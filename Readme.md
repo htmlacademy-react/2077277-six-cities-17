@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Ирина Украинцева](https://up.htmlacademy.ru/react/17/user/2077277).
-* Наставник: `Неизвестно`.
+* Наставник: [Юлия Волкова](https://htmlacademy.ru/profile/julie_volkova).
 
 ---
 
