@@ -11,7 +11,7 @@ function MainPage({ cardsNumber }: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
 
-      <Header isMainPage/>
+      <Header isMainPage isLoggedIn/>
       <CitiesList />
 
       <main className={`page__main page__main--index ${!cardsNumber ? 'page__main--index-empty' : ''}`}>

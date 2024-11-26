@@ -3,9 +3,10 @@ import HeaderNavigation from '../header-navigation/header-navigation';
 type HeaderProps = {
   isMainPage?: boolean;
   isLoginPage?: boolean;
+  isLoggedIn?: boolean;
 }
 
-function Header({isMainPage = false, isLoginPage = false}: HeaderProps): JSX.Element {
+function Header({isMainPage = false, isLoginPage = false, isLoggedIn = false}: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
@@ -15,7 +16,7 @@ function Header({isMainPage = false, isLoginPage = false}: HeaderProps): JSX.Ele
               <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
             </a>
           </div>
-          {!isLoginPage ? <HeaderNavigation/> : ''}
+          {!isLoginPage ? <HeaderNavigation isLoggedIn = {isLoggedIn}/> : ''}
         </div>
       </div>
     </header>

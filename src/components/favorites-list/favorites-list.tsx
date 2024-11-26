@@ -1,4 +1,5 @@
 import Card from '../card/card';
+import { FavoritesPage } from '../../const';
 
 type FavoritesListProps = {
   favoriteCity: string;
@@ -16,7 +17,7 @@ function FavoritesList({ favoriteCity }: FavoritesListProps): JSX.Element {
         </div>
       </div>
       <div className="favorites__places">
-        <Card isFavorites />
+        <Card page = {FavoritesPage} />
       </div>
     </li>
   );

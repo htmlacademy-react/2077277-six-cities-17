@@ -1,4 +1,10 @@
-function HeaderNavigation(): JSX.Element {
+import { Fragment } from 'react';
+
+type HeaderNavigationProps = {
+  isLoggedIn: boolean;
+}
+
+function HeaderNavigation({ isLoggedIn }: HeaderNavigationProps): JSX.Element {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -6,15 +12,20 @@ function HeaderNavigation(): JSX.Element {
           <a className="header__nav-link header__nav-link--profile" href="#">
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
-            <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-            <span className="header__favorite-count">3</span>
+            {isLoggedIn ?
+              <Fragment>
+                <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                <span className="header__favorite-count">3</span>
+              </Fragment> :
+              <span className="header__login">Sign in</span>}
           </a>
         </li>
-        <li className="header__nav-item">
-          <a className="header__nav-link" href="#">
-            <span className="header__signout">Sign out</span>
-          </a>
-        </li>
+        {isLoggedIn ?
+          <li className="header__nav-item">
+            <a className="header__nav-link" href="#">
+              <span className="header__signout">Sign out</span>
+            </a>
+          </li> : ''}
       </ul>
     </nav>
   );

@@ -1,6 +1,10 @@
-function Map(): JSX.Element {
+type MapProps = {
+  isOffer?: boolean;
+}
+
+function Map({isOffer = false}:MapProps): JSX.Element {
   return (
-    <section className = "cities__map map"></section>
+    <section className = {`${isOffer ? 'offer' : 'cities'}__map map`}></section>
   );
 }
 

@@ -1,19 +1,27 @@
-type CardProps = {
-  isFavorites?: boolean;
+type PageProps = {
+  ImageWrapperClass: string;
+  CardInfoClass: string;
+  ImgWidth: number;
+  ImgHeight: number;
+  StarsWidth: string;
 }
 
-function Card({isFavorites = false}:CardProps): JSX.Element {
+type CardProps = {
+  page: PageProps;
+}
+
+function Card({page}:CardProps): JSX.Element {
   return (
-    <article className={`${isFavorites ? 'favorites' : 'cities'}__card place-card`}>
+    <article className={`${page.ImageWrapperClass}__card place-card`}>
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
-      <div className={`${isFavorites ? 'favorites' : 'cities'}__image-wrapper place-card__image-wrapper`}>
+      <div className={`${page.ImageWrapperClass}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src="img/apartment-01.jpg" width={`${isFavorites ? 150 : 260}`} height={`${isFavorites ? 110 : 200}`} alt="Place image" />
+          <img className="place-card__image" src="img/apartment-01.jpg" width={`${page.ImgWidth}`} height={`${page.ImgHeight}`} alt="Place image" />
         </a>
       </div>
-      <div className={`${isFavorites ? 'favorites__card-info' : ''} place-card__info`}>
+      <div className={`${page.CardInfoClass} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;120</b>
@@ -28,7 +36,7 @@ function Card({isFavorites = false}:CardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={isFavorites ? { width: '100%' } : { width: '80%' }}></span>
+            <span style={{ width: page.StarsWidth }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

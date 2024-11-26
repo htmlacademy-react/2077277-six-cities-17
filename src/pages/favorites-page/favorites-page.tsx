@@ -4,7 +4,7 @@ import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import FavoritesMain from '../../components/favorites-main/favorites-main';
 import { FavoritesCity } from '../../const';
 
-function Favorites(): JSX.Element {
+function FavoritesPage(): JSX.Element {
 
   function isFavorites (city: [string, boolean]): boolean {
     return city[1];
@@ -13,7 +13,7 @@ function Favorites(): JSX.Element {
 
   return (
     <div className={`page ${!isFavoritesCity ? 'page--favorites-empty' : ''}`}>
-      <Header />
+      <Header isLoggedIn/>
       <main className={`page__main page__main--favorites ${!isFavoritesCity ? 'page__main--favorites-empty' : ''}`}>
         <div className="page__favorites-container container">
 
@@ -25,4 +25,4 @@ function Favorites(): JSX.Element {
   );
 }
 
-export default Favorites;
+export default FavoritesPage;

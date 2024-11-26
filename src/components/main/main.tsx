@@ -2,6 +2,7 @@ import Map from '../../components/map/map';
 import MainTitle from '../../components/main-title/main-title';
 import Card from '../../components/card/card';
 import { nanoid } from '@reduxjs/toolkit';
+import { MainPage } from '../../const';
 
 type MainProps = {
   cardsNumber: number;
@@ -9,7 +10,7 @@ type MainProps = {
 
 function Main({ cardsNumber }: MainProps): JSX.Element {
 
-  const cardsList = Array.from({length: cardsNumber}).map(() => <Card key={nanoid()}/>);
+  const cardsList = Array.from({length: cardsNumber}).map(() => <Card key={nanoid()} page = {MainPage}/>);
 
   return (
     <div className="cities__places-container container">
