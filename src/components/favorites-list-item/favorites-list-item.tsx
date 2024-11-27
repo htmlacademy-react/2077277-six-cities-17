@@ -1,11 +1,11 @@
 import Card from '../card/card';
 import { FavoritesPage } from '../../const';
 
-type FavoritesListProps = {
+type FavoritesListItemProps = {
   favoriteCity: string;
 }
 
-function FavoritesList({ favoriteCity }: FavoritesListProps): JSX.Element {
+function FavoritesListItem({ favoriteCity }: FavoritesListItemProps): JSX.Element {
 
   return (
     <li className="favorites__locations-items">
@@ -23,4 +23,4 @@ function FavoritesList({ favoriteCity }: FavoritesListProps): JSX.Element {
   );
 }
 
-export default FavoritesList;
+export default FavoritesListItem;

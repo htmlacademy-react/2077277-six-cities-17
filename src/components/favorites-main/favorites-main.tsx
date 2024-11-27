@@ -1,4 +1,4 @@
-import FavoritesList from '../../components/favorites-list/favorites-list';
+import FavoritesListItem from '../favorites-list-item/favorites-list-item';
 
 type FavoritesCityProps = {
   Paris: boolean;
@@ -17,7 +17,7 @@ function FavoritesMain({favoritesCity}:FavoritesMainProps): JSX.Element {
 
   const favoritesList = Object.entries(favoritesCity).map((item) => {
     if (item[1]) {
-      return <FavoritesList key={item[0]} favoriteCity={item[0]} />;
+      return <FavoritesListItem key={item[0]} favoriteCity={item[0]} />;
     }
   });
 

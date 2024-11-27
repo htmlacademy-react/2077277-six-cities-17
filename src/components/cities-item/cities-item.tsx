@@ -1,5 +1,7 @@
+import { CitiesList } from '../../type';
+
 type CitiesItemProps = {
-  city: string;
+  city: CitiesList;
   isActive: boolean;
 }
 
