@@ -50,8 +50,24 @@ const MainPage = {
   StarsWidth: '80%'
 } as const;
 
+const LoginStatus = {
+  Auth: 'Auth',
+  NoAuth: 'NoAuth',
+  Unknown: 'Unknown'
+
+} as const;
+
+const RoutePath = {
+  Index: '/',
+  Login: '/login',
+  Favorites: '/favorites',
+  Offer: '/offer/:id',
+  NotFound: '*'
+
+} as const;
+
 export {
   City, ACTIVE_CITY, CARDS_NUMBER, FavoritesCity, OFFER_IMAGE_NUMBER,
   offerInsideItems, REVIEWS_NUMBER, FavoritesPage, OFFER_CARDS_NUMBER,
-  OffersPage, MainPage
+  OffersPage, MainPage, LoginStatus, RoutePath
 };
