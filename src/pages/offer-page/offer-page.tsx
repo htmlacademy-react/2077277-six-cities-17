@@ -5,16 +5,25 @@ import Reviews from '../../components/reviews/reviews';
 import Map from '../../components/map/map';
 import Card from '../../components/card/card';
 import { OFFER_IMAGE_NUMBER, OFFER_CARDS_NUMBER } from '../../const';
-import { OffersPage } from '../../const';
+import { OffersPage, PageType } from '../../const';
 import { nanoid } from '@reduxjs/toolkit';
+import { LoginStatusList } from '../../type';
+import { Helmet } from 'react-helmet-async';
 
-function OfferPage(): JSX.Element {
+type OfferPageProps = {
+  loginStatus: LoginStatusList;
+}
+
+function OfferPage({loginStatus}: OfferPageProps): JSX.Element {
   const offerImages = Array.from({ length: OFFER_IMAGE_NUMBER }).map(() => <OfferImage key={nanoid()} />);
   const cards = Array.from({ length: OFFER_CARDS_NUMBER }).map(() => <Card key={nanoid()} page ={OffersPage} />);
 
   return (
     <div className="page">
-      <Header isLoggedIn/>
+      <Helmet>
+        <title>6 cities: {PageType.Offer}</title>
+      </Helmet>
+      <Header loginStatus={loginStatus}/>
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
@@ -83,7 +92,7 @@ function OfferPage(): JSX.Element {
                   </p>
                 </div>
               </div>
-              <Reviews isLoggedIn/>
+              <Reviews loginStatus={loginStatus}/>
             </div>
           </div>
           <Map isOffer />

@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import { CitiesList } from '../../type';
+import { RoutePath } from '../../const';
 
 type CitiesItemProps = {
   city: CitiesList;
@@ -8,9 +10,9 @@ type CitiesItemProps = {
 function CitiesItem({city, isActive}: CitiesItemProps): JSX.Element {
   return (
     <li className="locations__item">
-      <a className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`} {...(!isActive && {href:'#'})}>
+      <Link className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`} to={RoutePath.Index}>
         <span>{city}</span>
-      </a>
+      </Link>
     </li>
   );
 }

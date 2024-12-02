@@ -50,8 +50,44 @@ const MainPage = {
   StarsWidth: '80%'
 } as const;
 
+const LoginStatus = {
+  Auth: 'Auth',
+  NoAuth: 'NoAuth',
+  Unknown: 'Unknown'
+} as const;
+
+const RoutePath = {
+  Index: '/',
+  Login: '/login',
+  Favorites: '/favorites',
+  Offer: '/offer/:id',
+  NotFound: '*'
+
+} as const;
+
+const PageType = {
+  Main: 'Main',
+  Login: 'login',
+  Favorites: 'Favorites',
+  Offer: 'Offer',
+  NotFound: 'Not found'
+
+} as const;
+
+const LogoHeaderParams = {
+  Class: 'header',
+  Width: 81,
+  Height: 42,
+} as const;
+
+const LogoFooterParams = {
+  Class: 'footer',
+  Width: 64,
+  Height: 33,
+} as const;
+
 export {
   City, ACTIVE_CITY, CARDS_NUMBER, FavoritesCity, OFFER_IMAGE_NUMBER,
   offerInsideItems, REVIEWS_NUMBER, FavoritesPage, OFFER_CARDS_NUMBER,
-  OffersPage, MainPage
+  OffersPage, MainPage, LoginStatus, RoutePath, PageType, LogoHeaderParams, LogoFooterParams
 };
