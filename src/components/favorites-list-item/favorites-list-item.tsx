@@ -1,5 +1,6 @@
 import Card from '../card/card';
-import { FavoritesPage } from '../../const';
+import { FavoritesPage, RoutePath } from '../../const';
+import { Link } from 'react-router-dom';
 
 type FavoritesListItemProps = {
   favoriteCity: string;
@@ -11,9 +12,9 @@ function FavoritesListItem({ favoriteCity }: FavoritesListItemProps): JSX.Elemen
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="#">
+          <Link className="locations__item-link" to={RoutePath.Index}>
             <span>{favoriteCity}</span>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="favorites__places">

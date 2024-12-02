@@ -1,30 +1,33 @@
 import { Fragment } from 'react';
+import { LoginStatus, RoutePath } from '../../const';
+import { LoginStatusList } from '../../type';
+import { Link } from 'react-router-dom';
 
 type HeaderNavigationProps = {
-  isLoggedIn: boolean;
+  loginStatus: LoginStatusList;
 }
 
-function HeaderNavigation({ isLoggedIn }: HeaderNavigationProps): JSX.Element {
+function HeaderNavigation({ loginStatus }: HeaderNavigationProps): JSX.Element {
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
         <li className="header__nav-item user">
-          <a className="header__nav-link header__nav-link--profile" href="#">
+          <Link className="header__nav-link header__nav-link--profile" to={RoutePath.Favorites}>
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
-            {isLoggedIn ?
+            {loginStatus === LoginStatus.Auth ?
               <Fragment>
                 <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                 <span className="header__favorite-count">3</span>
               </Fragment> :
               <span className="header__login">Sign in</span>}
-          </a>
+          </Link>
         </li>
-        {isLoggedIn ?
+        {loginStatus === LoginStatus.Auth ?
           <li className="header__nav-item">
-            <a className="header__nav-link" href="#">
+            <Link className="header__nav-link" to={RoutePath.Index}>
               <span className="header__signout">Sign out</span>
-            </a>
+            </Link>
           </li> : ''}
       </ul>
     </nav>

@@ -1,15 +1,16 @@
 import { Navigate } from 'react-router-dom';
-import { RoutePath, LoginStatus } from '../../const';
-import { LoginStatusList } from '../../type';
+import { LoginStatus } from '../../const';
+import { LoginStatusList} from '../../type';
 
 type PrivateRouteProps = {
   children: JSX.Element;
   loginStatus: LoginStatusList;
+  routePath: string;
 }
 
-function PrivateRoute({children, loginStatus}: PrivateRouteProps): JSX.Element {
+function PrivateRoute({children, loginStatus, routePath}: PrivateRouteProps): JSX.Element {
   return (
-    loginStatus === LoginStatus.Auth ? children : <Navigate to={RoutePath.Login}></Navigate>
+    loginStatus === LoginStatus.Auth ? children : <Navigate to={routePath}></Navigate>
   );
 }
 
