@@ -1,13 +1,14 @@
 import ReviewsForm from '../reviews-form/reviews-form';
 import ReviewsItem from '../reviews-item/reviews-item';
-import { REVIEWS_NUMBER } from '../../const';
+import { REVIEWS_NUMBER, LoginStatus } from '../../const';
 import { nanoid } from '@reduxjs/toolkit';
+import { LoginStatusList } from '../../type';
 
 type ReviewsProps = {
-  isLoggedIn?: boolean;
+  loginStatus: LoginStatusList;
 }
 
-function Reviews({isLoggedIn = false}:ReviewsProps): JSX.Element {
+function Reviews({loginStatus}:ReviewsProps): JSX.Element {
 
   const reviews = Array.from({length: REVIEWS_NUMBER}).map(() => <ReviewsItem key={nanoid()}/>);
 
@@ -17,7 +18,7 @@ function Reviews({isLoggedIn = false}:ReviewsProps): JSX.Element {
       <ul className="reviews__list">
         {reviews}
       </ul>
-      {isLoggedIn ? <ReviewsForm /> : ''}
+      {loginStatus === LoginStatus.Auth ? <ReviewsForm /> : ''}
     </section>
   );
 }

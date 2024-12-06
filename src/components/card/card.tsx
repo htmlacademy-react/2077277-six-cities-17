@@ -1,13 +1,9 @@
-type PageProps = {
-  ImageWrapperClass: string;
-  CardInfoClass: string;
-  ImgWidth: number;
-  ImgHeight: number;
-  StarsWidth: string;
-}
+import { Link } from 'react-router-dom';
+import { PageParamsType } from '../../type';
+import { RoutePath } from '../../const';
 
 type CardProps = {
-  page: PageProps;
+  page: PageParamsType;
 }
 
 function Card({page}:CardProps): JSX.Element {
@@ -17,9 +13,9 @@ function Card({page}:CardProps): JSX.Element {
         <span>Premium</span>
       </div>
       <div className={`${page.ImageWrapperClass}__image-wrapper place-card__image-wrapper`}>
-        <a href="#">
+        <Link to={RoutePath.Offer}>
           <img className="place-card__image" src="img/apartment-01.jpg" width={`${page.ImgWidth}`} height={`${page.ImgHeight}`} alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className={`${page.CardInfoClass} place-card__info`}>
         <div className="place-card__price-wrapper">
@@ -41,7 +37,7 @@ function Card({page}:CardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">Beautiful &amp; luxurious apartment at great location</a>
+          <Link to={RoutePath.Offer}>Beautiful &amp; luxurious apartment at great location</Link>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
