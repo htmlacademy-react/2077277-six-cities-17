@@ -1,6 +1,7 @@
 import { PageParamsType } from '../../type';
 import { RoutePath, RATING_SHARE } from '../../const';
-import { Link } from 'react-router-dom';
+import { Link, generatePath } from 'react-router-dom';
+import capitalizeFirstLetter from '../../utils';
 
 type CardProps = {
   page: PageParamsType;
@@ -11,17 +12,25 @@ type CardProps = {
   rating: number;
   isPremium: boolean;
   isFavorite: boolean;
+  id: string;
+  onHandleActiveOfferChange: (id: string | null) => void;
+  isMainPage?: boolean;
 }
 
-function Card({ page, title, type, price, previewImage, rating, isPremium, isFavorite }: CardProps): JSX.Element {
+function Card({ page, title, type, price, previewImage, rating, isPremium, isFavorite, id, onHandleActiveOfferChange, isMainPage = false }: CardProps): JSX.Element {
+
   return (
-    <article className={`${page.ImageWrapperClass}__card place-card`}>
+    <article
+      className={`${page.ImageWrapperClass}__card place-card`}
+      onMouseEnter={() => isMainPage && onHandleActiveOfferChange(id)}
+      onMouseLeave={() => isMainPage && onHandleActiveOfferChange(null)}
+    >
       {isPremium &&
         <div className="place-card__mark">
           <span>Premium</span>
         </div>}
       <div className={`${page.ImageWrapperClass}__image-wrapper place-card__image-wrapper`}>
-        <Link to={RoutePath.Offer}>
+        <Link to={generatePath(RoutePath.Offer, { offerId: id })}>
           <img className="place-card__image" src={previewImage} width={`${page.ImgWidth}`} height={`${page.ImgHeight}`} alt="Place image" />
         </Link>
       </div>
@@ -45,9 +54,9 @@ function Card({ page, title, type, price, previewImage, rating, isPremium, isFav
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={RoutePath.Offer}>{title}</Link>
+          <Link to={generatePath(RoutePath.Offer, { offerId: id })}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{capitalizeFirstLetter(type)}</p>
       </div>
     </article>
   );

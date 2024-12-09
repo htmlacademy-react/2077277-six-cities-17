@@ -16,7 +16,7 @@ type OfferPageProps = {
 
 function OfferPage({loginStatus, offersNearby}: OfferPageProps): JSX.Element {
   const offerImages = Array.from({ length: OFFER_IMAGE_NUMBER }).map(() => <OfferImage key={nanoid()} />);
-  const cards = offersNearby.map((offer) => <Card key={offer.id} title={offer.title} type={offer.type} price={offer.price} previewImage={offer.previewImage} rating={offer.rating} isPremium={offer.isPremium} isFavorite={offer.isFavorite} page ={OffersPage} />);
+  const cards = offersNearby.map((offer) => <Card key={offer.id} id={offer.id} title={offer.title} type={offer.type} price={offer.price} previewImage={offer.previewImage} rating={offer.rating} isPremium={offer.isPremium} isFavorite={offer.isFavorite} page ={OffersPage} />);
 
   return (
     <div className="page">

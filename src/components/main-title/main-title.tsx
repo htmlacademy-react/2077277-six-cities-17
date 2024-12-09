@@ -4,7 +4,7 @@ type MainTitleProps = {
 
 function MainTitle({citiesCount}: MainTitleProps): JSX.Element {
   return (
-    <b className="places__found">{citiesCount} places to stay in Amsterdam</b>
+    <b className="places__found">{citiesCount} place{citiesCount > 1 ? 's' : ''} to stay in Amsterdam</b>
   );
 }
 

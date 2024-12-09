@@ -26,9 +26,14 @@ function App({ offers, favorites, offersNearby }: AppProps): JSX.Element {
         <Routes>
           <Route path={RoutePath.Index}>
             <Route index element={<MainPage loginStatus={status} offers={offers} />}></Route>
-            <Route path={RoutePath.Login} element={<LoginPage />}></Route>
+            <Route path={RoutePath.Login} element={
+              <PrivateRoute loginStatus={status} loginStatusExpected={LoginStatus.NoAuth} routePath={RoutePath.Index}>
+                <LoginPage />
+              </PrivateRoute>
+            }
+            />
             <Route path={RoutePath.Favorites} element={
-              <PrivateRoute loginStatus={status} routePath={RoutePath.Login}>
+              <PrivateRoute loginStatus={status} loginStatusExpected={LoginStatus.Auth} routePath={RoutePath.Login}>
                 <FavoritesPage loginStatus={status} favorites={favorites} />
               </PrivateRoute>
             }

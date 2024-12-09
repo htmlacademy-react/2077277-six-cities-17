@@ -22,7 +22,7 @@ function NotFoundPage({ loginStatus }: NotFoundPageProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">404 Not Found</h1>
         <div className={styles.container}>
-          <img src="/public/img/icon-404-error.png" alt="404" width={412} height={412} />
+          <img src="/img/icon-404-error.png" alt="404" width={412} height={412} />
           <p className={styles.text}> Not Found</p>
           <Link to={RoutePath.Index} className={styles.link}>Return to main page</Link>
         </div>
