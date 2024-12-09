@@ -1,6 +1,6 @@
-import { Fragment } from 'react';
 import { LoginStatus, RoutePath } from '../../const';
 import { LoginStatusList } from '../../type';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 type HeaderNavigationProps = {

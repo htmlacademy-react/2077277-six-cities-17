@@ -4,19 +4,19 @@ import OfferInsideList from '../../components/offer-inside-list/offer-inside-lis
 import Reviews from '../../components/reviews/reviews';
 import Map from '../../components/map/map';
 import Card from '../../components/card/card';
-import { OFFER_IMAGE_NUMBER, OFFER_CARDS_NUMBER } from '../../const';
-import { OffersPage, PageType } from '../../const';
+import { OFFER_IMAGE_NUMBER, OffersPage, PageType } from '../../const';
+import { LoginStatusList, OfferType } from '../../type';
 import { nanoid } from '@reduxjs/toolkit';
-import { LoginStatusList } from '../../type';
 import { Helmet } from 'react-helmet-async';
 
 type OfferPageProps = {
   loginStatus: LoginStatusList;
+  offersNearby: OfferType[];
 }
 
-function OfferPage({loginStatus}: OfferPageProps): JSX.Element {
+function OfferPage({loginStatus, offersNearby}: OfferPageProps): JSX.Element {
   const offerImages = Array.from({ length: OFFER_IMAGE_NUMBER }).map(() => <OfferImage key={nanoid()} />);
-  const cards = Array.from({ length: OFFER_CARDS_NUMBER }).map(() => <Card key={nanoid()} page ={OffersPage} />);
+  const cards = offersNearby.map((offer) => <Card key={offer.id} title={offer.title} type={offer.type} price={offer.price} previewImage={offer.previewImage} rating={offer.rating} isPremium={offer.isPremium} isFavorite={offer.isFavorite} page ={OffersPage} />);
 
   return (
     <div className="page">

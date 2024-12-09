@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import Header from '../../components/header/header';
+import { Link } from 'react-router-dom';
 import { RoutePath, PageType } from '../../const';
 import { LoginStatusList } from '../../type';
 import styles from './style.module.css';

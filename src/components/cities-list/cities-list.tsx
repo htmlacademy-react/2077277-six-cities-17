@@ -1,7 +1,6 @@
 import CitiesItem from '../cities-item/cities-item';
 import { City, ACTIVE_CITY } from '../../const';
 
-
 function CitiesList(): JSX.Element {
 
   const citiesItems = Object.values(City).map((city) =>

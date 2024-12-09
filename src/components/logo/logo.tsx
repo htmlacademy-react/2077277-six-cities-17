@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
 import { LogoParamsType } from '../../type';
 import { RoutePath } from '../../const';
+import { Link } from 'react-router-dom';
 
 type LogoProps = {
   isMainPage?: boolean;

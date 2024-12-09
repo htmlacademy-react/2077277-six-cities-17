@@ -8,7 +8,6 @@ type PageParamsType = {
   CardInfoClass: string;
   ImgWidth: number;
   ImgHeight: number;
-  StarsWidth: string;
 };
 
 type LogoParamsType = {
@@ -17,4 +16,42 @@ type LogoParamsType = {
   Height: number;
 };
 
-export type { CitiesList, LoginStatusList, PageParamsType, LogoParamsType };
+type LocationType = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}
+
+type CityType = {
+  name: CitiesList;
+  location: LocationType;
+};
+
+type OfferType = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  previewImage: string;
+  city: CityType;
+  location: LocationType;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+};
+
+type UserType = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+};
+
+type ReviewType = {
+  id: string;
+  date: string;
+  user: UserType;
+  comment: string;
+  rating: number;
+};
+
+export type { CitiesList, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType };

@@ -1,6 +1,6 @@
-import { Navigate } from 'react-router-dom';
 import { LoginStatus } from '../../const';
 import { LoginStatusList} from '../../type';
+import { Navigate } from 'react-router-dom';
 
 type PrivateRouteProps = {
   children: JSX.Element;
@@ -10,7 +10,7 @@ type PrivateRouteProps = {
 
 function PrivateRoute({children, loginStatus, routePath}: PrivateRouteProps): JSX.Element {
   return (
-    loginStatus === LoginStatus.Auth ? children : <Navigate to={routePath}></Navigate>
+    loginStatus === LoginStatus.Auth ? children : <Navigate to={routePath}/>
   );
 }
 
