@@ -13,17 +13,16 @@ type CardProps = {
   isPremium: boolean;
   isFavorite: boolean;
   id: string;
-  onHandleActiveOfferChange: (id: string | null) => void;
-  isMainPage?: boolean;
+  onHandleActiveOfferChange?: (id: string | null) => void;
 }
 
-function Card({ page, title, type, price, previewImage, rating, isPremium, isFavorite, id, onHandleActiveOfferChange, isMainPage = false }: CardProps): JSX.Element {
+function Card({ page, title, type, price, previewImage, rating, isPremium, isFavorite, id, onHandleActiveOfferChange}: CardProps): JSX.Element {
 
   return (
     <article
       className={`${page.ImageWrapperClass}__card place-card`}
-      onMouseEnter={() => isMainPage && onHandleActiveOfferChange(id)}
-      onMouseLeave={() => isMainPage && onHandleActiveOfferChange(null)}
+      onMouseEnter={() => onHandleActiveOfferChange && onHandleActiveOfferChange(id)}
+      onMouseLeave={() => onHandleActiveOfferChange && onHandleActiveOfferChange(null)}
     >
       {isPremium &&
         <div className="place-card__mark">
