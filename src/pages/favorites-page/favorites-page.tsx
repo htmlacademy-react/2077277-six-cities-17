@@ -4,6 +4,7 @@ import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import FavoritesMain from '../../components/favorites-main/favorites-main';
 import { PageType } from '../../const';
 import { LoginStatusList, OfferType } from '../../type';
+import styles from './style.module.css';
 import { Helmet } from 'react-helmet-async';
 
 type FavoritesPageProps = {
@@ -14,7 +15,7 @@ type FavoritesPageProps = {
 function FavoritesPage({ loginStatus, favorites }: FavoritesPageProps): JSX.Element {
 
   return (
-    <div className={`page ${!favorites.length ? 'page--favorites-empty' : ''}`}>
+    <div className={`page ${styles.container} ${!favorites.length ? 'page--favorites-empty' : ''}`}>
       <Helmet>
         <title>6 cities: {PageType.Favorites}</title>
       </Helmet>
