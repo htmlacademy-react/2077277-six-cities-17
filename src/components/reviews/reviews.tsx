@@ -1,8 +1,8 @@
 import ReviewsForm from '../reviews-form/reviews-form';
 import ReviewsItem from '../reviews-item/reviews-item';
-import { REVIEWS_NUMBER, LoginStatus } from '../../const';
 import { nanoid } from '@reduxjs/toolkit';
 import { LoginStatusList } from '../../type';
+import { REVIEWS_NUMBER, LoginStatus } from '../../const';
 
 type ReviewsProps = {
   loginStatus: LoginStatusList;

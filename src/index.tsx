@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { CARDS_NUMBER } from './const';
+import OFFERS from './mocks/offers';
+import FAVORITES from './mocks/favorites';
+import OFFERS_NEARBY from './mocks/offers-nearby';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -9,6 +11,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App cardsNumber = {CARDS_NUMBER} />
+    <App offers = {OFFERS} favorites={FAVORITES} offersNearby={OFFERS_NEARBY}/>
   </React.StrictMode>
 );
