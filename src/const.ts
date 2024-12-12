@@ -7,31 +7,21 @@ const City = {
   Dusseldorf: 'Dusseldorf'
 } as const;
 
-const FavoritesCity = {
-  [City.Paris]: false,
-  [City.Cologne]: true,
-  [City.Brussels]: false,
-  [City.Amsterdam]: true,
-  [City.Hamburg]: false,
-  [City.Dusseldorf]: false
-} as const;
-
 const offerInsideItems = [
   'wi-Fi', 'heating', 'kitchen', 'fridge', 'washing machine', 'coffee machine', 'dishwasher', 'towels', 'baby seat', 'cabel TV'
 ];
 
 const ACTIVE_CITY = City.Paris;
-const CARDS_NUMBER = 5;
 const OFFER_IMAGE_NUMBER = 6;
 const REVIEWS_NUMBER = 1;
-const OFFER_CARDS_NUMBER = 3;
+const RATING_STARS = [5, 4, 3, 2, 1] as const;
+const RATING_MEANING = ['perfect', 'good', 'not bad', 'badly', 'terribly'] as const;
 
 const FavoritesPage = {
   ImageWrapperClass: 'favorites',
   CardInfoClass: 'favorites__card-info',
   ImgWidth: 150,
   ImgHeight: 110,
-  StarsWidth: '100%'
 } as const;
 
 const OffersPage = {
@@ -39,7 +29,6 @@ const OffersPage = {
   CardInfoClass: '',
   ImgWidth: 260,
   ImgHeight: 200,
-  StarsWidth: '80%'
 } as const;
 
 const MainPage = {
@@ -47,7 +36,6 @@ const MainPage = {
   CardInfoClass: '',
   ImgWidth: 260,
   ImgHeight: 200,
-  StarsWidth: '80%'
 } as const;
 
 const LoginStatus = {
@@ -60,7 +48,7 @@ const RoutePath = {
   Index: '/',
   Login: '/login',
   Favorites: '/favorites',
-  Offer: '/offer/:id',
+  Offer: '/offer/:offerId',
   NotFound: '*'
 
 } as const;
@@ -86,8 +74,21 @@ const LogoFooterParams = {
   Height: 33,
 } as const;
 
+const RATING_SHARE = 20;
+
+const ReviewLength = {
+  Min: 50,
+  Max: 300,
+} as const;
+
+const StarsColor = {
+  Checked: '#ff9000',
+  UnChecked: '#c7c7c7',
+} as const;
+
 export {
-  City, ACTIVE_CITY, CARDS_NUMBER, FavoritesCity, OFFER_IMAGE_NUMBER,
-  offerInsideItems, REVIEWS_NUMBER, FavoritesPage, OFFER_CARDS_NUMBER,
-  OffersPage, MainPage, LoginStatus, RoutePath, PageType, LogoHeaderParams, LogoFooterParams
+  City, ACTIVE_CITY, OFFER_IMAGE_NUMBER, offerInsideItems,
+  REVIEWS_NUMBER, FavoritesPage, OffersPage, MainPage,
+  LoginStatus, RoutePath, PageType, LogoHeaderParams, LogoFooterParams,
+  RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor
 };

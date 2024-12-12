@@ -1,24 +1,28 @@
 import Card from '../card/card';
 import { FavoritesPage, RoutePath } from '../../const';
+import { OfferType } from '../../type';
 import { Link } from 'react-router-dom';
 
 type FavoritesListItemProps = {
-  favoriteCity: string;
+  offers: OfferType[];
+  city: string;
 }
 
-function FavoritesListItem({ favoriteCity }: FavoritesListItemProps): JSX.Element {
+function FavoritesListItem({ offers, city }: FavoritesListItemProps): JSX.Element {
+
+  const cardsList = offers.map((offer) => <Card key={offer.id} id={offer.id} title={offer.title} type={offer.type} price={offer.price} previewImage={offer.previewImage} rating={offer.rating} isPremium={offer.isPremium} isFavorite={offer.isFavorite} page={FavoritesPage} />);
 
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
           <Link className="locations__item-link" to={RoutePath.Index}>
-            <span>{favoriteCity}</span>
+            <span>{city}</span>
           </Link>
         </div>
       </div>
       <div className="favorites__places">
-        <Card page = {FavoritesPage} />
+        {cardsList}
       </div>
     </li>
   );
