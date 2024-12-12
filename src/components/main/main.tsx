@@ -11,15 +11,15 @@ type MainProps = {
 }
 
 function Main({ offers }: MainProps): JSX.Element {
-  const [isActiveOffer, setIsActiveOffer] = useState<string | null>(null);
+  const [activeOffer, setActiveOffer] = useState<string | null>(null);
 
   const handleActiveOfferChange = (id: string | null) => {
-    setIsActiveOffer(id);
+    setActiveOffer(id);
   };
 
   return (
     <div className="cities__places-container container">
-      <span className="visually-hidden">{isActiveOffer}</span>
+      <span className="visually-hidden">{activeOffer}</span>
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <MainTitle citiesCount={offers.length} />

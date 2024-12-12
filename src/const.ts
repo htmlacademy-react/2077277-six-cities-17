@@ -76,9 +76,19 @@ const LogoFooterParams = {
 
 const RATING_SHARE = 20;
 
+const ReviewLength = {
+  Min: 50,
+  Max: 300,
+} as const;
+
+const StarsColor = {
+  Checked: '#ff9000',
+  UnChecked: '#c7c7c7',
+} as const;
+
 export {
   City, ACTIVE_CITY, OFFER_IMAGE_NUMBER, offerInsideItems,
   REVIEWS_NUMBER, FavoritesPage, OffersPage, MainPage,
   LoginStatus, RoutePath, PageType, LogoHeaderParams, LogoFooterParams,
-  RATING_SHARE, RATING_STARS, RATING_MEANING
+  RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor
 };

@@ -5,10 +5,11 @@ import { ChangeEvent } from 'react';
 
 type RatingListProps = {
   onChangeRating: (evt: ChangeEvent<HTMLInputElement>) => void;
+  dataRating: null | number;
 }
 
-function RatingList({onChangeRating}:RatingListProps): JSX.Element {
-  const starsList = RATING_STARS.map((star, index) => <RatingStar key={nanoid()} starNumber={star} ratingMeaning={RATING_MEANING[index]} onChangeRating={onChangeRating} />);
+function RatingList({onChangeRating, dataRating}:RatingListProps): JSX.Element {
+  const starsList = RATING_STARS.map((star, index) => <RatingStar key={nanoid()} dataRating={dataRating} starNumber={star} ratingMeaning={RATING_MEANING[index]} onChangeRating={onChangeRating} />);
 
   return (
     <div className="reviews__rating-form form__rating">

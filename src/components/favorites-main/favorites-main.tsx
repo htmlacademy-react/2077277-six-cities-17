@@ -7,13 +7,13 @@ type FavoritesMainProps = {
 
 function FavoritesMain({ favorites }: FavoritesMainProps): JSX.Element {
 
-  const favoritesGroupByCity: Record<string, OfferType[]> = favorites.reduce((acc, offer) => {
+  const favoritesGroupByCity: Record<string, OfferType[]> = favorites.reduce((currentItem, offer) => {
     const cityName = offer.city.name;
-    if (!acc[cityName]) {
-      acc[cityName] = [];
+    if (!currentItem[cityName]) {
+      currentItem[cityName] = [];
     }
-    acc[cityName].push(offer);
-    return acc;
+    currentItem[cityName].push(offer);
+    return currentItem;
   }, {} as Record<string, OfferType[]>);
 
   const favoritesList = Object.keys(favoritesGroupByCity).map((city) => <FavoritesListItem key={city} city={city} offers={favoritesGroupByCity[city]} />
