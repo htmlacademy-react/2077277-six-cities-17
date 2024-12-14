@@ -11,15 +11,15 @@ type MainProps = {
 }
 
 function Main({ offers }: MainProps): JSX.Element {
-  const [activeOffer, setActiveOffer] = useState<string | null>(null);
+  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
   const handleActiveOfferChange = (id: string | null) => {
-    setActiveOffer(id);
+    setActiveOfferId(id);
   };
 
   return (
     <div className="cities__places-container container">
-      <span className="visually-hidden">{activeOffer}</span>
+      <span className="visually-hidden">{activeOfferId}</span>
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <MainTitle citiesCount={offers.length} />
@@ -27,7 +27,7 @@ function Main({ offers }: MainProps): JSX.Element {
         <CardsList page={MainPage} offers={offers} onHandleActiveOfferChange ={handleActiveOfferChange}/>
       </section>
       <div className="cities__right-section">
-        <Map />
+        <Map activeCity={offers[0].city} offers={offers} selectedOfferId={activeOfferId}/>
       </div>
     </div>
   );

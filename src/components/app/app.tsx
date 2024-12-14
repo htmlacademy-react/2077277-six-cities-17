@@ -5,10 +5,11 @@ import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
-import { LoginStatus, RoutePath } from '../../const';
+import { LoginStatus, RoutePath} from '../../const';
 import { OfferType } from '../../type';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+
 
 type AppProps = {
   offers: OfferType[];

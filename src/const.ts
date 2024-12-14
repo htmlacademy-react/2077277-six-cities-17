@@ -86,9 +86,15 @@ const StarsColor = {
   UnChecked: '#c7c7c7',
 } as const;
 
+const URL_MARKER_DEFAULT =
+  'img/pin.svg';
+
+const URL_MARKER_CURRENT =
+  'img/pin-active.svg';
+
 export {
   City, ACTIVE_CITY, OFFER_IMAGE_NUMBER, offerInsideItems,
   REVIEWS_NUMBER, FavoritesPage, OffersPage, MainPage,
   LoginStatus, RoutePath, PageType, LogoHeaderParams, LogoFooterParams,
-  RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor
+  RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor, URL_MARKER_DEFAULT, URL_MARKER_CURRENT
 };

@@ -1,6 +1,6 @@
 import { City, LoginStatus, RATING_MEANING, RATING_STARS } from './const';
 
-type CitiesList = typeof City[keyof typeof City];
+type CitiesListType = typeof City[keyof typeof City];
 type LoginStatusList = typeof LoginStatus[keyof typeof LoginStatus];
 
 type PageParamsType = {
@@ -23,7 +23,7 @@ type LocationType = {
 }
 
 type CityType = {
-  name: CitiesList;
+  name: CitiesListType;
   location: LocationType;
 };
 
@@ -62,4 +62,4 @@ type FormDataType = {
 type RatingMeaningType = typeof RATING_MEANING[number];
 type RatingStarsType = typeof RATING_STARS[number];
 
-export type { CitiesList, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType};
+export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType};
