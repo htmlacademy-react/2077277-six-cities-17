@@ -1,39 +1,47 @@
 import { useRef, useEffect } from 'react';
-import { Icon, Marker, layerGroup } from 'leaflet';
+import { Icon, LayerGroup, Marker, layerGroup } from 'leaflet';
 import useMap from '../../hooks';
-import { CityType, OfferType} from '../../type';
-import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../const';
+import { OfferType, CitiesListType } from '../../type';
+import { UrlMarker, CityLocation } from '../../const';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
   isOffer?: boolean;
-  activeCity: CityType;
+  activeCity: CitiesListType;
   offers: OfferType[];
   selectedOfferId: string | null;
 }
 
 const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: UrlMarker.Default,
   iconSize: [37, 53],
   iconAnchor: [13, 39]
 });
 
 const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
+  iconUrl: UrlMarker.Current,
   iconSize: [37, 53],
   iconAnchor: [13, 39]
 });
 
 function Map({ isOffer = false, activeCity, offers, selectedOfferId }: MapProps): JSX.Element {
-
+  const cityLocation = CityLocation[activeCity];
   const mapRef = useRef(null);
-  const map = useMap(mapRef, activeCity);
-
+  const map = useMap(mapRef, cityLocation);
+  const markerLayer = useRef<LayerGroup>(layerGroup());
 
   useEffect(() => {
     if (map) {
-      const markerLayer = layerGroup().addTo(map);
+      map.setView([cityLocation.latitude, cityLocation.longitude], cityLocation.zoom);
+      markerLayer.current.addTo(map);
+      markerLayer.current.clearLayers();
+    }
+  });
+
+  useEffect(() => {
+    if (map) {
       const selectedOffer = offers.find((offer) => offer.id === selectedOfferId);
+      const markerLayerCurrent = markerLayer.current;
 
       offers.forEach((offer) => {
         const marker = new Marker({
@@ -47,16 +55,16 @@ function Map({ isOffer = false, activeCity, offers, selectedOfferId }: MapProps)
               ? currentCustomIcon
               : defaultCustomIcon
           )
-          .addTo(markerLayer);
+          .addTo(markerLayer.current);
       });
 
       return () => {
-        map.removeLayer(markerLayer);
+        map.removeLayer(markerLayerCurrent);
       };
     }
-  }, [map, offers, selectedOfferId]);
+  }, [map, offers, selectedOfferId, activeCity]);
 
-  return <section className={`${isOffer ? 'offer' : 'cities'}__map map`} ref={mapRef}></section>;
+  return <section className={`${isOffer ? 'offer' : 'cities'}__map map`} {...(isOffer ? {} : {ref:mapRef})}></section>;
 }
 
 export default Map;

@@ -62,4 +62,4 @@ type FormDataType = {
 type RatingMeaningType = typeof RATING_MEANING[number];
 type RatingStarsType = typeof RATING_STARS[number];
 
-export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType};
+export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType};
