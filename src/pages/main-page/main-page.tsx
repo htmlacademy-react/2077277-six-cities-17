@@ -36,7 +36,7 @@ function MainPage({ loginStatus, offers }: MainPageProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="cities">
 
-          {!offers.length ? <MainEmpty /> : <Main offers={offers} />}
+          {!offers.length ? <MainEmpty /> : <Main offers={offers} activeCity={activeCity}/>}
 
         </div>
       </main>
