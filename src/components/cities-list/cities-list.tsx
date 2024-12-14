@@ -1,10 +1,16 @@
 import CitiesItem from '../cities-item/cities-item';
-import { City, ACTIVE_CITY } from '../../const';
+import { City } from '../../const';
+import { CitiesListType } from '../../type';
 
-function CitiesList(): JSX.Element {
+type CitiesListProps = {
+  activeCity: CitiesListType;
+  onActiveCityChange: (city: CitiesListType) => void;
+};
+
+function CitiesList({activeCity, onActiveCityChange}:CitiesListProps): JSX.Element {
 
   const citiesItems = Object.values(City).map((city) =>
-    <CitiesItem key={city} city={city} isActive={ACTIVE_CITY === city} />
+    <CitiesItem key={city} city={city} isActive={activeCity === city} onActiveCityChange={onActiveCityChange}/>
   );
 
   return (

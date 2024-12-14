@@ -86,9 +86,52 @@ const StarsColor = {
   UnChecked: '#c7c7c7',
 } as const;
 
+const UrlMarker = {
+  Default: 'img/pin.svg',
+  Current: 'img/pin-active.svg',
+} as const;
+
+const MapInfo = {
+  Url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  Attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+} as const;
+
+const CityLocation = {
+  [City.Paris]: {
+    latitude: 48.85661,
+    longitude: 2.351499,
+    zoom: 13
+  },
+  [City.Cologne]: {
+    latitude: 50.938361,
+    longitude: 6.959974,
+    zoom: 13
+  },
+  [City.Dusseldorf]: {
+    latitude: 51.225402,
+    longitude: 6.776314,
+    zoom: 13
+  },
+  [City.Brussels]: {
+    latitude: 50.846557,
+    longitude: 4.351697,
+    zoom: 13
+  },
+  [City.Amsterdam]: {
+    latitude: 52.37454,
+    longitude: 4.897976,
+    zoom: 13
+  },
+  [City.Hamburg]: {
+    latitude: 53.550341,
+    longitude: 10.000654,
+    zoom: 13
+  },
+};
+
 export {
   City, ACTIVE_CITY, OFFER_IMAGE_NUMBER, offerInsideItems,
   REVIEWS_NUMBER, FavoritesPage, OffersPage, MainPage,
   LoginStatus, RoutePath, PageType, LogoHeaderParams, LogoFooterParams,
-  RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor
+  RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor, UrlMarker, MapInfo, CityLocation
 };

@@ -95,7 +95,7 @@ function OfferPage({loginStatus, offersNearby}: OfferPageProps): JSX.Element {
               <Reviews loginStatus={loginStatus}/>
             </div>
           </div>
-          <Map isOffer />
+          <Map isOffer activeCity={'Paris'} offers={offersNearby} selectedOfferId={''}/>
         </section>
         <div className="container">
           <section className="near-places places">
