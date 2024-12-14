@@ -2,11 +2,11 @@ import { OfferType } from '../type';
 
 const OFFERS_NEARBY: OfferType[] = [
   {
-    id: '8046e71f-52bc-4121-a05a-7ef2164726c4',
-    title: 'Waterfront with extraordinary view',
-    type: 'house',
-    price: 904,
-    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/10.jpg',
+    id: '50ea244f-4e89-4320-9272-45241d4999fb',
+    title: 'Wood and stone place',
+    type: 'hotel',
+    price: 364,
+    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/7.jpg',
     city: {
       name: 'Paris',
       location: {
@@ -16,13 +16,13 @@ const OFFERS_NEARBY: OfferType[] = [
       }
     },
     location: {
-      latitude: 48.858610000000006,
-      longitude: 2.330499,
+      latitude: 48.87961000000001,
+      longitude: 2.353499,
       zoom: 16
     },
-    isFavorite: true,
-    isPremium: false,
-    rating: 5
+    isFavorite: false,
+    isPremium: true,
+    rating: 2.4
   },
   {
     id: 'ae8aa68f-e61e-47e6-afe0-4e8a6dced84e',
@@ -48,28 +48,51 @@ const OFFERS_NEARBY: OfferType[] = [
     rating: 3.4
   },
   {
-    id: '13c02889-dd9f-4078-ac51-000ad9dd9c1d',
-    title: 'Canal View Prinsengracht',
-    type: 'apartment',
-    price: 475,
-    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/18.jpg',
+    id: 'd916ed58-52d7-4195-8de0-09b521263780',
+    title: 'Tile House',
+    type: 'hotel',
+    price: 250,
+    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/19.jpg',
     city: {
-      name: 'Dusseldorf',
+      name: 'Paris',
       location: {
-        latitude: 51.225402,
-        longitude: 6.776314,
+        latitude: 48.85661,
+        longitude: 2.351499,
         zoom: 13
       }
     },
     location: {
-      latitude: 51.225402,
-      longitude: 6.784314,
+      latitude: 48.87561,
+      longitude: 2.375499,
       zoom: 16
     },
-    isFavorite: true,
+    isFavorite: false,
     isPremium: true,
-    rating: 2
-  }
+    rating: 3.4
+  },
+  {
+    id: 'd8ef554c-9f39-4efc-b816-fad3ac0e61cd',
+    title: 'Nice, cozy, warm big bed apartment',
+    type: 'hotel',
+    price: 153,
+    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/16.jpg',
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 48.834610000000005,
+      longitude: 2.364499,
+      zoom: 16
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 4.1
+  },
 ];
 
 export default OFFERS_NEARBY;

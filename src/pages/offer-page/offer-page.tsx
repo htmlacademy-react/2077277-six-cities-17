@@ -4,19 +4,26 @@ import OfferInsideList from '../../components/offer-inside-list/offer-inside-lis
 import Reviews from '../../components/reviews/reviews';
 import Map from '../../components/map/map';
 import Card from '../../components/card/card';
-import { OFFER_IMAGE_NUMBER, OffersPage, PageType } from '../../const';
-import { LoginStatusList, OfferType } from '../../type';
-import { nanoid } from '@reduxjs/toolkit';
+import { OffersPage, PageType } from '../../const';
+import { LoginStatusList, OfferType, OneOfferType, ReviewsType} from '../../type';
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 
 type OfferPageProps = {
   loginStatus: LoginStatusList;
   offersNearby: OfferType[];
+  offer: OneOfferType[];
+  reviews: ReviewsType[];
+  offers: OfferType[];
 }
 
-function OfferPage({loginStatus, offersNearby}: OfferPageProps): JSX.Element {
-  const offerImages = Array.from({ length: OFFER_IMAGE_NUMBER }).map(() => <OfferImage key={nanoid()} />);
-  const cards = offersNearby.map((offer) => <Card key={offer.id} id={offer.id} title={offer.title} type={offer.type} price={offer.price} previewImage={offer.previewImage} rating={offer.rating} isPremium={offer.isPremium} isFavorite={offer.isFavorite} page ={OffersPage} />);
+function OfferPage({loginStatus, offersNearby, offer, offers, reviews}: OfferPageProps): JSX.Element {
+
+  const offersNearbySliced = offersNearby.slice(0,3);
+  const offerImages = offer[0].images.map((image) => <OfferImage key={image} path={image} type={offer[0].type}/>);
+  const cards = offersNearbySliced.map((oneOffer) => <Card key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} isFavorite={oneOffer.isFavorite} page ={OffersPage} />);
+  const { offerId } = useParams<string>();
+  const offersNearbySlicedFull = [...offersNearbySliced, offers.find((item) => item.id === offerId)];
 
   return (
     <div className="page">
@@ -95,7 +102,7 @@ function OfferPage({loginStatus, offersNearby}: OfferPageProps): JSX.Element {
               <Reviews loginStatus={loginStatus}/>
             </div>
           </div>
-          <Map isOffer activeCity={'Paris'} offers={offersNearby} selectedOfferId={''}/>
+          <Map isOffer activeCity={offer[0].city.name} offers={offersNearbySlicedFull} selectedOfferId={offerId}/>
         </section>
         <div className="container">
           <section className="near-places places">
