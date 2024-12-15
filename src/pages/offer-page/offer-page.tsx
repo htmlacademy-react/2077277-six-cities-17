@@ -97,7 +97,7 @@ function OfferPage({ loginStatus, offersNearby, offer, offers, reviews }: OfferP
               <ReviewsList loginStatus={loginStatus} reviews={reviews} />
             </div>
           </div>
-          <Map isOffer activeCity={city.name} offers={offersNearbySlicedFull} selectedOfferId={offerId} />
+          <Map isOffer activeCity={currentOffer?.city.name ?? city.name} offers={offersNearbySlicedFull} selectedOfferId={offerId} />
         </section>
         <div className="container">
           <section className="near-places places">
