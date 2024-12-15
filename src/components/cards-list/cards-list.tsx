@@ -4,7 +4,7 @@ import { OfferType, PageParamsType } from '../../type';
 type CardsList = {
   filteredOffers: OfferType[];
   page: PageParamsType;
-  onHandleActiveOfferChange: (id: string | null) => void;
+  onHandleActiveOfferChange: (id: string | undefined) => void;
 }
 
 function CardsList({ filteredOffers, page, onHandleActiveOfferChange }: CardsList): JSX.Element {

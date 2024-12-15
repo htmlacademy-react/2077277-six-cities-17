@@ -12,10 +12,10 @@ type MainProps = {
 }
 
 function Main({ offers, activeCity }: MainProps): JSX.Element {
-  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+  const [activeOfferId, setActiveOfferId] = useState<string | undefined>(undefined);
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
 
-  const handleActiveOfferChange = (id: string | null) => {
+  const handleActiveOfferChange = (id: string | undefined) => {
     setActiveOfferId(id);
   };
 
