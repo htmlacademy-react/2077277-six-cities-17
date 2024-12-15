@@ -34,7 +34,7 @@ const OFFER: OneOfferType[] = [
       'Fridge',
       'Cable TV',
       'Baby seat',
-      'Laptop friendly workspace',
+      'Workspace',
       'Towels',
       'Air conditioning',
       'Washing machine',

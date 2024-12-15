@@ -85,8 +85,8 @@ const OFFERS: OfferType[] = [
       }
     },
     location: {
-      latitude: 48.858610000000006,
-      longitude: 2.330499,
+      latitude: 48.87861,
+      longitude: 2.357499,
       zoom: 16
     },
     isFavorite: true,

@@ -4,8 +4,10 @@ import OfferInsideList from '../../components/offer-inside-list/offer-inside-lis
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import Card from '../../components/card/card';
-import { OffersPage, PageType } from '../../const';
+import Bookmark from '../../components/bookmark/bookmark';
+import { OffersPage, PageType, RATING_SHARE } from '../../const';
 import { LoginStatusList, OfferType, OneOfferType, ReviewsType } from '../../type';
+import { capitalizeFirstLetter } from '../../utils';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
@@ -18,9 +20,9 @@ type OfferPageProps = {
 }
 
 function OfferPage({ loginStatus, offersNearby, offer, offers, reviews }: OfferPageProps): JSX.Element {
-
+  const { title, description, type, price, images, isPremium, isFavorite, rating, bedrooms, maxAdults, goods, host, city } = offer[0];
   const offersNearbySliced = offersNearby.slice(0, 3);
-  const offerImages = offer[0].images.map((image) => <OfferImage key={image} path={image} type={offer[0].type} />);
+  const offerImages = images.map((image) => <OfferImage key={image} path={image} type={offer[0].type} />);
   const cards = offersNearbySliced.map((oneOffer) => <Card key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} isFavorite={oneOffer.isFavorite} page={OffersPage} />);
   const { offerId } = useParams<string>();
 
@@ -45,69 +47,57 @@ function OfferPage({ loginStatus, offersNearby, offer, offers, reviews }: OfferP
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
+              {isPremium && <div className="offer__mark"><span>Premium</span></div>}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {title}
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
-                  <svg className="offer__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                <Bookmark isFavorite={isFavorite} isOfferPage />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{ width: '80%' }}></span>
+                  <span style={{ width: `${rating * RATING_SHARE}%` }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">4.8</span>
+                <span className="offer__rating-value rating__value">{rating}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  Apartment
+                  {capitalizeFirstLetter(type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
+                  {bedrooms} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                  Max {maxAdults} adults
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
+                <b className="offer__price-value">&euro;{price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
-              <OfferInsideList />
+              <OfferInsideList goods={goods} />
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
                   <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="offer__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+                    <img className="offer__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">
-                    Angelina
+                    {host.name}
                   </span>
-                  <span className="offer__user-status">
-                    Pro
-                  </span>
+                  {host.isPro && <span className="offer__user-status">Pro</span>}
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                  </p>
-                  <p className="offer__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                    {description}
                   </p>
                 </div>
               </div>
-              <ReviewsList loginStatus={loginStatus} reviews={reviews}/>
+              <ReviewsList loginStatus={loginStatus} reviews={reviews} />
             </div>
           </div>
-          <Map isOffer activeCity={offer[0].city.name} offers={offersNearbySlicedFull} selectedOfferId={offerId} />
+          <Map isOffer activeCity={city.name} offers={offersNearbySlicedFull} selectedOfferId={offerId} />
         </section>
         <div className="container">
           <section className="near-places places">
