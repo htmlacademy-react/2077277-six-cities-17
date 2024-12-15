@@ -57,9 +57,41 @@ type ReviewType = {
 type FormDataType = {
   rating: null | number;
   review: string;
-}
+};
+
+type ReviewsType = {
+  id: string;
+  comment: string;
+  date: string;
+  rating: number;
+  user: UserType;
+};
+
+type HostType = {
+  isPro: boolean;
+  name: string;
+  avatarUrl: string;
+};
+
+type OneOfferType = {
+  id: string;
+  title: string;
+  description: string;
+  type: string;
+  price: number;
+  images: string[];
+  city: CityType;
+  location: LocationType;
+  goods: string[];
+  host: HostType;
+  isPremium: boolean;
+  isFavorite: boolean;
+  rating: number;
+  bedrooms: number;
+  maxAdults: number;
+};
 
 type RatingMeaningType = typeof RATING_MEANING[number];
 type RatingStarsType = typeof RATING_STARS[number];
 
-export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType};
+export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType };

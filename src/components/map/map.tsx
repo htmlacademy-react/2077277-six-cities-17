@@ -9,7 +9,7 @@ type MapProps = {
   isOffer?: boolean;
   activeCity: CitiesListType;
   offers: OfferType[];
-  selectedOfferId: string | null;
+  selectedOfferId: string | undefined;
 }
 
 const defaultCustomIcon = new Icon({
@@ -25,6 +25,7 @@ const currentCustomIcon = new Icon({
 });
 
 function Map({ isOffer = false, activeCity, offers, selectedOfferId }: MapProps): JSX.Element {
+
   const cityLocation = CityLocation[activeCity];
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityLocation);
@@ -64,7 +65,7 @@ function Map({ isOffer = false, activeCity, offers, selectedOfferId }: MapProps)
     }
   }, [map, offers, selectedOfferId, activeCity]);
 
-  return <section className={`${isOffer ? 'offer' : 'cities'}__map map`} {...(isOffer ? {} : {ref:mapRef})}></section>;
+  return <section className={`${isOffer ? 'offer' : 'cities'}__map map`} ref={mapRef}></section>;
 }
 
 export default Map;

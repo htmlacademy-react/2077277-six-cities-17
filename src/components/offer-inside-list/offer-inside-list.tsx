@@ -1,8 +1,11 @@
 import OfferInsideItem from '../offer-inside-item/offer-inside-item';
-import { offerInsideItems } from '../../const';
 
-function OfferInsideList(): JSX.Element {
-  const offerItems = offerInsideItems.map((item) => <OfferInsideItem key={item} offerInsideItem={item} />);
+type OfferInsideListProps = {
+  goods: string[];
+}
+
+function OfferInsideList({goods}:OfferInsideListProps): JSX.Element {
+  const offerItems = goods.map((good) => <OfferInsideItem key={good} offerInsideItem={good} />);
 
   return (
     <div className="offer__inside">
