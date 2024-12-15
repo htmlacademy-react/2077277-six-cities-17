@@ -1,7 +1,7 @@
 import { PageParamsType } from '../../type';
 import { RoutePath, RATING_SHARE } from '../../const';
 import { Link, generatePath } from 'react-router-dom';
-import capitalizeFirstLetter from '../../utils';
+import { capitalizeFirstLetter } from '../../utils';
 
 type CardProps = {
   page: PageParamsType;

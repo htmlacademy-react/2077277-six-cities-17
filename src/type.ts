@@ -94,4 +94,4 @@ type OneOfferType = {
 type RatingMeaningType = typeof RATING_MEANING[number];
 type RatingStarsType = typeof RATING_STARS[number];
 
-export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType };
+export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType };

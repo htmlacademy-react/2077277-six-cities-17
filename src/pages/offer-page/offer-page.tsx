@@ -1,11 +1,11 @@
 import Header from '../../components/header/header';
 import OfferImage from '../../components/offer-image/offer-image';
 import OfferInsideList from '../../components/offer-inside-list/offer-inside-list';
-import Reviews from '../../components/reviews/reviews';
+import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import Card from '../../components/card/card';
 import { OffersPage, PageType } from '../../const';
-import { LoginStatusList, OfferType, OneOfferType, ReviewsType} from '../../type';
+import { LoginStatusList, OfferType, OneOfferType, ReviewsType } from '../../type';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
@@ -17,20 +17,25 @@ type OfferPageProps = {
   offers: OfferType[];
 }
 
-function OfferPage({loginStatus, offersNearby, offer, offers, reviews}: OfferPageProps): JSX.Element {
+function OfferPage({ loginStatus, offersNearby, offer, offers, reviews }: OfferPageProps): JSX.Element {
 
-  const offersNearbySliced = offersNearby.slice(0,3);
-  const offerImages = offer[0].images.map((image) => <OfferImage key={image} path={image} type={offer[0].type}/>);
-  const cards = offersNearbySliced.map((oneOffer) => <Card key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} isFavorite={oneOffer.isFavorite} page ={OffersPage} />);
+  const offersNearbySliced = offersNearby.slice(0, 3);
+  const offerImages = offer[0].images.map((image) => <OfferImage key={image} path={image} type={offer[0].type} />);
+  const cards = offersNearbySliced.map((oneOffer) => <Card key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} isFavorite={oneOffer.isFavorite} page={OffersPage} />);
   const { offerId } = useParams<string>();
-  const offersNearbySlicedFull = [...offersNearbySliced, offers.find((item) => item.id === offerId)];
+
+  const currentOffer = offers.find((item) => item.id === offerId);
+  const offersNearbySlicedFull = offersNearbySliced;
+  if (currentOffer) {
+    offersNearbySlicedFull.push(currentOffer);
+  }
 
   return (
     <div className="page">
       <Helmet>
         <title>6 cities: {PageType.Offer}</title>
       </Helmet>
-      <Header loginStatus={loginStatus}/>
+      <Header loginStatus={loginStatus} />
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
@@ -99,10 +104,10 @@ function OfferPage({loginStatus, offersNearby, offer, offers, reviews}: OfferPag
                   </p>
                 </div>
               </div>
-              <Reviews loginStatus={loginStatus}/>
+              <ReviewsList loginStatus={loginStatus} reviews={reviews}/>
             </div>
           </div>
-          <Map isOffer activeCity={offer[0].city.name} offers={offersNearbySlicedFull} selectedOfferId={offerId}/>
+          <Map isOffer activeCity={offer[0].city.name} offers={offersNearbySlicedFull} selectedOfferId={offerId} />
         </section>
         <div className="container">
           <section className="near-places places">

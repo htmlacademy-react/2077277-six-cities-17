@@ -2,11 +2,11 @@ import { OfferType } from '../type';
 
 const OFFERS_NEARBY: OfferType[] = [
   {
-    id: '50ea244f-4e89-4320-9272-45241d4999fb',
-    title: 'Wood and stone place',
-    type: 'hotel',
-    price: 364,
-    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/7.jpg',
+    id: '1053117c-bfcd-40f5-a18b-25d4a3dffce7',
+    title: 'Penthouse, 4-5 rooms + 5 balconies',
+    type: 'apartment',
+    price: 224,
+    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/18.jpg',
     city: {
       name: 'Paris',
       location: {
@@ -16,20 +16,20 @@ const OFFERS_NEARBY: OfferType[] = [
       }
     },
     location: {
-      latitude: 48.87961000000001,
-      longitude: 2.353499,
+      latitude: 48.837610000000005,
+      longitude: 2.3454990000000002,
       zoom: 16
     },
     isFavorite: false,
     isPremium: true,
-    rating: 2.4
+    rating: 4
   },
   {
-    id: 'ae8aa68f-e61e-47e6-afe0-4e8a6dced84e',
-    title: 'Perfectly located Castro',
-    type: 'house',
-    price: 343,
-    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/11.jpg',
+    id: '1c53ae92-b3ba-412a-bc55-b749edbfd444',
+    title: 'Wood and stone place',
+    type: 'hotel',
+    price: 289,
+    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/5.jpg',
     city: {
       name: 'Paris',
       location: {
@@ -39,13 +39,13 @@ const OFFERS_NEARBY: OfferType[] = [
       }
     },
     location: {
-      latitude: 48.834610000000005,
-      longitude: 2.335499,
+      latitude: 48.84761,
+      longitude: 2.356499,
       zoom: 16
     },
     isFavorite: false,
-    isPremium: false,
-    rating: 3.4
+    isPremium: true,
+    rating: 2.6
   },
   {
     id: 'd916ed58-52d7-4195-8de0-09b521263780',

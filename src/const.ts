@@ -12,7 +12,6 @@ const offerInsideItems = [
 ];
 
 const ACTIVE_CITY = City.Paris;
-const REVIEWS_NUMBER = 1;
 const RATING_STARS = [5, 4, 3, 2, 1] as const;
 const RATING_MEANING = ['perfect', 'good', 'not bad', 'badly', 'terribly'] as const;
 
@@ -129,8 +128,7 @@ const CityLocation = {
 };
 
 export {
-  City, ACTIVE_CITY, offerInsideItems,
-  REVIEWS_NUMBER, FavoritesPage, OffersPage, MainPage,
+  City, ACTIVE_CITY, offerInsideItems, FavoritesPage, OffersPage, MainPage,
   LoginStatus, RoutePath, PageType, LogoHeaderParams, LogoFooterParams,
   RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor, UrlMarker, MapInfo, CityLocation
 };
