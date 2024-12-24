@@ -27,10 +27,17 @@ function OfferPage({ loginStatus, offersNearby, offer, offers, reviews }: OfferP
   const { offerId } = useParams<string>();
 
   const currentOffer = offers.find((item) => item.id === offerId);
-  const offersNearbySlicedFull = offersNearbySliced;
-  if (currentOffer) {
-    offersNearbySlicedFull.push(currentOffer);
+
+  function getSlicedNearOffersWithCurrentOffer() {
+    const nearOffersWithCurrentOffer = offersNearbySliced;
+    if (currentOffer) {
+      nearOffersWithCurrentOffer.push(currentOffer);
+    }
+
+    return nearOffersWithCurrentOffer;
   }
+
+  const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer();
 
   return (
     <div className="page">
@@ -97,7 +104,7 @@ function OfferPage({ loginStatus, offersNearby, offer, offers, reviews }: OfferP
               <ReviewsList loginStatus={loginStatus} reviews={reviews} />
             </div>
           </div>
-          <Map isOffer activeCity={currentOffer?.city.name ?? city.name} offers={offersNearbySlicedFull} selectedOfferId={offerId} />
+          <Map isOffer activeCity={currentOffer?.city.name ?? city.name} offers={slicedNearOffersWithCurrentOffer} selectedOfferId={offerId} />
         </section>
         <div className="container">
           <section className="near-places places">
