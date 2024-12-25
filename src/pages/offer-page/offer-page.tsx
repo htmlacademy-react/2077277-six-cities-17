@@ -7,7 +7,7 @@ import Card from '../../components/card/card';
 import Bookmark from '../../components/bookmark/bookmark';
 import { OffersPage, PageType, RATING_SHARE } from '../../const';
 import { LoginStatusList, OfferType, OneOfferType, ReviewsType } from '../../type';
-import { capitalizeFirstLetter } from '../../utils';
+import { capitalizeFirstLetter, getSlicedNearOffersWithCurrentOffer } from '../../utils';
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 
@@ -22,23 +22,13 @@ function OfferPage({ loginStatus, offersNearby, offer, reviews }: OfferPageProps
   const { title, description, type, price, images, isPremium, isFavorite, rating, bedrooms, maxAdults, goods, host, city } = offer[0];
   const { offerId } = useParams<string>();
   const currentOffer = offersNearby.find((item) => item.id === offerId);
+  const offerImages = images.map((image) => <OfferImage key={image} path={image} type={offer[0].type} />);
 
   const offersNearbyWithoutCurrentOffer = offersNearby.filter((itemOffer) => itemOffer.id !== offerId);
   const offersNearbySlicedWithoutCurrentOffer = offersNearbyWithoutCurrentOffer.slice(0, 3);
-
-  const offerImages = images.map((image) => <OfferImage key={image} path={image} type={offer[0].type} />);
-
   const cards = offersNearbySlicedWithoutCurrentOffer.map((oneOffer) => <Card key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} isFavorite={oneOffer.isFavorite} page={OffersPage} />);
 
-  function getSlicedNearOffersWithCurrentOffer() {
-    const nearOffersWithCurrentOffer = offersNearbyWithoutCurrentOffer;
-    if (currentOffer) {
-      nearOffersWithCurrentOffer.push(currentOffer);
-    }
-
-    return nearOffersWithCurrentOffer;
-  }
-  const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer();
+  const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer(offersNearbyWithoutCurrentOffer, currentOffer);
 
   return (
     <div className="page">
