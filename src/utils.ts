@@ -10,12 +10,9 @@ function getHumanizeDate(date: string, format: string): string {
 }
 
 function getSlicedNearOffersWithCurrentOffer(offersNearby:OfferType[], currentOffer:OfferType | undefined) {
-  const nearOffersWithCurrentOffer = offersNearby;
   if (currentOffer) {
-    nearOffersWithCurrentOffer.push(currentOffer);
-  }
-
-  return nearOffersWithCurrentOffer;
+    return offersNearby.concat([currentOffer]) ;
+  } return offersNearby;
 }
 
 export { capitalizeFirstLetter, getHumanizeDate, getSlicedNearOffersWithCurrentOffer };
