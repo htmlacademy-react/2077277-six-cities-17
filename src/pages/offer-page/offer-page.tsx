@@ -21,15 +21,18 @@ type OfferPageProps = {
 
 function OfferPage({ loginStatus, offersNearby, offer, offers, reviews }: OfferPageProps): JSX.Element {
   const { title, description, type, price, images, isPremium, isFavorite, rating, bedrooms, maxAdults, goods, host, city } = offer[0];
-  const offersNearbySliced = offersNearby.slice(0, 3);
-  const offerImages = images.map((image) => <OfferImage key={image} path={image} type={offer[0].type} />);
-  const cards = offersNearbySliced.map((oneOffer) => <Card key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} isFavorite={oneOffer.isFavorite} page={OffersPage} />);
   const { offerId } = useParams<string>();
+  const currentOffer = offersNearby.find((item) => item.id === offerId);
 
-  const currentOffer = offers.find((item) => item.id === offerId);
+  const offersNearbyWithoutCurrentOffer = offersNearby.filter((itemOffer) => itemOffer.id !== offerId);
+  const offersNearbySlicedWithoutCurrentOffer = offersNearbyWithoutCurrentOffer.slice(0, 3);
+
+  const offerImages = images.map((image) => <OfferImage key={image} path={image} type={offer[0].type} />);
+
+  const cards = offersNearbySlicedWithoutCurrentOffer.map((oneOffer) => <Card key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} isFavorite={oneOffer.isFavorite} page={OffersPage} />);
 
   function getSlicedNearOffersWithCurrentOffer() {
-    const nearOffersWithCurrentOffer = offersNearbySliced;
+    const nearOffersWithCurrentOffer = offersNearbyWithoutCurrentOffer;
     if (currentOffer) {
       nearOffersWithCurrentOffer.push(currentOffer);
     }
@@ -38,6 +41,10 @@ function OfferPage({ loginStatus, offersNearby, offer, offers, reviews }: OfferP
   }
 
   const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer();
+
+  // console.log(currentOffer);
+  // console.log(offersNearbySliced);
+  // console.log(slicedNearOffersWithCurrentOffer);
 
   return (
     <div className="page">

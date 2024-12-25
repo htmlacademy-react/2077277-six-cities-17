@@ -2,34 +2,11 @@ import { OfferType } from '../type';
 
 const OFFERS_NEARBY: OfferType[] = [
   {
-    id: '1053117c-bfcd-40f5-a18b-25d4a3dffce7',
-    title: 'Penthouse, 4-5 rooms + 5 balconies',
-    type: 'apartment',
-    price: 224,
-    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/18.jpg',
-    city: {
-      name: 'Paris',
-      location: {
-        latitude: 48.85661,
-        longitude: 2.351499,
-        zoom: 13
-      }
-    },
-    location: {
-      latitude: 48.837610000000005,
-      longitude: 2.3454990000000002,
-      zoom: 16
-    },
-    isFavorite: false,
-    isPremium: true,
-    rating: 4
-  },
-  {
-    id: '1c53ae92-b3ba-412a-bc55-b749edbfd444',
+    id: '50ea244f-4e89-4320-9272-45241d4999fb',
     title: 'Wood and stone place',
     type: 'hotel',
-    price: 289,
-    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/5.jpg',
+    price: 364,
+    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/7.jpg',
     city: {
       name: 'Paris',
       location: {
@@ -39,20 +16,20 @@ const OFFERS_NEARBY: OfferType[] = [
       }
     },
     location: {
-      latitude: 48.84761,
-      longitude: 2.356499,
+      latitude: 48.858610000000006,
+      longitude: 2.330499,
       zoom: 16
     },
     isFavorite: false,
     isPremium: true,
-    rating: 2.6
+    rating: 2.4
   },
   {
-    id: 'd916ed58-52d7-4195-8de0-09b521263780',
-    title: 'Tile House',
+    id: 'b4eac7d0-8cb8-4046-8c5c-e8fcb7ae6b51',
+    title: 'Perfectly located Castro',
     type: 'hotel',
-    price: 250,
-    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/19.jpg',
+    price: 104,
+    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/20.jpg',
     city: {
       name: 'Paris',
       location: {
@@ -62,20 +39,20 @@ const OFFERS_NEARBY: OfferType[] = [
       }
     },
     location: {
-      latitude: 48.87561,
-      longitude: 2.375499,
+      latitude: 48.868610000000004,
+      longitude: 2.342499,
       zoom: 16
     },
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
-    rating: 3.4
+    rating: 2.1
   },
   {
-    id: 'd8ef554c-9f39-4efc-b816-fad3ac0e61cd',
-    title: 'Nice, cozy, warm big bed apartment',
-    type: 'hotel',
-    price: 153,
-    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/16.jpg',
+    id: 'ae8aa68f-e61e-47e6-afe0-4e8a6dced84e',
+    title: 'Perfectly located Castro',
+    type: 'house',
+    price: 343,
+    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/11.jpg',
     city: {
       name: 'Paris',
       location: {
@@ -86,12 +63,35 @@ const OFFERS_NEARBY: OfferType[] = [
     },
     location: {
       latitude: 48.834610000000005,
-      longitude: 2.364499,
+      longitude: 2.335499,
       zoom: 16
     },
     isFavorite: false,
     isPremium: false,
-    rating: 4.1
+    rating: 3.4
+  },
+  {
+    id: '8046e71f-52bc-4121-a05a-7ef2164726c4',
+    title: 'Waterfront with extraordinary view',
+    type: 'house',
+    price: 904,
+    previewImage: 'https://16.design.htmlacademy.pro/static/hotel/10.jpg',
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 48.87861,
+      longitude: 2.357499,
+      zoom: 16
+    },
+    isFavorite: true,
+    isPremium: false,
+    rating: 5
   },
 ];
 

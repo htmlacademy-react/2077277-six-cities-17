@@ -41,7 +41,7 @@ function App({ offers, favorites, offersNearby, offer, reviews }: AppProps): JSX
               </PrivateRoute>
             }
             />
-            <Route path={RoutePath.Offer} element={<OfferPage loginStatus={status} offersNearby={offersNearby} offer={offer} offers={offers} reviews={reviews} />}></Route>
+            <Route path={RoutePath.Offer} element={<OfferPage loginStatus={status} offersNearby={offersNearby} offer={offer} reviews={reviews} />}></Route>
             <Route path={RoutePath.NotFound} element={<NotFoundPage loginStatus={status} />}></Route>
           </Route>
         </Routes>
