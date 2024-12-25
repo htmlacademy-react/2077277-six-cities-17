@@ -16,10 +16,9 @@ type OfferPageProps = {
   offersNearby: OfferType[];
   offer: OneOfferType[];
   reviews: ReviewsType[];
-  offers: OfferType[];
 }
 
-function OfferPage({ loginStatus, offersNearby, offer, offers, reviews }: OfferPageProps): JSX.Element {
+function OfferPage({ loginStatus, offersNearby, offer, reviews }: OfferPageProps): JSX.Element {
   const { title, description, type, price, images, isPremium, isFavorite, rating, bedrooms, maxAdults, goods, host, city } = offer[0];
   const { offerId } = useParams<string>();
   const currentOffer = offersNearby.find((item) => item.id === offerId);
@@ -39,12 +38,7 @@ function OfferPage({ loginStatus, offersNearby, offer, offers, reviews }: OfferP
 
     return nearOffersWithCurrentOffer;
   }
-
   const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer();
-
-  // console.log(currentOffer);
-  // console.log(offersNearbySliced);
-  // console.log(slicedNearOffersWithCurrentOffer);
 
   return (
     <div className="page">
