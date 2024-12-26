@@ -1,25 +1,39 @@
-function ReviewsItem(): JSX.Element {
+import { UserType } from '../../type';
+import { RATING_SHARE } from '../../const';
+import { getHumanizeDate } from '../../utils';
+
+type ReviewsItemProps = {
+  comment: string;
+  date: string;
+  rating: number;
+  user: UserType;
+}
+
+function ReviewsItem({ comment, date, rating, user }: ReviewsItemProps): JSX.Element {
+  const visibleDate = getHumanizeDate(date, 'MMMM YYYY');
+  const attributeDate = getHumanizeDate(date, 'YYYY-MM-DD');
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">
-          Max
+          {user.name}
         </span>
       </div>
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{ width: `${rating * RATING_SHARE}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <p className="reviews__text">
-          A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+          {comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <time className="reviews__time" dateTime={attributeDate}>{visibleDate}</time>
       </div>
     </li>
   );

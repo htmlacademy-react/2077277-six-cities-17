@@ -9,13 +9,13 @@ import { useState } from 'react';
 type MainProps = {
   offers: OfferType[];
   activeCity: CitiesListType;
+  filteredOffers: OfferType[];
 }
 
-function Main({ offers, activeCity }: MainProps): JSX.Element {
-  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+function Main({ offers, activeCity, filteredOffers }: MainProps): JSX.Element {
+  const [activeOfferId, setActiveOfferId] = useState<string | undefined>(undefined);
 
-
-  const handleActiveOfferChange = (id: string | null) => {
+  const handleActiveOfferChange = (id: string | undefined) => {
     setActiveOfferId(id);
   };
 
@@ -23,9 +23,9 @@ function Main({ offers, activeCity }: MainProps): JSX.Element {
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <MainTitle citiesCount={offers.length} />
+        <MainTitle citiesCount={filteredOffers.length} activeCity={activeCity}/>
         <Sorting />
-        <CardsList page={MainPage} offers={offers} onHandleActiveOfferChange ={handleActiveOfferChange} activeCity={activeCity}/>
+        <CardsList page={MainPage} filteredOffers={filteredOffers} onHandleActiveOfferChange ={handleActiveOfferChange}/>
       </section>
       <div className="cities__right-section">
         <Map activeCity={activeCity} offers={offers} selectedOfferId={activeOfferId}/>

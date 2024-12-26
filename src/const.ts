@@ -7,13 +7,7 @@ const City = {
   Dusseldorf: 'Dusseldorf'
 } as const;
 
-const offerInsideItems = [
-  'wi-Fi', 'heating', 'kitchen', 'fridge', 'washing machine', 'coffee machine', 'dishwasher', 'towels', 'baby seat', 'cabel TV'
-];
-
 const ACTIVE_CITY = City.Paris;
-const OFFER_IMAGE_NUMBER = 6;
-const REVIEWS_NUMBER = 1;
 const RATING_STARS = [5, 4, 3, 2, 1] as const;
 const RATING_MEANING = ['perfect', 'good', 'not bad', 'badly', 'terribly'] as const;
 
@@ -129,9 +123,20 @@ const CityLocation = {
   },
 };
 
+const BookmarkOfferParams = {
+  Class: 'offer',
+  Width: 31,
+  Height: 33,
+} as const;
+
+const BookmarkCardParams = {
+  Class: 'place-card',
+  Width: 18,
+  Height: 19,
+} as const;
+
 export {
-  City, ACTIVE_CITY, OFFER_IMAGE_NUMBER, offerInsideItems,
-  REVIEWS_NUMBER, FavoritesPage, OffersPage, MainPage,
+  City, ACTIVE_CITY, FavoritesPage, OffersPage, MainPage,
   LoginStatus, RoutePath, PageType, LogoHeaderParams, LogoFooterParams,
-  RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor, UrlMarker, MapInfo, CityLocation
+  RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor, UrlMarker, MapInfo, CityLocation, BookmarkOfferParams, BookmarkCardParams
 };

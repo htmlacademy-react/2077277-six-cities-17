@@ -15,6 +15,7 @@ type MainPageProps = {
 function MainPage({ loginStatus, offers }: MainPageProps): JSX.Element {
 
   const [activeCity, setActiveCity] = useState<CitiesListType>(ACTIVE_CITY);
+  const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
 
   const handleActiveCityChange = (city: CitiesListType): void => {
     if (city === activeCity) {
@@ -32,11 +33,11 @@ function MainPage({ loginStatus, offers }: MainPageProps): JSX.Element {
       <Header isMainPage loginStatus={loginStatus} />
       <CitiesList activeCity={activeCity} onActiveCityChange={handleActiveCityChange}/>
 
-      <main className={`page__main page__main--index ${!offers.length ? 'page__main--index-empty' : ''}`}>
+      <main className={`page__main page__main--index ${!filteredOffers.length ? 'page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="cities">
 
-          {!offers.length ? <MainEmpty /> : <Main offers={offers} activeCity={activeCity}/>}
+          {!filteredOffers.length ? <MainEmpty activeCity={activeCity}/> : <Main offers={offers} activeCity={activeCity} filteredOffers={filteredOffers} />}
 
         </div>
       </main>

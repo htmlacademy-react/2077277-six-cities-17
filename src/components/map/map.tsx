@@ -9,7 +9,7 @@ type MapProps = {
   isOffer?: boolean;
   activeCity: CitiesListType;
   offers: OfferType[];
-  selectedOfferId: string | null;
+  selectedOfferId: string | undefined;
 }
 
 const defaultCustomIcon = new Icon({
@@ -25,7 +25,9 @@ const currentCustomIcon = new Icon({
 });
 
 function Map({ isOffer = false, activeCity, offers, selectedOfferId }: MapProps): JSX.Element {
+
   const cityLocation = CityLocation[activeCity];
+  const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityLocation);
   const markerLayer = useRef<LayerGroup>(layerGroup());
@@ -33,8 +35,8 @@ function Map({ isOffer = false, activeCity, offers, selectedOfferId }: MapProps)
   useEffect(() => {
     if (map) {
       map.setView([cityLocation.latitude, cityLocation.longitude], cityLocation.zoom);
-      markerLayer.current.addTo(map);
       markerLayer.current.clearLayers();
+      markerLayer.current.addTo(map);
     }
   });
 
@@ -43,7 +45,7 @@ function Map({ isOffer = false, activeCity, offers, selectedOfferId }: MapProps)
       const selectedOffer = offers.find((offer) => offer.id === selectedOfferId);
       const markerLayerCurrent = markerLayer.current;
 
-      offers.forEach((offer) => {
+      filteredOffers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
@@ -62,9 +64,9 @@ function Map({ isOffer = false, activeCity, offers, selectedOfferId }: MapProps)
         map.removeLayer(markerLayerCurrent);
       };
     }
-  }, [map, offers, selectedOfferId, activeCity]);
+  }, [map, offers, filteredOffers, selectedOfferId, activeCity]);
 
-  return <section className={`${isOffer ? 'offer' : 'cities'}__map map`} {...(isOffer ? {} : {ref:mapRef})}></section>;
+  return <section className={`${isOffer ? 'offer' : 'cities'}__map map`} ref={mapRef}></section>;
 }
 
 export default Map;

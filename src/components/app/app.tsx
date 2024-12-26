@@ -6,7 +6,7 @@ import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { LoginStatus, RoutePath} from '../../const';
-import { OfferType } from '../../type';
+import { OfferType, OneOfferType, ReviewsType } from '../../type';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -15,9 +15,11 @@ type AppProps = {
   offers: OfferType[];
   favorites: OfferType[];
   offersNearby: OfferType[];
+  offer: OneOfferType[];
+  reviews: ReviewsType[];
 }
 
-function App({ offers, favorites, offersNearby }: AppProps): JSX.Element {
+function App({ offers, favorites, offersNearby, offer, reviews }: AppProps): JSX.Element {
   const status = LoginStatus.Auth;
 
   return (
@@ -39,7 +41,7 @@ function App({ offers, favorites, offersNearby }: AppProps): JSX.Element {
               </PrivateRoute>
             }
             />
-            <Route path={RoutePath.Offer} element={<OfferPage loginStatus={status} offersNearby={offersNearby} />}></Route>
+            <Route path={RoutePath.Offer} element={<OfferPage loginStatus={status} offersNearby={offersNearby} offer={offer} reviews={reviews} />}></Route>
             <Route path={RoutePath.NotFound} element={<NotFoundPage loginStatus={status} />}></Route>
           </Route>
         </Routes>
