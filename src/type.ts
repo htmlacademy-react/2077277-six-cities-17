@@ -1,4 +1,5 @@
 import { City, LoginStatus, RATING_MEANING, RATING_STARS } from './const';
+import { store } from './store';
 
 type CitiesListType = typeof City[keyof typeof City];
 type LoginStatusList = typeof LoginStatus[keyof typeof LoginStatus];
@@ -91,7 +92,10 @@ type OneOfferType = {
   maxAdults: number;
 };
 
+type RootState = ReturnType<typeof store.getState>
+type AppDispatch = typeof store.dispatch
+
 type RatingMeaningType = typeof RATING_MEANING[number];
 type RatingStarsType = typeof RATING_STARS[number];
 
-export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType };
+export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType, RootState, AppDispatch };

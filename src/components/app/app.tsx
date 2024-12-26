@@ -12,14 +12,13 @@ import { HelmetProvider } from 'react-helmet-async';
 
 
 type AppProps = {
-  offers: OfferType[];
   favorites: OfferType[];
   offersNearby: OfferType[];
   offer: OneOfferType[];
   reviews: ReviewsType[];
 }
 
-function App({ offers, favorites, offersNearby, offer, reviews }: AppProps): JSX.Element {
+function App({ favorites, offersNearby, offer, reviews }: AppProps): JSX.Element {
   const status = LoginStatus.Auth;
 
   return (
@@ -28,7 +27,7 @@ function App({ offers, favorites, offersNearby, offer, reviews }: AppProps): JSX
         <ScrollToTop />
         <Routes>
           <Route path={RoutePath.Index}>
-            <Route index element={<MainPage loginStatus={status} offers={offers} />}></Route>
+            <Route index element={<MainPage loginStatus={status} />}></Route>
             <Route path={RoutePath.Login} element={
               <PrivateRoute loginStatus={status} loginStatusExpected={LoginStatus.NoAuth} routePath={RoutePath.Index}>
                 <LoginPage />
