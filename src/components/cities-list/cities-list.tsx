@@ -4,13 +4,12 @@ import { CitiesListType } from '../../type';
 
 type CitiesListProps = {
   activeCity: CitiesListType;
-  onActiveCityChange: (city: CitiesListType) => void;
 };
 
-function CitiesList({activeCity, onActiveCityChange}:CitiesListProps): JSX.Element {
+function CitiesList({activeCity}:CitiesListProps): JSX.Element {
 
   const citiesItems = Object.values(City).map((city) =>
-    <CitiesItem key={city} city={city} isActive={activeCity === city} onActiveCityChange={onActiveCityChange}/>
+    <CitiesItem key={city} city={city} isActive={activeCity === city}/>
   );
 
   return (
