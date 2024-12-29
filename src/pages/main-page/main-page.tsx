@@ -9,6 +9,7 @@ import { useAppSelector } from '../../hooks';
 import { getOffersList } from '../../store/action';
 import { store } from '../../store';
 import OFFERS from '../../mocks/offers';
+import { selectActiveCity, selectOffersList } from '../../store/selectors';
 
 type MainPageProps = {
   loginStatus: LoginStatusList;
@@ -18,8 +19,8 @@ store.dispatch(getOffersList(OFFERS));
 
 function MainPage({ loginStatus }: MainPageProps): JSX.Element {
 
-  const activeCity = useAppSelector((state) => state.activeCity);
-  const offers = useAppSelector((state) => state.offersList);
+  const activeCity = useAppSelector(selectActiveCity);
+  const offers = useAppSelector(selectOffersList);
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
 
   return (

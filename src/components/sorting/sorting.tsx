@@ -2,11 +2,12 @@ import SortingItem from '../sorting-item/sorting-item';
 import { SortType } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { useEffect, useRef, useState } from 'react';
+import { selectSortListType } from '../../store/selectors';
 
 function Sorting(): JSX.Element {
   const sortSpanRef = useRef<HTMLElement>(null);
   const [isSortingOpen, setSortingOpen] = useState(false);
-  const currentSortType = useAppSelector((state) => state.currentSortType);
+  const currentSortType = useAppSelector(selectSortListType);
   const SortItem = Object.values(SortType).map((item) => <SortingItem key={item} isActive={currentSortType === item} sortType={item} />);
 
   useEffect(() => {
