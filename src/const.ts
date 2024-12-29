@@ -135,8 +135,18 @@ const BookmarkCardParams = {
   Height: 19,
 } as const;
 
+const SortType = {
+  Popular: 'Popular',
+  PriceLow: 'Price: low to high',
+  PriceHigh: 'Price: high to low',
+  Rating: 'Top rated first'
+} as const;
+
+const DEFAULT_SORT_TYPE = SortType.Popular;
+
 export {
   City, ACTIVE_CITY, FavoritesPage, OffersPage, MainPage,
   LoginStatus, RoutePath, PageType, LogoHeaderParams, LogoFooterParams,
-  RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor, UrlMarker, MapInfo, CityLocation, BookmarkOfferParams, BookmarkCardParams
+  RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor,
+  UrlMarker, MapInfo, CityLocation, BookmarkOfferParams, BookmarkCardParams, SortType, DEFAULT_SORT_TYPE
 };
