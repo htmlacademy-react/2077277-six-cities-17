@@ -13,7 +13,7 @@ const createAppAsyncThunk = createAsyncThunk.withTypes<{
 }>();
 
 const fetchOffers = createAppAsyncThunk<OfferType[], undefined>(
-  'data/fetchOffers',
+  'offers/fetchOffers',
   async(_arg, {extra: api}) => {
     const {data} = await api.get<OfferType[]>(APIRoute.Offers);
     return data;

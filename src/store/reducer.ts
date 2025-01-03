@@ -1,8 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { ACTIVE_CITY, DEFAULT_SORT_TYPE } from '../const';
 import { CitiesListType, OfferType, SortListType } from '../type';
-import { changeCity, getOffersList, changeSortingType } from './action';
+import { changeCity, changeSortingType } from './action';
 import { setError } from './action';
+import { fetchOffers } from './api-action';
 
 const initialState = {
   activeCity: ACTIVE_CITY as CitiesListType,
@@ -17,8 +18,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(changeCity, (state, action) => {
       state.activeCity = action.payload;
     })
-    .addCase(getOffersList, (state, action) => {
+    .addCase(fetchOffers.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(fetchOffers.fulfilled, (state, action) => {
       state.offersList = action.payload;
+      state.isLoading = false;
     })
     .addCase(changeSortingType, (state, action) => {
       state.currentSortType = action.payload;
