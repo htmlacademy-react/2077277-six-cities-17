@@ -144,9 +144,23 @@ const SortType = {
 
 const DEFAULT_SORT_TYPE = SortType.Popular;
 
+const Server = {
+  Url: 'https://16.design.htmlacademy.pro/six-cities',
+  Timeout: 5000,
+} as const;
+
+const TOKEN_NAME = 'six-cities-token';
+const ERROR_TIMEOUT = 3000;
+
+const APIRoute = {
+  Offers: '/offers',
+  Login: '/login',
+  Logout: '/logout',
+} as const;
+
 export {
   City, ACTIVE_CITY, FavoritesPage, OffersPage, MainPage,
   LoginStatus, RoutePath, PageType, LogoHeaderParams, LogoFooterParams,
   RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor,
-  UrlMarker, MapInfo, CityLocation, BookmarkOfferParams, BookmarkCardParams, SortType, DEFAULT_SORT_TYPE
+  UrlMarker, MapInfo, CityLocation, BookmarkOfferParams, BookmarkCardParams, SortType, DEFAULT_SORT_TYPE, Server, TOKEN_NAME, ERROR_TIMEOUT, APIRoute
 };

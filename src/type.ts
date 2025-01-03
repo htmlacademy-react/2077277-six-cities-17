@@ -102,4 +102,11 @@ type RatingStarsType = typeof RATING_STARS[number];
 
 type State = ReturnType<typeof store.getState>;
 
-export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType, RootState, AppDispatch, SortListType, State };
+type ErrorMessageType = {
+  type: string;
+  message: string;
+}
+
+type Token = string;
+
+export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType, RootState, AppDispatch, SortListType, State, ErrorMessageType, Token };
