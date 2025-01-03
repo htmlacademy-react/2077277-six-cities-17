@@ -52,7 +52,8 @@ const PageType = {
   Login: 'login',
   Favorites: 'Favorites',
   Offer: 'Offer',
-  NotFound: 'Not found'
+  NotFound: 'Not found',
+  Loading: 'Loading'
 
 } as const;
 
