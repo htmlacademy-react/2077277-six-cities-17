@@ -151,7 +151,7 @@ const Server = {
 } as const;
 
 const TOKEN_NAME = 'six-cities-token';
-const ERROR_TIMEOUT = 3000;
+const ERROR_TIMEOUT = 5000;
 
 const APIRoute = {
   Offers: '/offers',
