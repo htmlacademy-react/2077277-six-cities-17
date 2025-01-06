@@ -1,0 +1,11 @@
+.error {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  border: 2px solid #d01717;
+  background-color: white;
+  color: #d01717;
+  padding: 40px 60px;
+}

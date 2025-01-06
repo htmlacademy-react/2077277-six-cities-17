@@ -109,4 +109,15 @@ type ErrorMessageType = {
 
 type Token = string;
 
-export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType, RootState, AppDispatch, SortListType, State, ErrorMessageType, Token };
+type AuthData = {
+  login: string;
+  password: string;
+};
+
+type UserData = {
+  id: number;
+  email: string;
+  token: string;
+};
+
+export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType, RootState, AppDispatch, SortListType, State, ErrorMessageType, Token, AuthData, UserData };

@@ -151,7 +151,7 @@ const Server = {
 } as const;
 
 const TOKEN_NAME = 'six-cities-token';
-const ERROR_TIMEOUT = 3000;
+const ERROR_TIMEOUT = 5000;
 
 const APIRoute = {
   Offers: '/offers',
@@ -159,9 +159,14 @@ const APIRoute = {
   Logout: '/logout',
 } as const;
 
+const ErrorStatus = {
+  NoAuth: 401,
+} as const;
+
 export {
   City, ACTIVE_CITY, FavoritesPage, OffersPage, MainPage,
   LoginStatus, RoutePath, PageType, LogoHeaderParams, LogoFooterParams,
   RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor,
-  UrlMarker, MapInfo, CityLocation, BookmarkOfferParams, BookmarkCardParams, SortType, DEFAULT_SORT_TYPE, Server, TOKEN_NAME, ERROR_TIMEOUT, APIRoute
+  UrlMarker, MapInfo, CityLocation, BookmarkOfferParams, BookmarkCardParams,
+  SortType, DEFAULT_SORT_TYPE, Server, TOKEN_NAME, ERROR_TIMEOUT, APIRoute, ErrorStatus
 };
