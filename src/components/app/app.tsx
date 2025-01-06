@@ -10,8 +10,10 @@ import { LoginStatus, RoutePath } from '../../const';
 import { OfferType, OneOfferType, ReviewsType } from '../../type';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectOffersLoadingStatus } from '../../store/selectors';
+import { useEffect } from 'react';
+import { fetchOffers } from '../../store/api-action';
 
 
 type AppProps = {
@@ -22,8 +24,14 @@ type AppProps = {
 }
 
 function App({ favorites, offersNearby, offer, reviews }: AppProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const status = LoginStatus.Auth;
   const isOffersListLoading = useAppSelector(selectOffersLoadingStatus);
+
+  useEffect(() => {
+    dispatch(fetchOffers());
+    dispatch(checkAuthStatus());
+  }, [dispatch]);
 
   return (
     <HelmetProvider>

@@ -6,15 +6,11 @@ import { PageType } from '../../const';
 import { LoginStatusList } from '../../type';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
-import { store } from '../../store';
 import { selectActiveCity, selectOffersList } from '../../store/selectors';
-import { fetchOffers } from '../../store/api-action';
 
 type MainPageProps = {
   loginStatus: LoginStatusList;
 }
-
-store.dispatch(fetchOffers());
 
 function MainPage({ loginStatus }: MainPageProps): JSX.Element {
 

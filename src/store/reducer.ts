@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { ACTIVE_CITY, DEFAULT_SORT_TYPE } from '../const';
-import { CitiesListType, OfferType, SortListType } from '../type';
+import { ACTIVE_CITY, DEFAULT_SORT_TYPE, LoginStatus } from '../const';
+import { CitiesListType, OfferType, SortListType, LoginStatusList } from '../type';
 import { changeCity, changeSortingType } from './action';
 import { setError } from './action';
 import { fetchOffers } from './api-action';
@@ -10,6 +10,7 @@ const initialState = {
   offersList: [] as OfferType[],
   currentSortType: DEFAULT_SORT_TYPE as SortListType,
   isLoading: false as boolean,
+  authorizationStatus: LoginStatus.NoAuth as LoginStatusList,
   error: null as string | null,
 };
 
