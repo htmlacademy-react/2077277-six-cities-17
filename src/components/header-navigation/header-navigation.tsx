@@ -1,6 +1,6 @@
 import { LoginStatus, RoutePath } from '../../const';
 import { LoginStatusList } from '../../type';
-import { Fragment } from 'react';
+import { Fragment} from 'react';
 import { Link } from 'react-router-dom';
 
 type HeaderNavigationProps = {
@@ -8,6 +8,7 @@ type HeaderNavigationProps = {
 }
 
 function HeaderNavigation({ loginStatus }: HeaderNavigationProps): JSX.Element {
+
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
