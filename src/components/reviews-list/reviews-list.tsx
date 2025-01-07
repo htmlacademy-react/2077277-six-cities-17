@@ -2,6 +2,7 @@ import ReviewsForm from '../reviews-form/reviews-form';
 import ReviewsItem from '../reviews-item/reviews-item';
 import { LoginStatusList, ReviewsType } from '../../type';
 import { LoginStatus } from '../../const';
+import { getReviewsByDate } from '../../utils';
 
 type ReviewsListProps = {
   loginStatus: LoginStatusList;
@@ -10,8 +11,8 @@ type ReviewsListProps = {
 
 function ReviewsList({ loginStatus, reviews }: ReviewsListProps): JSX.Element {
 
-  const reviewsSliced = reviews.slice(0, 10);
-  const reviewsList = reviewsSliced.map((review) => <ReviewsItem key={review.id} comment={review.comment} date={review.date} rating={review.rating} user={review.user} />);
+  const reviewsSlicedAndSorted = reviews.slice(0, 10).toSorted(getReviewsByDate);
+  const reviewsList = reviewsSlicedAndSorted.map((review) => <ReviewsItem key={review.id} comment={review.comment} date={review.date} rating={review.rating} user={review.user} />);
 
   return (
     <section className="offer__reviews reviews">
