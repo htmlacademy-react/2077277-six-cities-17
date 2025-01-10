@@ -157,6 +157,7 @@ const APIRoute = {
   Offers: '/offers',
   Login: '/login',
   Logout: '/logout',
+  Comments: '/comments',
 } as const;
 
 const ErrorStatus = {

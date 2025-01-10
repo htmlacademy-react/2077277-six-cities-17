@@ -1,8 +1,9 @@
-import { City, LoginStatus, RATING_MEANING, RATING_STARS, SortType } from './const';
+import { City, LoginStatus, RATING_MEANING, RATING_STARS, SortType, RoutePath } from './const';
 import { store } from './store';
 
 type CitiesListType = typeof City[keyof typeof City];
 type LoginStatusList = typeof LoginStatus[keyof typeof LoginStatus];
+type RoutePathType = typeof RoutePath[keyof typeof RoutePath];
 
 type PageParamsType = {
   ImageWrapperClass: string;
@@ -45,14 +46,6 @@ type UserType = {
   name: string;
   avatarUrl: string;
   isPro: boolean;
-};
-
-type ReviewType = {
-  id: string;
-  date: string;
-  user: UserType;
-  comment: string;
-  rating: number;
 };
 
 type FormDataType = {
@@ -120,4 +113,14 @@ type UserData = {
   token: string;
 };
 
-export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType, RootState, AppDispatch, SortListType, State, ErrorMessageType, Token, AuthData, UserData };
+type CommentType = {
+  review: string;
+  rating: number;
+};
+
+type CommentInfoType = {
+  comment: CommentType;
+  id: number;
+};
+
+export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType, RootState, AppDispatch, SortListType, State, ErrorMessageType, Token, AuthData, UserData, CommentInfoType, RoutePathType };

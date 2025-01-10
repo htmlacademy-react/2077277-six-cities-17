@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { OfferType, SortListType, ReviewsType } from './type';
 import { SortType } from './const';
+import { useParams } from 'react-router-dom';
 
 function capitalizeFirstLetter(word: string): string {
   return word.charAt(0).toUpperCase() + word.slice(1);
@@ -29,4 +30,9 @@ const sortBy = {
 
 const sortOffers = (offers: OfferType[], sortType: SortListType):OfferType[] => sortBy[sortType](offers);
 
-export { capitalizeFirstLetter, getHumanizeDate, getSlicedNearOffersWithCurrentOffer, sortOffers, getReviewsByDate };
+const GetUrlId = (): string | null => {
+  const { offerId } = useParams();
+  return offerId ?? null;
+};
+
+export { capitalizeFirstLetter, getHumanizeDate, getSlicedNearOffersWithCurrentOffer, sortOffers, getReviewsByDate, GetUrlId };

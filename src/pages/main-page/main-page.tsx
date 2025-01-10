@@ -17,7 +17,6 @@ type MainPageProps = {
 store.dispatch(fetchOffers());
 
 function MainPage({ loginStatus }: MainPageProps): JSX.Element {
-
   const activeCity = useAppSelector(selectActiveCity);
   const offers = useAppSelector(selectOffersList);
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);

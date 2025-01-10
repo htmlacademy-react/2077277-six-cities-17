@@ -5,30 +5,59 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import Card from '../../components/card/card';
 import Bookmark from '../../components/bookmark/bookmark';
-import { OffersPage, PageType, RATING_SHARE } from '../../const';
-import { LoginStatusList, OfferType, OneOfferType, ReviewsType } from '../../type';
-import { capitalizeFirstLetter, getSlicedNearOffersWithCurrentOffer } from '../../utils';
+import LoadingPage from '../loading-page/loading-page';
+import { OffersPage, PageType, RATING_SHARE, RoutePath } from '../../const';
+import { capitalizeFirstLetter, getSlicedNearOffersWithCurrentOffer, GetUrlId } from '../../utils';
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { selectOffer, selectOfferLoadingStatus, selectLoginStatus, selectNearbyOffers, selectNearbyOffersStatus, selectOffersList, selectCommentsOffersStatus, selectOffersComments } from '../../store/selectors';
+import { getOfferInfoById, fetchNearbyOffers, fetchOfferComments } from '../../store/api-action';
+import { useEffect } from 'react';
 
-type OfferPageProps = {
-  loginStatus: LoginStatusList;
-  offersNearby: OfferType[];
-  offer: OneOfferType[];
-  reviews: ReviewsType[];
-}
+function OfferPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const offerId = GetUrlId();
+  const isOfferLoading = useAppSelector(selectOfferLoadingStatus);
+  const offer = useAppSelector(selectOffer);
+  const offersList = useAppSelector(selectOffersList);
+  const isNearbyOffersLoading = useAppSelector(selectNearbyOffersStatus);
+  const offersNearby = useAppSelector(selectNearbyOffers);
+  const isOffersCommentsLoading = useAppSelector(selectCommentsOffersStatus);
+  const reviews = useAppSelector(selectOffersComments);
+  const loginStatus = useAppSelector(selectLoginStatus);
 
-function OfferPage({ loginStatus, offersNearby, offer, reviews }: OfferPageProps): JSX.Element {
-  const { title, description, type, price, images, isPremium, isFavorite, rating, bedrooms, maxAdults, goods, host, city } = offer[0];
-  const { offerId } = useParams<string>();
-  const currentOffer = offersNearby.find((item) => item.id === offerId);
-  const offerImages = images.map((image) => <OfferImage key={image} path={image} type={offer[0].type} />);
+  useEffect(() => {
+    if (!offerId) {
+      return;
+    }
+    dispatch(getOfferInfoById(offerId))
+      .unwrap()
+      .then(() => {
+        dispatch(fetchNearbyOffers(offerId));
+        dispatch(fetchOfferComments(offerId));
+      });
+  }, [dispatch, offerId]);
+
+  if (isOfferLoading || isNearbyOffersLoading || isOffersCommentsLoading) {
+    return <LoadingPage loginStatus={loginStatus} />;
+  }
+
+  if (!offer) {
+    return <Navigate to={RoutePath.NotFound} />;
+  }
+
+  const { title, description, type, price, images, isPremium, isFavorite, rating, bedrooms, maxAdults, goods, host, city } = offer;
+
+
+  const currentOffer = offersList.find((item) => item.id === offerId);
+  const offerImages = images.map((image) => <OfferImage key={image} path={image} type={offer.type} />);
 
   const offersNearbyWithoutCurrentOffer = offersNearby.filter((itemOffer) => itemOffer.id !== offerId);
   const offersNearbySlicedWithoutCurrentOffer = offersNearbyWithoutCurrentOffer.slice(0, 3);
   const cards = offersNearbySlicedWithoutCurrentOffer.map((oneOffer) => <Card key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} isFavorite={oneOffer.isFavorite} page={OffersPage} />);
 
-  const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer(offersNearbyWithoutCurrentOffer, currentOffer);
+  const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer(offersNearbySlicedWithoutCurrentOffer, currentOffer);
 
   return (
     <div className="page">
