@@ -14,7 +14,7 @@ type CardProps = {
   isPremium: boolean;
   isFavorite: boolean;
   id: string;
-  onHandleActiveOfferChange?: (id: string | undefined) => void;
+  onHandleActiveOfferChange?: (id: string | null) => void;
 }
 
 function Card({ page, title, type, price, previewImage, rating, isPremium, isFavorite, id, onHandleActiveOfferChange}: CardProps): JSX.Element {
@@ -23,7 +23,7 @@ function Card({ page, title, type, price, previewImage, rating, isPremium, isFav
     <article
       className={`${page.ImageWrapperClass}__card place-card`}
       onMouseEnter={() => onHandleActiveOfferChange && onHandleActiveOfferChange(id)}
-      onMouseLeave={() => onHandleActiveOfferChange && onHandleActiveOfferChange(undefined)}
+      onMouseLeave={() => onHandleActiveOfferChange && onHandleActiveOfferChange(null)}
     >
       {isPremium &&
         <div className="place-card__mark">

@@ -13,9 +13,9 @@ type MainProps = {
 }
 
 function Main({ offers, activeCity, filteredOffers }: MainProps): JSX.Element {
-  const [activeOfferId, setActiveOfferId] = useState<string | undefined>(undefined);
+  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
-  const handleActiveOfferChange = (id: string | undefined) => {
+  const handleActiveOfferChange = (id: string | null) => {
     setActiveOfferId(id);
   };
 
