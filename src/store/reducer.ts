@@ -4,21 +4,38 @@ import { CitiesListType, OfferType, SortListType, LoginStatusList, UserData, One
 import { changeCity, changeSortingType, setError } from './action';
 import { checkAuthStatus, fetchOffers, loginAction, logoutAction, getOfferInfoById, fetchNearbyOffers, fetchOfferComments, postOfferComment } from './api-action';
 
-const initialState = {
-  activeCity: ACTIVE_CITY as CitiesListType,
-  offersList: [] as OfferType[],
-  offer: null as OneOfferType | null,
-  nearbyOffers: [] as OfferType[],
-  offerComments: [] as ReviewsType[],
-  currentSortType: DEFAULT_SORT_TYPE as SortListType,
-  isLoading: false as boolean,
-  isLoadingOffer: false as boolean,
-  isLoadingNearbyOffers: false as boolean,
-  isLoadingOffersComments: false as boolean,
-  isLoadingComment: false as boolean,
-  authorizationStatus: LoginStatus.NoAuth as LoginStatusList,
-  userInfo: null as UserData | null,
-  error: null as string | null,
+type initialStateType = {
+  activeCity: CitiesListType;
+  offersList: OfferType[];
+  offer: OneOfferType | null;
+  nearbyOffers: OfferType[];
+  offerComments: ReviewsType[];
+  currentSortType: SortListType;
+  isLoadingOffers: boolean;
+  isLoadingOffer: boolean;
+  isLoadingNearbyOffers: boolean;
+  isLoadingOffersComments: boolean;
+  isLoadingComment: boolean;
+  authorizationStatus: LoginStatusList;
+  userInfo: UserData | null;
+  error: string | null;
+};
+
+const initialState: initialStateType = {
+  activeCity: ACTIVE_CITY,
+  offersList: [],
+  offer: null,
+  nearbyOffers: [],
+  offerComments: [],
+  currentSortType: DEFAULT_SORT_TYPE,
+  isLoadingOffers: false,
+  isLoadingOffer: false,
+  isLoadingNearbyOffers: false,
+  isLoadingOffersComments: false,
+  isLoadingComment: false,
+  authorizationStatus: LoginStatus.NoAuth,
+  userInfo: null,
+  error: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -27,14 +44,14 @@ const reducer = createReducer(initialState, (builder) => {
       state.activeCity = action.payload;
     })
     .addCase(fetchOffers.pending, (state) => {
-      state.isLoading = true;
+      state.isLoadingOffers = true;
     })
     .addCase(fetchOffers.rejected, (state) => {
-      state.isLoading = false;
+      state.isLoadingOffers = false;
     })
     .addCase(fetchOffers.fulfilled, (state, action) => {
       state.offersList = action.payload;
-      state.isLoading = false;
+      state.isLoadingOffers = false;
     })
     .addCase(getOfferInfoById.pending, (state) => {
       state.isLoadingOffer = true;

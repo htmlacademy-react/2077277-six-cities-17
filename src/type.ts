@@ -96,9 +96,9 @@ type RatingStarsType = typeof RATING_STARS[number];
 type State = ReturnType<typeof store.getState>;
 
 type ErrorMessageType = {
-  type: string;
   message: string;
-}
+  details?: [{ messages: string }];
+};
 
 type Token = string;
 

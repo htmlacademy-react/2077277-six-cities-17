@@ -14,13 +14,10 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectOffersLoadingStatus, selectLoginStatus} from '../../store/selectors';
 import { useEffect } from 'react';
 import { fetchOffers, checkAuthStatus } from '../../store/api-action';
-import { store } from '../../store';
 
 type AppProps = {
   favorites: OfferType[];
 }
-
-store.dispatch(checkAuthStatus());
 
 function App({ favorites}: AppProps): JSX.Element {
   const dispatch = useAppDispatch();

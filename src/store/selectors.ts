@@ -6,7 +6,7 @@ const selectOffersList = (state: State):OfferType[] => state.offersList;
 const selectOffer = (state: State):OneOfferType | null => state.offer;
 const selectNearbyOffers = (state: State):OfferType[] => state.nearbyOffers;
 const selectOffersComments = (state: State):ReviewsType[] => state.offerComments;
-const selectOffersLoadingStatus = (state: State):boolean => state.isLoading;
+const selectOffersLoadingStatus = (state: State):boolean => state.isLoadingOffers;
 const selectOfferLoadingStatus = (state: State):boolean => state.isLoadingOffer;
 const selectNearbyOffersStatus = (state: State):boolean => state.isLoadingNearbyOffers;
 const selectCommentsOffersStatus = (state: State):boolean => state.isLoadingOffersComments;

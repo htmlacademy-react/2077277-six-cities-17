@@ -1,17 +1,7 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
-import { setError } from './action';
-import { store } from '.';
-import { State, AppDispatch, OfferType, AuthData, UserData, ReviewsType, CommentInfoType, OneOfferType } from '../type';
-import { ERROR_TIMEOUT, APIRoute } from '../const';
+import { OfferType, AuthData, UserData, ReviewsType, CommentInfoType, OneOfferType } from '../type';
+import { APIRoute } from '../const';
 import { saveToken, dropToken } from '../services/token';
-
-
-const createAppAsyncThunk = createAsyncThunk.withTypes<{
-  state: State;
-  dispatch: AppDispatch;
-  extra: AxiosInstance;
-}>();
+import { createAppAsyncThunk } from '../hooks';
 
 const fetchOffers = createAppAsyncThunk<OfferType[], undefined>(
   'offers/fetchOffers',
@@ -78,11 +68,4 @@ const postOfferComment = createAppAsyncThunk<ReviewsType, CommentInfoType>(
   }
 );
 
-const clearError = createAppAsyncThunk<void, undefined>(
-  'error/clearError',
-  () => {
-    setTimeout(() => store.dispatch(setError(null)), ERROR_TIMEOUT);
-  }
-);
-
-export { clearError, fetchOffers, checkAuthStatus, loginAction, logoutAction, getOfferInfoById, fetchNearbyOffers, fetchOfferComments, postOfferComment };
+export { fetchOffers, checkAuthStatus, loginAction, logoutAction, getOfferInfoById, fetchNearbyOffers, fetchOfferComments, postOfferComment };

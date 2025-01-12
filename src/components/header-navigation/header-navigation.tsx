@@ -2,8 +2,8 @@ import { LoginStatus, RoutePath } from '../../const';
 import { LoginStatusList } from '../../type';
 import { Fragment} from 'react';
 import { Link} from 'react-router-dom';
-// import { logoutAction } from '../../store/api-action';
-// import { useAppDispatch } from '../../hooks';
+import { logoutAction } from '../../store/api-action';
+import { useAppDispatch } from '../../hooks';
 import { useAppSelector } from '../../hooks';
 import { selectUserInfo } from '../../store/selectors';
 
@@ -17,13 +17,13 @@ function HeaderNavigation({ loginStatus}: HeaderNavigationProps): JSX.Element {
   if(userInfo) {
     email = userInfo.email;
   }
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const isLogin = loginStatus === LoginStatus.Auth;
 
   const handleUserLogout = () => {
     if (isLogin) {
-      // dispatch(logoutAction());
+      dispatch(logoutAction());
     }
   };
 
