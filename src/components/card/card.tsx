@@ -18,6 +18,7 @@ type CardProps = {
 }
 
 function Card({ page, title, type, price, previewImage, rating, isPremium, isFavorite, id, onHandleActiveOfferChange}: CardProps): JSX.Element {
+  const roundRating = Math.round(rating);
 
   return (
     <article
@@ -44,7 +45,7 @@ function Card({ page, title, type, price, previewImage, rating, isPremium, isFav
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating * RATING_SHARE}%` }}></span>
+            <span style={{ width: `${roundRating * RATING_SHARE}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

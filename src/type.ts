@@ -49,7 +49,7 @@ type UserType = {
 };
 
 type FormDataType = {
-  rating: null | number;
+  rating: number;
   review: string;
 };
 
@@ -113,14 +113,9 @@ type UserData = {
   token: string;
 };
 
-type CommentType = {
-  review: string;
-  rating: number;
-};
-
 type CommentInfoType = {
-  comment: CommentType;
-  id: number;
+  comment: FormDataType;
+  id: string;
 };
 
 export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType, RootState, AppDispatch, SortListType, State, ErrorMessageType, Token, AuthData, UserData, CommentInfoType, RoutePathType };

@@ -11,7 +11,7 @@ type ReviewsListProps = {
 
 function ReviewsList({ loginStatus, reviews }: ReviewsListProps): JSX.Element {
 
-  const reviewsSlicedAndSorted = reviews.slice(0, 10).toSorted(getReviewsByDate);
+  const reviewsSlicedAndSorted = reviews.toSorted(getReviewsByDate).slice(0, 10);
   const reviewsList = reviewsSlicedAndSorted.map((review) => <ReviewsItem key={review.id} comment={review.comment} date={review.date} rating={review.rating} user={review.user} />);
 
   return (

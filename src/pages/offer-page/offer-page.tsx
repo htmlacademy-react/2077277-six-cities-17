@@ -49,7 +49,7 @@ function OfferPage(): JSX.Element {
 
   const { title, description, type, price, images, isPremium, isFavorite, rating, bedrooms, maxAdults, goods, host, city } = offer;
 
-
+  const roundRating = Math.round(rating);
   const currentOffer = offersList.find((item) => item.id === offerId);
   const offerImages = images.map((image) => <OfferImage key={image} path={image} type={offer.type} />);
 
@@ -64,7 +64,7 @@ function OfferPage(): JSX.Element {
       <Helmet>
         <title>6 cities: {PageType.Offer}</title>
       </Helmet>
-      <Header loginStatus={loginStatus} />
+      <Header loginStatus={loginStatus}/>
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
@@ -83,7 +83,7 @@ function OfferPage(): JSX.Element {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{ width: `${rating * RATING_SHARE}%` }}></span>
+                  <span style={{ width: `${roundRating * RATING_SHARE}%` }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="offer__rating-value rating__value">{rating}</span>

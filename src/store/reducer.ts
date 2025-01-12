@@ -2,7 +2,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import { ACTIVE_CITY, DEFAULT_SORT_TYPE, LoginStatus } from '../const';
 import { CitiesListType, OfferType, SortListType, LoginStatusList, UserData, OneOfferType, ReviewsType } from '../type';
 import { changeCity, changeSortingType, setError } from './action';
-import { checkAuthStatus, fetchOffers, loginAction, logoutAction, getOfferInfoById, fetchNearbyOffers, fetchOfferComments } from './api-action';
+import { checkAuthStatus, fetchOffers, loginAction, logoutAction, getOfferInfoById, fetchNearbyOffers, fetchOfferComments, postOfferComment } from './api-action';
 
 const initialState = {
   activeCity: ACTIVE_CITY as CitiesListType,
@@ -15,6 +15,7 @@ const initialState = {
   isLoadingOffer: false as boolean,
   isLoadingNearbyOffers: false as boolean,
   isLoadingOffersComments: false as boolean,
+  isLoadingComment: false as boolean,
   authorizationStatus: LoginStatus.NoAuth as LoginStatusList,
   userInfo: null as UserData | null,
   error: null as string | null,
@@ -70,6 +71,16 @@ const reducer = createReducer(initialState, (builder) => {
         state.offerComments = action.payload;
       }
       state.isLoadingOffersComments = false;
+    })
+    .addCase(postOfferComment.pending, (state) => {
+      state.isLoadingComment = true;
+    })
+    .addCase(postOfferComment.rejected, (state) => {
+      state.isLoadingComment = false;
+    })
+    .addCase(postOfferComment.fulfilled, (state, action) => {
+      state.offerComments = state.offerComments.concat([action.payload]);
+      state.isLoadingComment = false;
     })
     .addCase(checkAuthStatus.fulfilled, (state, action) => {
       state.authorizationStatus = LoginStatus.Auth;

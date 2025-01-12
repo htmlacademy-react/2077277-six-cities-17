@@ -4,12 +4,19 @@ import { Fragment} from 'react';
 import { Link} from 'react-router-dom';
 // import { logoutAction } from '../../store/api-action';
 // import { useAppDispatch } from '../../hooks';
+import { useAppSelector } from '../../hooks';
+import { selectUserInfo } from '../../store/selectors';
 
 type HeaderNavigationProps = {
   loginStatus: LoginStatusList;
 }
 
-function HeaderNavigation({ loginStatus }: HeaderNavigationProps): JSX.Element {
+function HeaderNavigation({ loginStatus}: HeaderNavigationProps): JSX.Element {
+  const userInfo = useAppSelector(selectUserInfo);
+  let email = '';
+  if(userInfo) {
+    email = userInfo.email;
+  }
   // const dispatch = useAppDispatch();
 
   const isLogin = loginStatus === LoginStatus.Auth;
@@ -29,7 +36,7 @@ function HeaderNavigation({ loginStatus }: HeaderNavigationProps): JSX.Element {
             </div>
             {loginStatus === LoginStatus.Auth ?
               <Fragment>
-                <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                <span className="header__user-name user__name">{email}</span>
                 <span className="header__favorite-count">0</span>
               </Fragment> :
               <span className="header__login">Sign in</span>}

@@ -71,7 +71,7 @@ const fetchOfferComments = createAppAsyncThunk<ReviewsType[], string>(
 );
 
 const postOfferComment = createAppAsyncThunk<ReviewsType, CommentInfoType>(
-  'offer/fetchOfferComments',
+  'offer/postOfferComment',
   async ({ id, comment }, { extra: api }) => {
     const { data } = await api.post<ReviewsType>(`${APIRoute.Comments}/${id}`, { comment: comment.review, rating: +comment.rating });
     return data;
