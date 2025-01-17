@@ -6,10 +6,10 @@ import Map from '../../components/map/map';
 import Card from '../../components/card/card';
 import Bookmark from '../../components/bookmark/bookmark';
 import LoadingPage from '../loading-page/loading-page';
-import { OffersPage, PageType, RATING_SHARE, RoutePath } from '../../const';
+import NotFoundPage from '../not-found-page/not-found-page';
+import { OffersPage, PageType, RATING_SHARE } from '../../const';
 import { capitalizeFirstLetter, getSlicedNearOffersWithCurrentOffer, GetUrlId } from '../../utils';
 import { Helmet } from 'react-helmet-async';
-import { Navigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { selectOffer, selectOfferLoadingStatus, selectLoginStatus, selectNearbyOffers, selectNearbyOffersStatus, selectOffersList, selectCommentsOffersStatus, selectOffersComments } from '../../store/selectors';
 import { getOfferInfoById, fetchNearbyOffers, fetchOfferComments } from '../../store/api-action';
@@ -44,7 +44,7 @@ function OfferPage(): JSX.Element {
   }
 
   if (!offer) {
-    return <Navigate to={RoutePath.NotFound} />;
+    return <NotFoundPage loginStatus={loginStatus} />;
   }
 
   const { title, description, type, price, images, isPremium, isFavorite, rating, bedrooms, maxAdults, goods, host, city } = offer;
