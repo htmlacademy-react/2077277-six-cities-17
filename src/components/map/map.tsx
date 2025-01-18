@@ -9,7 +9,7 @@ type MapProps = {
   isOffer?: boolean;
   activeCity: CitiesListType;
   offers: OfferType[];
-  selectedOfferId: string | undefined;
+  selectedOfferId: string | null;
 }
 
 const defaultCustomIcon = new Icon({

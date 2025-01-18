@@ -47,16 +47,8 @@ type UserType = {
   isPro: boolean;
 };
 
-type ReviewType = {
-  id: string;
-  date: string;
-  user: UserType;
-  comment: string;
-  rating: number;
-};
-
 type FormDataType = {
-  rating: null | number;
+  rating: number;
   review: string;
 };
 
@@ -93,19 +85,16 @@ type OneOfferType = {
 };
 
 type SortListType = typeof SortType[keyof typeof SortType];
-
 type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch
-
 type RatingMeaningType = typeof RATING_MEANING[number];
 type RatingStarsType = typeof RATING_STARS[number];
-
 type State = ReturnType<typeof store.getState>;
 
 type ErrorMessageType = {
-  type: string;
   message: string;
-}
+  details?: [{ messages: string }];
+};
 
 type Token = string;
 
@@ -120,4 +109,9 @@ type UserData = {
   token: string;
 };
 
-export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, ReviewType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType, RootState, AppDispatch, SortListType, State, ErrorMessageType, Token, AuthData, UserData };
+type CommentInfoType = {
+  comment: FormDataType;
+  id: string;
+};
+
+export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType, RootState, AppDispatch, SortListType, State, ErrorMessageType, Token, AuthData, UserData, CommentInfoType };

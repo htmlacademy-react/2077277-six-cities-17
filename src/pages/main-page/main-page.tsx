@@ -7,17 +7,12 @@ import { LoginStatusList } from '../../type';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import { selectActiveCity, selectOffersList } from '../../store/selectors';
-import { store } from '../../store';
-import { fetchOffers } from '../../store/api-action';
 
 type MainPageProps = {
   loginStatus: LoginStatusList;
 }
 
-store.dispatch(fetchOffers());
-
 function MainPage({ loginStatus }: MainPageProps): JSX.Element {
-
   const activeCity = useAppSelector(selectActiveCity);
   const offers = useAppSelector(selectOffersList);
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);

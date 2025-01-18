@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
-import { OfferType, SortListType } from './type';
+import { OfferType, SortListType, ReviewsType } from './type';
 import { SortType } from './const';
+import { useParams } from 'react-router-dom';
 
 function capitalizeFirstLetter(word: string): string {
   return word.charAt(0).toUpperCase() + word.slice(1);
@@ -8,6 +9,10 @@ function capitalizeFirstLetter(word: string): string {
 
 function getHumanizeDate(date: string, format: string): string {
   return date ? dayjs(date).format(format) : '';
+}
+
+function getReviewsByDate(firstReviewDate: ReviewsType, secondReviewDate: ReviewsType) {
+  return dayjs(secondReviewDate.date).diff(dayjs(firstReviewDate.date));
 }
 
 function getSlicedNearOffersWithCurrentOffer(offersNearby: OfferType[], currentOffer: OfferType | undefined) {
@@ -25,4 +30,9 @@ const sortBy = {
 
 const sortOffers = (offers: OfferType[], sortType: SortListType):OfferType[] => sortBy[sortType](offers);
 
-export { capitalizeFirstLetter, getHumanizeDate, getSlicedNearOffersWithCurrentOffer, sortOffers };
+const useUrlId = (): string | null => {
+  const { offerId } = useParams();
+  return offerId ?? null;
+};
+
+export { capitalizeFirstLetter, getHumanizeDate, getSlicedNearOffersWithCurrentOffer, sortOffers, getReviewsByDate, useUrlId };

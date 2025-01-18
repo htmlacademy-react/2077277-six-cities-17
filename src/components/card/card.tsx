@@ -14,16 +14,17 @@ type CardProps = {
   isPremium: boolean;
   isFavorite: boolean;
   id: string;
-  onHandleActiveOfferChange?: (id: string | undefined) => void;
+  onHandleActiveOfferChange?: (id: string | null) => void;
 }
 
 function Card({ page, title, type, price, previewImage, rating, isPremium, isFavorite, id, onHandleActiveOfferChange}: CardProps): JSX.Element {
+  const roundRating = Math.round(rating);
 
   return (
     <article
       className={`${page.ImageWrapperClass}__card place-card`}
       onMouseEnter={() => onHandleActiveOfferChange && onHandleActiveOfferChange(id)}
-      onMouseLeave={() => onHandleActiveOfferChange && onHandleActiveOfferChange(undefined)}
+      onMouseLeave={() => onHandleActiveOfferChange && onHandleActiveOfferChange(null)}
     >
       {isPremium &&
         <div className="place-card__mark">
@@ -44,7 +45,7 @@ function Card({ page, title, type, price, previewImage, rating, isPremium, isFav
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating * RATING_SHARE}%` }}></span>
+            <span style={{ width: `${roundRating * RATING_SHARE}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

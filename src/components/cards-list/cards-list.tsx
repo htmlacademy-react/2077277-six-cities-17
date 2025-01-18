@@ -7,7 +7,7 @@ import { selectSortListType } from '../../store/selectors';
 type CardsList = {
   filteredOffers: OfferType[];
   page: PageParamsType;
-  onHandleActiveOfferChange: (id: string | undefined) => void;
+  onHandleActiveOfferChange: (id: string | null) => void;
 }
 
 function CardsList({ filteredOffers, page, onHandleActiveOfferChange }: CardsList): JSX.Element {

@@ -7,25 +7,19 @@ import LoadingPage from '../../pages/loading-page/loading-page';
 import PrivateRoute from '../private-route/private-route';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { LoginStatus, RoutePath } from '../../const';
-import { OfferType, OneOfferType, ReviewsType } from '../../type';
+import { OfferType} from '../../type';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectOffersLoadingStatus, selectLoginStatus } from '../../store/selectors';
+import { selectOffersLoadingStatus, selectLoginStatus} from '../../store/selectors';
 import { useEffect } from 'react';
 import { fetchOffers, checkAuthStatus } from '../../store/api-action';
-import { store } from '../../store';
 
 type AppProps = {
   favorites: OfferType[];
-  offersNearby: OfferType[];
-  offer: OneOfferType[];
-  reviews: ReviewsType[];
 }
 
-store.dispatch(checkAuthStatus());
-
-function App({ favorites, offersNearby, offer, reviews }: AppProps): JSX.Element {
+function App({ favorites}: AppProps): JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectLoginStatus);
   const isOffersListLoading = useAppSelector(selectOffersLoadingStatus);
@@ -55,7 +49,7 @@ function App({ favorites, offersNearby, offer, reviews }: AppProps): JSX.Element
                 </PrivateRoute>
               }
               />
-              <Route path={RoutePath.Offer} element={<OfferPage loginStatus={status} offersNearby={offersNearby} offer={offer} reviews={reviews} />}></Route>
+              <Route path={RoutePath.Offer} element={<OfferPage />}></Route>
               <Route path={RoutePath.NotFound} element={<NotFoundPage loginStatus={status} />}></Route>
             </Route>
           </Routes>}

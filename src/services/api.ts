@@ -6,9 +6,7 @@ import { processErrorHandle } from './process-error-handle';
 import { ErrorMessageType } from '../type';
 
 const StatusCodeMapping: Record<number, boolean> = {
-  // [StatusCodes.BAD_REQUEST]: true,
   [StatusCodes.UNAUTHORIZED]: true,
-  [StatusCodes.NOT_FOUND]: true
 };
 
 const getDisplayError = (response: AxiosResponse) => !StatusCodeMapping[response.status];
@@ -19,7 +17,7 @@ const createAPI = (): AxiosInstance => {
     timeout: Server.Timeout
   });
 
-  api.interceptors.request.use((config:InternalAxiosRequestConfig) => {
+  api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     const token = getToken();
 
     if (token && config.headers) {
@@ -32,13 +30,14 @@ const createAPI = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<ErrorMessageType>) => {
-      if (error.response && getDisplayError(error.response)) {
-        const errorMessage = (error.response.data);
-
-        processErrorHandle(errorMessage.message);
+      if (error.response) {
+        if (getDisplayError(error.response)) {
+          const errorMessage = error.response.data;
+          const message = errorMessage.details?.[0]?.messages || errorMessage.message;
+          processErrorHandle(message);
+        }
       }
-
-      throw error;
+      return Promise.reject(error);
     }
   );
 
