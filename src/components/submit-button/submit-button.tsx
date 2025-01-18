@@ -1,6 +1,6 @@
 import { ReviewLength } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { selectCommentStatus } from '../../store/selectors';
+import { selectCommentStatus } from '../../store/comments/comments-selectors';
 
 type SubmitButtonProps = {
   isButtonDisabled: boolean;

@@ -12,9 +12,12 @@ import { OffersPage, PageType, RATING_SHARE } from '../../const';
 import { capitalizeFirstLetter, getSlicedNearOffersWithCurrentOffer, useUrlId } from '../../utils';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { selectOffer, selectOfferLoadingStatus, selectLoginStatus, selectNearbyOffers, selectNearbyOffersStatus, selectOffersList, selectCommentsOffersStatus, selectOffersComments, selectErrorConnection } from '../../store/selectors';
+import { selectCommentsOffersStatus, selectOffersComments } from '../../store/comments/comments-selectors';
+import { selectLoginStatus } from '../../store/user/user-selectors';
+import { selectNearbyOffers, selectNearbyOffersStatus, selectOffersList } from '../../store/offers/offers-selectors';
+import { selectOfferLoadingStatus, selectOffer, selectErrorConnection } from '../../store/offer/offer-selectors';
 import { getOfferInfoById, fetchNearbyOffers, fetchOfferComments } from '../../store/api-action';
-import { setErrorConnectionStatus } from '../../store/action';
+import { setErrorConnectionStatus } from '../../store/offer/offer-slice';
 import { useEffect } from 'react';
 
 function OfferPage(): JSX.Element {
@@ -37,6 +40,7 @@ function OfferPage(): JSX.Element {
     dispatch(getOfferInfoById(offerId))
       .unwrap()
       .then(() => {
+        dispatch(setErrorConnectionStatus(false));
         dispatch(fetchNearbyOffers(offerId));
         dispatch(fetchOfferComments(offerId));
       })

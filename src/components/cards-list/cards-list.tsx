@@ -2,7 +2,7 @@ import Card from '../../components/card/card';
 import { useAppSelector } from '../../hooks';
 import { OfferType, PageParamsType } from '../../type';
 import { sortOffers } from '../../utils';
-import { selectSortListType } from '../../store/selectors';
+import { selectSortListType } from '../../store/sorting/sorting-selectors';
 
 type CardsList = {
   filteredOffers: OfferType[];

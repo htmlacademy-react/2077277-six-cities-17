@@ -6,7 +6,7 @@ import { ReviewLength } from '../../const';
 import { postOfferComment } from '../../store/api-action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useUrlId } from '../../utils';
-import { selectCommentStatus } from '../../store/selectors';
+import { selectCommentStatus } from '../../store/comments/comments-selectors';
 
 const initialState: FormDataType = {
   rating: 0,

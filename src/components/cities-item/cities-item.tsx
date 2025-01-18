@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks';
 import { CitiesListType } from '../../type';
 import { RoutePath } from '../../const';
-import { changeCity } from '../../store/action';
+import { changeCity } from '../../store/city/city-slice';
 
 type CitiesItemProps = {
   city: CitiesListType;

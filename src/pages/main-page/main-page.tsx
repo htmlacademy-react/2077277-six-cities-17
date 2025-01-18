@@ -6,7 +6,8 @@ import { PageType } from '../../const';
 import { LoginStatusList } from '../../type';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
-import { selectActiveCity, selectOffersList } from '../../store/selectors';
+import { selectOffersList } from '../../store/offers/offers-selectors';
+import { selectActiveCity } from '../../store/city/city-selectors';
 
 type MainPageProps = {
   loginStatus: LoginStatusList;

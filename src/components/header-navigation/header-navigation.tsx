@@ -4,7 +4,7 @@ import { Fragment} from 'react';
 import { Link} from 'react-router-dom';
 import { logoutAction } from '../../store/api-action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectUserInfo } from '../../store/selectors';
+import { selectUserInfo } from '../../store/user/user-selectors';
 
 type HeaderNavigationProps = {
   loginStatus: LoginStatusList;

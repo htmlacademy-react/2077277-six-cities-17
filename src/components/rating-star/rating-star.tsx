@@ -1,7 +1,7 @@
 import { Fragment, ChangeEvent } from 'react';
 import { RatingMeaningType, RatingStarsType } from '../../type';
 import { StarsColor } from '../../const';
-import { selectCommentStatus } from '../../store/selectors';
+import { selectCommentStatus } from '../../store/comments/comments-selectors';
 import { useAppSelector } from '../../hooks';
 
 type RatingStarProps = {
