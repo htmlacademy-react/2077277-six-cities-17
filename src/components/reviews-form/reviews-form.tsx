@@ -5,7 +5,7 @@ import { FormDataType } from '../../type';
 import { ReviewLength } from '../../const';
 import { postOfferComment } from '../../store/api-action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { GetUrlId } from '../../utils';
+import { useUrlId } from '../../utils';
 import { selectCommentStatus } from '../../store/selectors';
 
 const initialState: FormDataType = {
@@ -15,7 +15,7 @@ const initialState: FormDataType = {
 
 function ReviewsForm(): JSX.Element {
   const dispatch = useAppDispatch();
-  const offerId = GetUrlId();
+  const offerId = useUrlId();
   const isCommentStatusPending = useAppSelector(selectCommentStatus);
   const [formData, setFormData] = useState<FormDataType>(initialState);
   const isButtonDisabled = formData.rating !== 0 && formData.review.length >= ReviewLength.Min && formData.review.length <= ReviewLength.Max;

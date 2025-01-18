@@ -7,17 +7,19 @@ import Card from '../../components/card/card';
 import Bookmark from '../../components/bookmark/bookmark';
 import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
+import ErrorConnection from '../../components/error-connection/error-connection';
 import { OffersPage, PageType, RATING_SHARE } from '../../const';
-import { capitalizeFirstLetter, getSlicedNearOffersWithCurrentOffer, GetUrlId } from '../../utils';
+import { capitalizeFirstLetter, getSlicedNearOffersWithCurrentOffer, useUrlId } from '../../utils';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { selectOffer, selectOfferLoadingStatus, selectLoginStatus, selectNearbyOffers, selectNearbyOffersStatus, selectOffersList, selectCommentsOffersStatus, selectOffersComments } from '../../store/selectors';
+import { selectOffer, selectOfferLoadingStatus, selectLoginStatus, selectNearbyOffers, selectNearbyOffersStatus, selectOffersList, selectCommentsOffersStatus, selectOffersComments, selectErrorConnection } from '../../store/selectors';
 import { getOfferInfoById, fetchNearbyOffers, fetchOfferComments } from '../../store/api-action';
+import { setErrorConnectionStatus } from '../../store/action';
 import { useEffect } from 'react';
 
 function OfferPage(): JSX.Element {
   const dispatch = useAppDispatch();
-  const offerId = GetUrlId();
+  const offerId = useUrlId();
   const isOfferLoading = useAppSelector(selectOfferLoadingStatus);
   const offer = useAppSelector(selectOffer);
   const offersList = useAppSelector(selectOffersList);
@@ -26,6 +28,7 @@ function OfferPage(): JSX.Element {
   const isOffersCommentsLoading = useAppSelector(selectCommentsOffersStatus);
   const reviews = useAppSelector(selectOffersComments);
   const loginStatus = useAppSelector(selectLoginStatus);
+  const errorConnectionStatus = useAppSelector(selectErrorConnection);
 
   useEffect(() => {
     if (!offerId) {
@@ -36,8 +39,15 @@ function OfferPage(): JSX.Element {
       .then(() => {
         dispatch(fetchNearbyOffers(offerId));
         dispatch(fetchOfferComments(offerId));
+      })
+      .catch(() => {
+        dispatch(setErrorConnectionStatus(true));
       });
   }, [dispatch, offerId]);
+
+  if (errorConnectionStatus) {
+    return <ErrorConnection/>;
+  }
 
   if (isOfferLoading || isNearbyOffersLoading || isOffersCommentsLoading) {
     return <LoadingPage loginStatus={loginStatus} />;
@@ -64,7 +74,7 @@ function OfferPage(): JSX.Element {
       <Helmet>
         <title>6 cities: {PageType.Offer}</title>
       </Helmet>
-      <Header loginStatus={loginStatus}/>
+      <Header loginStatus={loginStatus} />
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">

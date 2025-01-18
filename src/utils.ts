@@ -30,9 +30,9 @@ const sortBy = {
 
 const sortOffers = (offers: OfferType[], sortType: SortListType):OfferType[] => sortBy[sortType](offers);
 
-const GetUrlId = (): string | null => {
+const useUrlId = (): string | null => {
   const { offerId } = useParams();
   return offerId ?? null;
 };
 
-export { capitalizeFirstLetter, getHumanizeDate, getSlicedNearOffersWithCurrentOffer, sortOffers, getReviewsByDate, GetUrlId };
+export { capitalizeFirstLetter, getHumanizeDate, getSlicedNearOffersWithCurrentOffer, sortOffers, getReviewsByDate, useUrlId };

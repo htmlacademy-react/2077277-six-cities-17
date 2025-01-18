@@ -1,10 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { ACTIVE_CITY, DEFAULT_SORT_TYPE, LoginStatus } from '../const';
 import { CitiesListType, OfferType, SortListType, LoginStatusList, UserData, OneOfferType, ReviewsType } from '../type';
-import { changeCity, changeSortingType, setError } from './action';
+import { changeCity, changeSortingType, setError, setErrorConnectionStatus } from './action';
 import { checkAuthStatus, fetchOffers, loginAction, logoutAction, getOfferInfoById, fetchNearbyOffers, fetchOfferComments, postOfferComment } from './api-action';
 
-type initialStateType = {
+type InitialStateType = {
   activeCity: CitiesListType;
   offersList: OfferType[];
   offer: OneOfferType | null;
@@ -19,9 +19,10 @@ type initialStateType = {
   authorizationStatus: LoginStatusList;
   userInfo: UserData | null;
   error: string | null;
+  isErrorConnection: boolean;
 };
 
-const initialState: initialStateType = {
+const initialState: InitialStateType = {
   activeCity: ACTIVE_CITY,
   offersList: [],
   offer: null,
@@ -36,6 +37,7 @@ const initialState: initialStateType = {
   authorizationStatus: LoginStatus.NoAuth,
   userInfo: null,
   error: null,
+  isErrorConnection: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -58,6 +60,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getOfferInfoById.rejected, (state) => {
       state.isLoadingOffer = false;
+      state.isErrorConnection = false;
     })
     .addCase(getOfferInfoById.fulfilled, (state, action) => {
       if (action.payload) {
@@ -122,6 +125,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(setErrorConnectionStatus, (state, action) => {
+      state.isErrorConnection = action.payload;
     });
 });
 

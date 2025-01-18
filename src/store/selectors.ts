@@ -14,5 +14,6 @@ const selectCommentStatus = (state: State):boolean => state.isLoadingComment;
 const selectLoginStatus = (state: State):LoginStatusList => state.authorizationStatus;
 const selectUserInfo = (state: State):UserData | null => state.userInfo;
 const selectError = (state: State): string | null => state.error;
+const selectErrorConnection = (state: State): boolean => state.isErrorConnection;
 
-export {selectSortListType, selectActiveCity, selectOffersList, selectOffersLoadingStatus, selectError, selectLoginStatus, selectOffer, selectOfferLoadingStatus, selectNearbyOffersStatus, selectNearbyOffers, selectOffersComments, selectCommentsOffersStatus, selectCommentStatus, selectUserInfo};
+export {selectSortListType, selectActiveCity, selectOffersList, selectOffersLoadingStatus, selectError, selectLoginStatus, selectOffer, selectOfferLoadingStatus, selectNearbyOffersStatus, selectNearbyOffers, selectOffersComments, selectCommentsOffersStatus, selectCommentStatus, selectUserInfo, selectErrorConnection};

@@ -3,8 +3,7 @@ import { LoginStatusList } from '../../type';
 import { Fragment} from 'react';
 import { Link} from 'react-router-dom';
 import { logoutAction } from '../../store/api-action';
-import { useAppDispatch } from '../../hooks';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectUserInfo } from '../../store/selectors';
 
 type HeaderNavigationProps = {
