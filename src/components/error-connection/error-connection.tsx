@@ -10,7 +10,7 @@ function ErrorConnection(): JSX.Element | null {
           <section className="cities__no-places">
             <div className="cities__status-wrapper tabs__content">
               <b className="cities__status">Server error</b>
-              <p className="cities__status-description">We could not find any property available at the moment</p>
+              <p className="cities__status-description">We could not find available property at the moment</p>
               <Link to={RoutePath.Index} className={styles.link}>Return to main page</Link>
             </div>
           </section>

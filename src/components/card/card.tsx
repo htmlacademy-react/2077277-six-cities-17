@@ -1,8 +1,9 @@
-import Bookmark from '../bookmark/bookmark';
+import BookmarkMemo from '../bookmark/bookmark';
 import { PageParamsType } from '../../type';
 import { RoutePath, RATING_SHARE } from '../../const';
 import { Link, generatePath } from 'react-router-dom';
 import { capitalizeFirstLetter } from '../../utils';
+import { memo } from 'react';
 
 type CardProps = {
   page: PageParamsType;
@@ -41,7 +42,7 @@ function Card({ page, title, type, price, previewImage, rating, isPremium, isFav
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <Bookmark isFavorite={isFavorite}/>
+          <BookmarkMemo isFavorite={isFavorite}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
@@ -58,4 +59,6 @@ function Card({ page, title, type, price, previewImage, rating, isPremium, isFav
   );
 }
 
-export default Card;
+const CardMemo = memo(Card);
+
+export default CardMemo;

@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { CitiesListType } from '../../type';
 
 type MainTitleProps = {
@@ -11,4 +12,6 @@ function MainTitle({citiesCount, activeCity}: MainTitleProps): JSX.Element {
   );
 }
 
-export default MainTitle;
+const MainTitleMemo = memo(MainTitle);
+
+export default MainTitleMemo;

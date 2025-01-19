@@ -1,6 +1,7 @@
 import { LogoParamsType } from '../../type';
 import { RoutePath } from '../../const';
 import { Link } from 'react-router-dom';
+import { memo } from 'react';
 
 type LogoProps = {
   isMainPage?: boolean;
@@ -15,4 +16,6 @@ function Logo({ isMainPage, params }: LogoProps): JSX.Element {
   );
 }
 
-export default Logo;
+const LogoMemo = memo(Logo);
+
+export default LogoMemo;

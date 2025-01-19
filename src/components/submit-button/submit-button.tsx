@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { ReviewLength } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { selectCommentStatus } from '../../store/comments/comments-selectors';
@@ -19,4 +20,6 @@ function SubmitButton({isButtonDisabled}:SubmitButtonProps): JSX.Element {
   );
 }
 
-export default SubmitButton;
+const SubmitButtonMemo = memo(SubmitButton);
+
+export default SubmitButtonMemo;

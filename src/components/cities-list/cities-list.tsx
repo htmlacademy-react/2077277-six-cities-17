@@ -1,4 +1,4 @@
-import CitiesItem from '../cities-item/cities-item';
+import CitiesItemMemo from '../cities-item/cities-item';
 import { City } from '../../const';
 import { CitiesListType } from '../../type';
 
@@ -9,7 +9,7 @@ type CitiesListProps = {
 function CitiesList({activeCity}:CitiesListProps): JSX.Element {
 
   const citiesItems = Object.values(City).map((city) =>
-    <CitiesItem key={city} city={city} isActive={activeCity === city}/>
+    <CitiesItemMemo key={city} city={city} isActive={activeCity === city}/>
   );
 
   return (

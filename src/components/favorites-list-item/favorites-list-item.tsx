@@ -1,4 +1,4 @@
-import Card from '../card/card';
+import CardMemo from '../card/card';
 import { FavoritesPage, RoutePath } from '../../const';
 import { OfferType } from '../../type';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ type FavoritesListItemProps = {
 
 function FavoritesListItem({ offers, city }: FavoritesListItemProps): JSX.Element {
 
-  const cardsList = offers.map((offer) => <Card key={offer.id} id={offer.id} title={offer.title} type={offer.type} price={offer.price} previewImage={offer.previewImage} rating={offer.rating} isPremium={offer.isPremium} isFavorite={offer.isFavorite} page={FavoritesPage} />);
+  const cardsList = offers.map((offer) => <CardMemo key={offer.id} id={offer.id} title={offer.title} type={offer.type} price={offer.price} previewImage={offer.previewImage} rating={offer.rating} isPremium={offer.isPremium} isFavorite={offer.isFavorite} page={FavoritesPage} />);
 
   return (
     <li className="favorites__locations-items">

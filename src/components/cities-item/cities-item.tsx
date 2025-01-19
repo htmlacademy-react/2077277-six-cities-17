@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../hooks';
 import { CitiesListType } from '../../type';
 import { RoutePath } from '../../const';
 import { changeCity } from '../../store/city/city-slice';
+import { memo } from 'react';
 
 type CitiesItemProps = {
   city: CitiesListType;
@@ -13,12 +14,18 @@ function CitiesItem({ city, isActive }: CitiesItemProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   return (
-    <li className="locations__item" onClick={() => dispatch(changeCity(city))}>
-      <Link className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`} to={RoutePath.Index}>
+    <li className="locations__item">
+      <Link className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`} to={RoutePath.Index} onClick={(evt) => {
+        evt.preventDefault();
+        dispatch(changeCity(city));
+      }}
+      >
         <span>{city}</span>
       </Link>
     </li>
   );
 }
 
-export default CitiesItem;
+const CitiesItemMemo = memo(CitiesItem);
+
+export default CitiesItemMemo;

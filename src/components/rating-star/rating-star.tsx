@@ -1,4 +1,4 @@
-import { Fragment, ChangeEvent } from 'react';
+import { Fragment, ChangeEvent, memo } from 'react';
 import { RatingMeaningType, RatingStarsType } from '../../type';
 import { StarsColor } from '../../const';
 import { selectCommentStatus } from '../../store/comments/comments-selectors';
@@ -29,4 +29,6 @@ function RatingStar({ starNumber, ratingMeaning, onChangeRating, dataRating }: R
   );
 }
 
-export default RatingStar;
+const RatingStarMemo = memo(RatingStar);
+
+export default RatingStarMemo;
