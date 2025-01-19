@@ -1,10 +1,10 @@
-import Header from '../../components/header/header';
-import OfferImage from '../../components/offer-image/offer-image';
+import HeaderMemo from '../../components/header/header';
+import OfferImageMemo from '../../components/offer-image/offer-image';
 import OfferInsideList from '../../components/offer-inside-list/offer-inside-list';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
-import Card from '../../components/card/card';
-import Bookmark from '../../components/bookmark/bookmark';
+import CardMemo from '../../components/card/card';
+import BookmarkMemo from '../../components/bookmark/bookmark';
 import LoadingPage from '../loading-page/loading-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 import ErrorConnection from '../../components/error-connection/error-connection';
@@ -12,9 +12,12 @@ import { OffersPage, PageType, RATING_SHARE } from '../../const';
 import { capitalizeFirstLetter, getSlicedNearOffersWithCurrentOffer, useUrlId } from '../../utils';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector, useAppDispatch } from '../../hooks';
-import { selectOffer, selectOfferLoadingStatus, selectLoginStatus, selectNearbyOffers, selectNearbyOffersStatus, selectOffersList, selectCommentsOffersStatus, selectOffersComments, selectErrorConnection } from '../../store/selectors';
+import { selectCommentsOffersStatus, selectOffersComments } from '../../store/comments/comments-selectors';
+import { selectLoginStatus } from '../../store/user/user-selectors';
+import { selectNearbyOffers, selectNearbyOffersStatus, selectOffersList } from '../../store/offers/offers-selectors';
+import { selectOfferLoadingStatus, selectOffer, selectErrorConnection } from '../../store/offer/offer-selectors';
 import { getOfferInfoById, fetchNearbyOffers, fetchOfferComments } from '../../store/api-action';
-import { setErrorConnectionStatus } from '../../store/action';
+import { setErrorConnectionStatus } from '../../store/offer/offer-slice';
 import { useEffect } from 'react';
 
 function OfferPage(): JSX.Element {
@@ -37,6 +40,7 @@ function OfferPage(): JSX.Element {
     dispatch(getOfferInfoById(offerId))
       .unwrap()
       .then(() => {
+        dispatch(setErrorConnectionStatus(false));
         dispatch(fetchNearbyOffers(offerId));
         dispatch(fetchOfferComments(offerId));
       })
@@ -61,11 +65,11 @@ function OfferPage(): JSX.Element {
 
   const roundRating = Math.round(rating);
   const currentOffer = offersList.find((item) => item.id === offerId);
-  const offerImages = images.map((image) => <OfferImage key={image} path={image} type={offer.type} />);
+  const offerImages = images.map((image) => <OfferImageMemo key={image} path={image} type={offer.type} />);
 
   const offersNearbyWithoutCurrentOffer = offersNearby.filter((itemOffer) => itemOffer.id !== offerId);
   const offersNearbySlicedWithoutCurrentOffer = offersNearbyWithoutCurrentOffer.slice(0, 3);
-  const cards = offersNearbySlicedWithoutCurrentOffer.map((oneOffer) => <Card key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} isFavorite={oneOffer.isFavorite} page={OffersPage} />);
+  const cards = offersNearbySlicedWithoutCurrentOffer.map((oneOffer) => <CardMemo key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} isFavorite={oneOffer.isFavorite} page={OffersPage} />);
 
   const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer(offersNearbySlicedWithoutCurrentOffer, currentOffer);
 
@@ -74,7 +78,7 @@ function OfferPage(): JSX.Element {
       <Helmet>
         <title>6 cities: {PageType.Offer}</title>
       </Helmet>
-      <Header loginStatus={loginStatus} />
+      <HeaderMemo loginStatus={loginStatus} />
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
@@ -89,7 +93,7 @@ function OfferPage(): JSX.Element {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <Bookmark isFavorite={isFavorite} isOfferPage />
+                <BookmarkMemo isFavorite={isFavorite} isOfferPage />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">

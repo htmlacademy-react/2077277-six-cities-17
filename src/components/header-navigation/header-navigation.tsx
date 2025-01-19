@@ -1,10 +1,10 @@
 import { LoginStatus, RoutePath } from '../../const';
 import { LoginStatusList } from '../../type';
-import { Fragment} from 'react';
+import { Fragment, memo} from 'react';
 import { Link} from 'react-router-dom';
 import { logoutAction } from '../../store/api-action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectUserInfo } from '../../store/selectors';
+import { selectUserInfo } from '../../store/user/user-selectors';
 
 type HeaderNavigationProps = {
   loginStatus: LoginStatusList;
@@ -52,4 +52,6 @@ function HeaderNavigation({ loginStatus}: HeaderNavigationProps): JSX.Element {
   );
 }
 
-export default HeaderNavigation;
+const HeaderNavigationMemo = memo(HeaderNavigation);
+
+export default HeaderNavigationMemo;

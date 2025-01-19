@@ -1,4 +1,4 @@
-import { changeSortingType } from '../../store/action';
+import { changeSortingType } from '../../store/sorting/sorting-slice';
 import { SortListType } from '../../type';
 import { useAppDispatch } from '../../hooks';
 

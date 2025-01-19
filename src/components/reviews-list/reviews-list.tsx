@@ -1,5 +1,5 @@
-import ReviewsForm from '../reviews-form/reviews-form';
-import ReviewsItem from '../reviews-item/reviews-item';
+import ReviewsFormMemo from '../reviews-form/reviews-form';
+import ReviewsItemMemo from '../reviews-item/reviews-item';
 import { LoginStatusList, ReviewsType } from '../../type';
 import { LoginStatus } from '../../const';
 import { getReviewsByDate } from '../../utils';
@@ -12,7 +12,7 @@ type ReviewsListProps = {
 function ReviewsList({ loginStatus, reviews }: ReviewsListProps): JSX.Element {
 
   const reviewsSlicedAndSorted = reviews.toSorted(getReviewsByDate).slice(0, 10);
-  const reviewsList = reviewsSlicedAndSorted.map((review) => <ReviewsItem key={review.id} comment={review.comment} date={review.date} rating={review.rating} user={review.user} />);
+  const reviewsList = reviewsSlicedAndSorted.map((review) => <ReviewsItemMemo key={review.id} comment={review.comment} date={review.date} rating={review.rating} user={review.user} />);
 
   return (
     <section className="offer__reviews reviews">
@@ -20,7 +20,7 @@ function ReviewsList({ loginStatus, reviews }: ReviewsListProps): JSX.Element {
       <ul className="reviews__list">
         {reviewsList}
       </ul>
-      {loginStatus === LoginStatus.Auth ? <ReviewsForm /> : ''}
+      {loginStatus === LoginStatus.Auth ? <ReviewsFormMemo /> : ''}
     </section>
   );
 }

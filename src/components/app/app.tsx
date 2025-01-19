@@ -11,7 +11,8 @@ import { OfferType} from '../../type';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { selectOffersLoadingStatus, selectLoginStatus} from '../../store/selectors';
+import { selectOffersLoadingStatus } from '../../store/offers/offers-selectors';
+import { selectLoginStatus } from '../../store/user/user-selectors';
 import { useEffect } from 'react';
 import { fetchOffers, checkAuthStatus } from '../../store/api-action';
 

@@ -164,10 +164,21 @@ const ErrorStatus = {
   NoAuth: 401,
 } as const;
 
+const NameSpace = {
+  User: 'USER',
+  Offer: 'OFFER',
+  Offers: 'OFFERS',
+  Sorting: 'SORTING',
+  City: 'CITY',
+  Comments: 'COMMENTS',
+  Error: 'ERROR'
+} as const;
+
 export {
   City, ACTIVE_CITY, FavoritesPage, OffersPage, MainPage,
   LoginStatus, RoutePath, PageType, LogoHeaderParams, LogoFooterParams,
   RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor,
   UrlMarker, MapInfo, CityLocation, BookmarkOfferParams, BookmarkCardParams,
-  SortType, DEFAULT_SORT_TYPE, Server, TOKEN_NAME, ERROR_TIMEOUT, APIRoute, ErrorStatus
+  SortType, DEFAULT_SORT_TYPE, Server, TOKEN_NAME, ERROR_TIMEOUT, APIRoute,
+  ErrorStatus, NameSpace
 };

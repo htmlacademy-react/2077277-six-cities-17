@@ -1,6 +1,7 @@
 import { UserType } from '../../type';
 import { RATING_SHARE } from '../../const';
 import { getHumanizeDate } from '../../utils';
+import { memo } from 'react';
 
 type ReviewsItemProps = {
   comment: string;
@@ -39,4 +40,6 @@ function ReviewsItem({ comment, date, rating, user }: ReviewsItemProps): JSX.Ele
   );
 }
 
-export default ReviewsItem;
+const ReviewsItemMemo = memo(ReviewsItem);
+
+export default ReviewsItemMemo;

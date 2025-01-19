@@ -1,8 +1,8 @@
 import SortingItem from '../sorting-item/sorting-item';
 import { SortType } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { useEffect, useRef, useState } from 'react';
-import { selectSortListType } from '../../store/selectors';
+import { memo, useEffect, useRef, useState } from 'react';
+import { selectSortListType } from '../../store/sorting/sorting-selectors';
 
 function Sorting(): JSX.Element {
   const sortSpanRef = useRef<HTMLElement>(null);
@@ -39,4 +39,6 @@ function Sorting(): JSX.Element {
   );
 }
 
-export default Sorting;
+const SortingMemo = memo(Sorting);
+
+export default SortingMemo;

@@ -1,7 +1,8 @@
-import HeaderNavigation from '../header-navigation/header-navigation';
-import Logo from '../logo/logo';
+import HeaderNavigationMemo from '../header-navigation/header-navigation';
+import LogoMemo from '../logo/logo';
 import { LoginStatusList } from '../../type';
 import { LoginStatus, LogoHeaderParams } from '../../const';
+import { memo } from 'react';
 
 type HeaderProps = {
   isMainPage?: boolean;
@@ -15,13 +16,15 @@ function Header({ isMainPage = false, isLoginPage = false, loginStatus = LoginSt
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <Logo isMainPage={isMainPage} params={LogoHeaderParams}/>
+            <LogoMemo isMainPage={isMainPage} params={LogoHeaderParams}/>
           </div>
-          {!isLoginPage ? <HeaderNavigation loginStatus={loginStatus} /> : ''}
+          {!isLoginPage ? <HeaderNavigationMemo loginStatus={loginStatus} /> : ''}
         </div>
       </div>
     </header>
   );
 }
 
-export default Header;
+const HeaderMemo = memo(Header);
+
+export default HeaderMemo;

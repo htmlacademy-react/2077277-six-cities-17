@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type OfferImageProps = {
   path: string;
   type: string;
@@ -12,4 +14,6 @@ function OfferImage({path, type}:OfferImageProps): JSX.Element {
   );
 }
 
-export default OfferImage;
+const OfferImageMemo = memo(OfferImage);
+
+export default OfferImageMemo;

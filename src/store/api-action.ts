@@ -1,6 +1,5 @@
 import { OfferType, AuthData, UserData, ReviewsType, CommentInfoType, OneOfferType } from '../type';
 import { APIRoute } from '../const';
-import { saveToken, dropToken } from '../services/token';
 import { createAppAsyncThunk } from '../hooks';
 
 const fetchOffers = createAppAsyncThunk<OfferType[], undefined>(
@@ -23,7 +22,6 @@ const loginAction = createAppAsyncThunk<UserData, AuthData>(
   'user/login',
   async ({ login: email, password }, { extra: api }) => {
     const { data } = await api.post<UserData>(APIRoute.Login, { email, password });
-    saveToken(data.token);
     return data;
   }
 );
@@ -32,7 +30,6 @@ const logoutAction = createAppAsyncThunk<void, undefined>(
   'user/logout',
   async (_arg, { extra: api }) => {
     await api.delete(APIRoute.Logout);
-    dropToken();
   }
 );
 
@@ -53,7 +50,7 @@ const fetchNearbyOffers = createAppAsyncThunk<OfferType[], string>(
 );
 
 const fetchOfferComments = createAppAsyncThunk<ReviewsType[], string>(
-  'offer/fetchOfferComments',
+  'comments/fetchOfferComments',
   async (id, { extra: api }) => {
     const { data } = await api.get<ReviewsType[]>(`${APIRoute.Comments}/${id}`);
     return data;
@@ -61,7 +58,7 @@ const fetchOfferComments = createAppAsyncThunk<ReviewsType[], string>(
 );
 
 const postOfferComment = createAppAsyncThunk<ReviewsType, CommentInfoType>(
-  'offer/postOfferComment',
+  'comments/postOfferComment',
   async ({ id, comment }, { extra: api }) => {
     const { data } = await api.post<ReviewsType>(`${APIRoute.Comments}/${id}`, { comment: comment.review, rating: +comment.rating });
     return data;

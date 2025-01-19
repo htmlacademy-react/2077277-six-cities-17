@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { BookmarkCardParams, BookmarkOfferParams } from '../../const';
 
 type BookmarkProps = {
@@ -18,4 +19,6 @@ function Bookmark({ isFavorite, isOfferPage = false }: BookmarkProps): JSX.Eleme
   );
 }
 
-export default Bookmark;
+const BookmarkMemo = memo(Bookmark);
+
+export default BookmarkMemo;
