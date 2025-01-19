@@ -17,7 +17,7 @@ import { selectLoginStatus } from '../../store/user/user-selectors';
 import { selectNearbyOffers, selectNearbyOffersStatus, selectOffersList } from '../../store/offers/offers-selectors';
 import { selectOfferLoadingStatus, selectOffer, selectErrorConnection } from '../../store/offer/offer-selectors';
 import { getOfferInfoById, fetchNearbyOffers, fetchOfferComments } from '../../store/api-action';
-import { setErrorConnectionStatus } from '../../store/offer/offer-slice';
+import { setErrorConnectionStatusOffer } from '../../store/offer/offer-slice';
 import { useEffect } from 'react';
 
 function OfferPage(): JSX.Element {
@@ -40,12 +40,12 @@ function OfferPage(): JSX.Element {
     dispatch(getOfferInfoById(offerId))
       .unwrap()
       .then(() => {
-        dispatch(setErrorConnectionStatus(false));
+        dispatch(setErrorConnectionStatusOffer(false));
         dispatch(fetchNearbyOffers(offerId));
         dispatch(fetchOfferComments(offerId));
       })
       .catch(() => {
-        dispatch(setErrorConnectionStatus(true));
+        dispatch(setErrorConnectionStatusOffer(true));
       });
   }, [dispatch, offerId]);
 

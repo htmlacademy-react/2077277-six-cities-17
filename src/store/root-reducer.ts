@@ -4,7 +4,7 @@ import { citySlice } from './city/city-slice';
 import { sortingSlice } from './sorting/sorting-slice';
 import userSlice from './user/user-slice';
 import { errorSlice } from './error/error-slice';
-import offersSlice from './offers/offers-slice';
+import { offersSlice } from './offers/offers-slice';
 import { offerSlice } from './offer/offer-slice';
 import commentsSlice from './comments/comments-slice';
 

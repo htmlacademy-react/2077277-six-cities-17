@@ -4,10 +4,11 @@ import LoginPage from '../../pages/login-page/login-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import LoadingPage from '../../pages/loading-page/loading-page';
+import ErrorConnection from '../error-connection/error-connection';
 import PrivateRoute from '../private-route/private-route';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { LoginStatus, RoutePath } from '../../const';
-import { OfferType} from '../../type';
+import { OfferType } from '../../type';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -15,20 +16,41 @@ import { selectOffersLoadingStatus } from '../../store/offers/offers-selectors';
 import { selectLoginStatus } from '../../store/user/user-selectors';
 import { useEffect } from 'react';
 import { fetchOffers, checkAuthStatus } from '../../store/api-action';
+import { setErrorConnectionStatusOffers } from '../../store/offers/offers-slice';
+import { selectErrorConnectionOffers } from '../../store/offers/offers-selectors';
 
 type AppProps = {
   favorites: OfferType[];
 }
 
-function App({ favorites}: AppProps): JSX.Element {
+function App({ favorites }: AppProps): JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectLoginStatus);
   const isOffersListLoading = useAppSelector(selectOffersLoadingStatus);
+  const errorConnectionStatus = useAppSelector(selectErrorConnectionOffers);
 
   useEffect(() => {
-    dispatch(fetchOffers());
-    dispatch(checkAuthStatus());
+    dispatch(fetchOffers())
+      .unwrap()
+      .then(() => {
+        dispatch(setErrorConnectionStatusOffers(false));
+        dispatch(checkAuthStatus());
+      })
+      .catch(() => {
+        dispatch(setErrorConnectionStatusOffers(true));
+      });
   }, [dispatch]);
+
+  if (errorConnectionStatus) {
+    return (
+      <HelmetProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <ErrorConnection mainPage/>;
+        </BrowserRouter>
+      </HelmetProvider>
+    );
+  }
 
   return (
     <HelmetProvider>
