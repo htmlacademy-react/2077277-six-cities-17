@@ -5,12 +5,16 @@ import { Link} from 'react-router-dom';
 import { logoutAction } from '../../store/api-action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectUserInfo } from '../../store/user/user-selectors';
+import { selectFavoriteOffers } from '../../store/favorites/favorites-selectors';
 
 type HeaderNavigationProps = {
   loginStatus: LoginStatusList;
 }
 
 function HeaderNavigation({ loginStatus}: HeaderNavigationProps): JSX.Element {
+  const favoritesOffers = useAppSelector(selectFavoriteOffers);
+  const favoritesLength = favoritesOffers.length;
+
   const userInfo = useAppSelector(selectUserInfo);
   let email = '';
   if(userInfo) {
@@ -26,6 +30,8 @@ function HeaderNavigation({ loginStatus}: HeaderNavigationProps): JSX.Element {
     }
   };
 
+  const favoritesOffersLength = favoritesLength ?? '0';
+
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -36,7 +42,7 @@ function HeaderNavigation({ loginStatus}: HeaderNavigationProps): JSX.Element {
             {loginStatus === LoginStatus.Auth ?
               <Fragment>
                 <span className="header__user-name user__name">{email}</span>
-                <span className="header__favorite-count">0</span>
+                <span className="header__favorite-count">{favoritesOffersLength}</span>
               </Fragment> :
               <span className="header__login">Sign in</span>}
           </Link>

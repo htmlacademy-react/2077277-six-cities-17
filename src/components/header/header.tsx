@@ -16,7 +16,7 @@ function Header({ isMainPage = false, isLoginPage = false, loginStatus = LoginSt
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <LogoMemo isMainPage={isMainPage} params={LogoHeaderParams}/>
+            <LogoMemo isMainPage={isMainPage} params={LogoHeaderParams} />
           </div>
           {!isLoginPage ? <HeaderNavigationMemo loginStatus={loginStatus} /> : ''}
         </div>

@@ -40,17 +40,19 @@ function OfferPage(): JSX.Element {
     dispatch(getOfferInfoById(offerId))
       .unwrap()
       .then(() => {
-        dispatch(setErrorConnectionStatusOffer(false));
         dispatch(fetchNearbyOffers(offerId));
         dispatch(fetchOfferComments(offerId));
       })
       .catch(() => {
         dispatch(setErrorConnectionStatusOffer(true));
       });
+    return () => {
+      dispatch(setErrorConnectionStatusOffer(false));
+    };
   }, [dispatch, offerId]);
 
-  if (errorConnectionStatus) {
-    return <ErrorConnection/>;
+  if (errorConnectionStatus && offer) {
+    return <ErrorConnection />;
   }
 
   if (isOfferLoading || isNearbyOffersLoading || isOffersCommentsLoading) {

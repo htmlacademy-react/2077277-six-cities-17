@@ -8,22 +8,17 @@ import ErrorConnection from '../error-connection/error-connection';
 import PrivateRoute from '../private-route/private-route';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
 import { LoginStatus, RoutePath } from '../../const';
-import { OfferType } from '../../type';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectOffersLoadingStatus } from '../../store/offers/offers-selectors';
 import { selectLoginStatus } from '../../store/user/user-selectors';
 import { useEffect } from 'react';
-import { fetchOffers, checkAuthStatus } from '../../store/api-action';
+import { fetchOffers, checkAuthStatus, fetchFavoriteOffers } from '../../store/api-action';
 import { setErrorConnectionStatusOffers } from '../../store/offers/offers-slice';
 import { selectErrorConnectionOffers } from '../../store/offers/offers-selectors';
 
-type AppProps = {
-  favorites: OfferType[];
-}
-
-function App({ favorites }: AppProps): JSX.Element {
+function App(): JSX.Element {
   const dispatch = useAppDispatch();
   const status = useAppSelector(selectLoginStatus);
   const isOffersListLoading = useAppSelector(selectOffersLoadingStatus);
@@ -34,7 +29,11 @@ function App({ favorites }: AppProps): JSX.Element {
       .unwrap()
       .then(() => {
         dispatch(setErrorConnectionStatusOffers(false));
-        dispatch(checkAuthStatus());
+        dispatch(checkAuthStatus())
+          .unwrap()
+          .then(() => {
+            dispatch(fetchFavoriteOffers());
+          });
       })
       .catch(() => {
         dispatch(setErrorConnectionStatusOffers(true));
@@ -46,7 +45,7 @@ function App({ favorites }: AppProps): JSX.Element {
       <HelmetProvider>
         <BrowserRouter>
           <ScrollToTop />
-          <ErrorConnection mainPage/>;
+          <ErrorConnection mainPage />;
         </BrowserRouter>
       </HelmetProvider>
     );
@@ -68,7 +67,7 @@ function App({ favorites }: AppProps): JSX.Element {
               />
               <Route path={RoutePath.Favorites} element={
                 <PrivateRoute loginStatus={status} loginStatusExpected={LoginStatus.Auth} routePath={RoutePath.Login}>
-                  <FavoritesPage loginStatus={status} favorites={favorites} />
+                  <FavoritesPage loginStatus={status} />
                 </PrivateRoute>
               }
               />

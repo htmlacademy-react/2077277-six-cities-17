@@ -1,7 +1,7 @@
 import SortingItem from '../sorting-item/sorting-item';
 import { SortType } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { selectSortListType } from '../../store/sorting/sorting-selectors';
 
 function Sorting(): JSX.Element {
@@ -9,6 +9,7 @@ function Sorting(): JSX.Element {
   const [isSortingOpen, setSortingOpen] = useState(false);
   const currentSortType = useAppSelector(selectSortListType);
   const SortItem = Object.values(SortType).map((item) => <SortingItem key={item} isActive={currentSortType === item} sortType={item} />);
+  const onHandleSortTypeChange = useMemo(() => () => setSortingOpen((lastOpened) => !lastOpened), []);
 
   useEffect(() => {
     const hideSortList = (evt: MouseEvent) => {
@@ -26,7 +27,7 @@ function Sorting(): JSX.Element {
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by&nbsp;</span>
-      <span className="places__sorting-type" tabIndex={0} ref={sortSpanRef} onClick={() => setSortingOpen((lastOpened) => !lastOpened)}>
+      <span className="places__sorting-type" tabIndex={0} ref={sortSpanRef} onClick={onHandleSortTypeChange}>
         {currentSortType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>

@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks';
 import { selectOffersList } from '../../store/offers/offers-selectors';
 import { selectActiveCity } from '../../store/city/city-selectors';
+import { useMemo } from 'react';
 
 type MainPageProps = {
   loginStatus: LoginStatusList;
@@ -16,7 +17,7 @@ type MainPageProps = {
 function MainPage({ loginStatus }: MainPageProps): JSX.Element {
   const activeCity = useAppSelector(selectActiveCity);
   const offers = useAppSelector(selectOffersList);
-  const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
+  const filteredOffers = useMemo(() => offers.filter((offer) => offer.city.name === activeCity), [offers, activeCity]);
 
   return (
     <div className="page page--gray page--main">

@@ -151,13 +151,14 @@ const Server = {
 } as const;
 
 const TOKEN_NAME = 'six-cities-token';
-const ERROR_TIMEOUT = 5000;
+const ERROR_TIMEOUT = 3000;
 
 const APIRoute = {
   Offers: '/offers',
   Login: '/login',
   Logout: '/logout',
   Comments: '/comments',
+  Favorite: '/favorite',
 } as const;
 
 const ErrorStatus = {
@@ -171,6 +172,7 @@ const NameSpace = {
   Sorting: 'SORTING',
   City: 'CITY',
   Comments: 'COMMENTS',
+  Favorite: 'FAVORITE',
   Error: 'ERROR'
 } as const;
 

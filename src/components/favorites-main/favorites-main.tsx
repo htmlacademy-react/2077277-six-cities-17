@@ -1,12 +1,10 @@
 import FavoritesListItem from '../favorites-list-item/favorites-list-item';
 import { OfferType } from '../../type';
+import { selectFavoriteOffers } from '../../store/favorites/favorites-selectors';
+import { useAppSelector } from '../../hooks';
 
-type FavoritesMainProps = {
-  favorites: OfferType[];
-}
-
-function FavoritesMain({ favorites }: FavoritesMainProps): JSX.Element {
-
+function FavoritesMain(): JSX.Element {
+  const favorites = useAppSelector(selectFavoriteOffers);
   const favoritesGroupByCity: Record<string, OfferType[]> = favorites.reduce((currentItem, offer) => {
     const cityName = offer.city.name;
     if (!currentItem[cityName]) {

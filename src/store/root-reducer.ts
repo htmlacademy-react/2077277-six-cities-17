@@ -7,6 +7,7 @@ import { errorSlice } from './error/error-slice';
 import { offersSlice } from './offers/offers-slice';
 import { offerSlice } from './offer/offer-slice';
 import commentsSlice from './comments/comments-slice';
+import { favoritesSlice } from './favorites/favorites-slice';
 
 const rootReducer = combineReducers({
   [NameSpace.City]: citySlice.reducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   [NameSpace.Offers]: offersSlice.reducer,
   [NameSpace.Offer]: offerSlice.reducer,
   [NameSpace.Comments]: commentsSlice.reducer,
+  [NameSpace.Favorite]: favoritesSlice.reducer,
 });
 
 export default rootReducer;

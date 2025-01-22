@@ -3,7 +3,7 @@ import { useAppSelector } from '../../hooks';
 import { OfferType, PageParamsType } from '../../type';
 import { sortOffers } from '../../utils';
 import { selectSortListType } from '../../store/sorting/sorting-selectors';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 
 type CardsList = {
   filteredOffers: OfferType[];
@@ -13,9 +13,9 @@ type CardsList = {
 
 function CardsList({ filteredOffers, page, onHandleActiveOfferChange }: CardsList): JSX.Element {
   const currentSortType = useAppSelector(selectSortListType);
-  const sortedOffers = sortOffers(filteredOffers, currentSortType);
+  const sortedOffers = useMemo(() => sortOffers(filteredOffers, currentSortType), [currentSortType, filteredOffers]);
 
-  const cardsList = sortedOffers.map((offer) => <CardMemo key={offer.id} id={offer.id} title={offer.title} type={offer.type} price={offer.price} previewImage={offer.previewImage} rating={offer.rating} isPremium={offer.isPremium} isFavorite={offer.isFavorite} page={page} onHandleActiveOfferChange={onHandleActiveOfferChange}/>);
+  const cardsList = sortedOffers.map((offer) => <CardMemo key={offer.id} id={offer.id} title={offer.title} type={offer.type} price={offer.price} previewImage={offer.previewImage} rating={offer.rating} isPremium={offer.isPremium} page={page} onHandleActiveOfferChange={onHandleActiveOfferChange}/>);
 
   return (
     <div className="cities__places-list places__list tabs__content">
