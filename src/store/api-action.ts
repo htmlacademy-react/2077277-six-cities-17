@@ -10,6 +10,29 @@ const fetchOffers = createAppAsyncThunk<OfferType[], undefined>(
   }
 );
 
+const fetchFavoriteOffers = createAppAsyncThunk<OfferType[], undefined>(
+  `${NameSpace.Favorite}/fetchFavoritesOffers`,
+  async (_arg, { extra: api }) => {
+    const { data } = await api.get<OfferType[]>(APIRoute.Favorite);
+    return data;
+  }
+);
+
+const changeFavoriteStatus = createAppAsyncThunk<OfferType, { offerId: string; wasFavorite: boolean }>(
+  `${NameSpace.Favorite}/changeFavoriteStatus`,
+  async ({ offerId, wasFavorite }, { getState, extra: api }) => {
+    const nextFavoriteStatus = Number(!wasFavorite);
+    const { data } = await api.post<OneOfferType>(`${APIRoute.Favorite}/${offerId}/${nextFavoriteStatus}`);
+    const { offersList } = getState().OFFERS;
+    const currentOfferCard = offersList.find((card) => card.id === data.id);
+
+    if (!currentOfferCard) {
+      throw new Error(`No such offer with given id: ${data.id}`);
+    }
+    return { ...currentOfferCard, isFavorite: data.isFavorite };
+  }
+);
+
 const checkAuthStatus = createAppAsyncThunk<UserData, undefined>(
   `${NameSpace.User}/checkAuthStatus`,
   async (_arg, { extra: api }) => {
@@ -62,29 +85,6 @@ const postOfferComment = createAppAsyncThunk<ReviewsType, CommentInfoType>(
   async ({ id, comment }, { extra: api }) => {
     const { data } = await api.post<ReviewsType>(`${APIRoute.Comments}/${id}`, { comment: comment.review, rating: +comment.rating });
     return data;
-  }
-);
-
-const fetchFavoriteOffers = createAppAsyncThunk<OfferType[], undefined>(
-  `${NameSpace.Favorite}/fetchFavoritesOffers`,
-  async (_arg, { extra: api }) => {
-    const { data } = await api.get<OfferType[]>(APIRoute.Favorite);
-    return data;
-  }
-);
-
-const changeFavoriteStatus = createAppAsyncThunk<OfferType, { offerId: string; wasFavorite: boolean }>(
-  `${NameSpace.Favorite}/changeFavoriteStatus`,
-  async ({ offerId, wasFavorite }, { getState, extra: api }) => {
-    const nextFavoriteStatus = Number(!wasFavorite);
-    const { data } = await api.post<OneOfferType>(`${APIRoute.Favorite}/${offerId}/${nextFavoriteStatus}`);
-    const { offersList } = getState().OFFERS;
-    const currentOfferCard = offersList.find((card) => card.id === data.id);
-
-    if (!currentOfferCard) {
-      throw new Error(`No such offer with given id: ${data.id}`);
-    }
-    return { ...currentOfferCard, isFavorite: data.isFavorite };
   }
 );
 

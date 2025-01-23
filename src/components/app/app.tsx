@@ -30,7 +30,6 @@ function App(): JSX.Element {
       .then(() => {
         dispatch(setErrorConnectionStatusOffers(false));
         dispatch(checkAuthStatus())
-          .unwrap()
           .then(() => {
             dispatch(fetchFavoriteOffers());
           });

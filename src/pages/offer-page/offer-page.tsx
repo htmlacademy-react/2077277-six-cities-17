@@ -63,7 +63,7 @@ function OfferPage(): JSX.Element {
     return <NotFoundPage loginStatus={loginStatus} />;
   }
 
-  const { title, description, type, price, images, isPremium, isFavorite, rating, bedrooms, maxAdults, goods, host, city } = offer;
+  const { title, description, type, price, images, isPremium, rating, bedrooms, maxAdults, goods, host, city, id } = offer;
 
   const roundRating = Math.round(rating);
   const currentOffer = offersList.find((item) => item.id === offerId);
@@ -71,7 +71,7 @@ function OfferPage(): JSX.Element {
 
   const offersNearbyWithoutCurrentOffer = offersNearby.filter((itemOffer) => itemOffer.id !== offerId);
   const offersNearbySlicedWithoutCurrentOffer = offersNearbyWithoutCurrentOffer.slice(0, 3);
-  const cards = offersNearbySlicedWithoutCurrentOffer.map((oneOffer) => <CardMemo key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} isFavorite={oneOffer.isFavorite} page={OffersPage} />);
+  const cards = offersNearbySlicedWithoutCurrentOffer.map((oneOffer) => <CardMemo key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} page={OffersPage} />);
 
   const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer(offersNearbySlicedWithoutCurrentOffer, currentOffer);
 
@@ -95,7 +95,7 @@ function OfferPage(): JSX.Element {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <BookmarkMemo isFavorite={isFavorite} isOfferPage />
+                <BookmarkMemo isOfferPage offerId={id} />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">

@@ -2,7 +2,7 @@ import { memo, useMemo } from 'react';
 import { BookmarkCardParams, BookmarkOfferParams, LoginStatus, APIRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectLoginStatus } from '../../store/user/user-selectors';
-import { selectFavoriteStatusById } from '../../store/favorites/favorites-selectors';
+import { selectFavoriteStatusById, selectLoadingFavoriteOffersStatus } from '../../store/favorites/favorites-selectors';
 import { changeFavoriteStatus } from '../../store/api-action';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,6 +19,7 @@ function Bookmark({ isOfferPage = false, offerId }: BookmarkProps): JSX.Element 
   const authStatus = useAppSelector(selectLoginStatus);
   const isAuthorized = useMemo(() => authStatus === LoginStatus.Auth, [authStatus]);
   const isFavorite = useAppSelector((state) => selectFavoriteStatusById(state, offerId));
+  const loadingFavoriteOffersStatus = useAppSelector(selectLoadingFavoriteOffersStatus);
 
   const onHandleBookmarkClick = () => {
     if (isAuthorized) {
@@ -29,7 +30,7 @@ function Bookmark({ isOfferPage = false, offerId }: BookmarkProps): JSX.Element 
   };
 
   return (
-    <button className={`${isOfferPage ? BookmarkOfferParams.Class : BookmarkCardParams.Class}__bookmark-button ${isFavorite && isAuthorized ? activeClass : ''} button`} type="button" onClick={onHandleBookmarkClick}>
+    <button className={`${isOfferPage ? BookmarkOfferParams.Class : BookmarkCardParams.Class}__bookmark-button ${isFavorite && isAuthorized ? activeClass : ''} button`} type="button" onClick={onHandleBookmarkClick} disabled={loadingFavoriteOffersStatus}>
       <svg className={`${isOfferPage ? BookmarkOfferParams.Class : BookmarkCardParams.Class}__bookmark-icon`} width={isOfferPage ? BookmarkOfferParams.Width : BookmarkCardParams.Width} height={isOfferPage ? BookmarkOfferParams.Height : BookmarkCardParams.Height}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>

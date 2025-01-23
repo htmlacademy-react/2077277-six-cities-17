@@ -7,23 +7,18 @@ type InitialStateType = {
   favoriteOffers: OfferType[];
   isLoadingFavoriteOffers: boolean;
   isLoadingFavoriteStatus: boolean;
-  // isErrorConnectionOffers: boolean;
 };
 
 const initialState: InitialStateType = {
   favoriteOffers: [],
   isLoadingFavoriteOffers: false,
   isLoadingFavoriteStatus: false,
-  // isErrorConnectionOffers: false,
 };
 
 export const favoritesSlice = createSlice({
   name: NameSpace.Favorite,
   initialState,
   reducers: {
-    // setErrorConnectionStatusOffers(state, action: PayloadAction<boolean>) {
-    //   state.isErrorConnectionOffers = action.payload;
-    // }
   },
   extraReducers(builder) {
     builder
@@ -32,12 +27,10 @@ export const favoritesSlice = createSlice({
       })
       .addCase(fetchFavoriteOffers.rejected, (state) => {
         state.isLoadingFavoriteOffers = false;
-        // state.isErrorConnectionOffers = true;
       })
       .addCase(fetchFavoriteOffers.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
         state.isLoadingFavoriteOffers = false;
-        // state.isErrorConnectionOffers = false;
       })
 
       .addCase(changeFavoriteStatus.pending, (state) => {
@@ -57,5 +50,3 @@ export const favoritesSlice = createSlice({
       });
   }
 });
-
-// export const {setErrorConnectionStatusOffers} = offersSlice.actions;
