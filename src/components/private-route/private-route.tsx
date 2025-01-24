@@ -12,9 +12,6 @@ function PrivateRoute({children, isLogin = false}: PrivateRouteProps): JSX.Eleme
 
   const authorizationStatus = useAppSelector(selectLoginStatus);
 
-  console.log(authorizationStatus);
-
-
   if (isLogin) {
     return (
       authorizationStatus === LoginStatus.Auth
