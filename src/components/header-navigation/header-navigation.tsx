@@ -1,7 +1,7 @@
 import { LoginStatus, RoutePath } from '../../const';
 import { LoginStatusList } from '../../type';
 import { Fragment, memo} from 'react';
-import { Link} from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import { logoutAction } from '../../store/api-action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectUserInfo } from '../../store/user/user-selectors';
@@ -14,9 +14,14 @@ type HeaderNavigationProps = {
 function HeaderNavigation({ loginStatus}: HeaderNavigationProps): JSX.Element {
   const favoritesOffers = useAppSelector(selectFavoriteOffers);
   const favoritesLength = favoritesOffers.length;
-
   const userInfo = useAppSelector(selectUserInfo);
+  const {pathname} = useLocation();
+
+  const isPrivatePage = pathname === String(RoutePath.Favorites);
+  const route = isPrivatePage ? RoutePath.Login : pathname;
+
   let email = '';
+
   if(userInfo) {
     email = userInfo.email;
   }
@@ -49,7 +54,7 @@ function HeaderNavigation({ loginStatus}: HeaderNavigationProps): JSX.Element {
         </li>
         {loginStatus === LoginStatus.Auth ?
           <li className="header__nav-item">
-            <Link onClick={handleUserLogout} className="header__nav-link" to={RoutePath.Index}>
+            <Link onClick={handleUserLogout} className="header__nav-link" to={route}>
               <span className="header__signout">Sign out</span>
             </Link>
           </li> : ''}

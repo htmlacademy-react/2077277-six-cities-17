@@ -7,7 +7,7 @@ import LoadingPage from '../../pages/loading-page/loading-page';
 import ErrorConnection from '../error-connection/error-connection';
 import PrivateRoute from '../private-route/private-route';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
-import { LoginStatus, RoutePath } from '../../const';
+import { RoutePath } from '../../const';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -30,8 +30,10 @@ function App(): JSX.Element {
       .then(() => {
         dispatch(setErrorConnectionStatusOffers(false));
         dispatch(checkAuthStatus())
-          .then(() => {
-            dispatch(fetchFavoriteOffers());
+          .then((response) => {
+            if (response.meta.requestStatus === 'fulfilled') {
+              dispatch(fetchFavoriteOffers());
+            }
           });
       })
       .catch(() => {
@@ -59,13 +61,13 @@ function App(): JSX.Element {
             <Route path={RoutePath.Index}>
               <Route index element={<MainPage loginStatus={status} />}></Route>
               <Route path={RoutePath.Login} element={
-                <PrivateRoute loginStatus={status} loginStatusExpected={LoginStatus.NoAuth} routePath={RoutePath.Index}>
+                <PrivateRoute isLogin >
                   <LoginPage />
                 </PrivateRoute>
               }
               />
               <Route path={RoutePath.Favorites} element={
-                <PrivateRoute loginStatus={status} loginStatusExpected={LoginStatus.Auth} routePath={RoutePath.Login}>
+                <PrivateRoute >
                   <FavoritesPage loginStatus={status} />
                 </PrivateRoute>
               }
