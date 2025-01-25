@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 
 function LoginPage(): JSX.Element {
+
   return (
     <div className="page page--gray page--login">
       <Helmet>
@@ -15,7 +16,7 @@ function LoginPage(): JSX.Element {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <LoginForm/>
+            <LoginForm />
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">

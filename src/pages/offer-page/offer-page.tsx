@@ -67,7 +67,7 @@ function OfferPage(): JSX.Element {
 
   const roundRating = Math.round(rating);
   const currentOffer = offersList.find((item) => item.id === offerId);
-  const offerImages = images.map((image) => <OfferImageMemo key={image} path={image} type={offer.type} />);
+  const offerImages = images.slice(0, 6).map((image) => <OfferImageMemo key={image} path={image} type={offer.type} />);
 
   const offersNearbyWithoutCurrentOffer = offersNearby.filter((itemOffer) => itemOffer.id !== offerId);
   const offersNearbySlicedWithoutCurrentOffer = offersNearbyWithoutCurrentOffer.slice(0, 3);
@@ -109,10 +109,10 @@ function OfferPage(): JSX.Element {
                   {capitalizeFirstLetter(type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {bedrooms} Bedrooms
+                  {bedrooms} {`${bedrooms === 1 ? 'Bedroom' : 'Bedrooms'}`}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max {maxAdults} adults
+                  Max {maxAdults} {`${maxAdults === 1 ? 'adult' : 'adults'}`}
                 </li>
               </ul>
               <div className="offer__price">
@@ -123,7 +123,7 @@ function OfferPage(): JSX.Element {
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={`offer__avatar-wrapper ${ host.isPro ? 'offer__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
                     <img className="offer__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">

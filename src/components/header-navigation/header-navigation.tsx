@@ -16,7 +16,6 @@ function HeaderNavigation({ loginStatus}: HeaderNavigationProps): JSX.Element {
   const favoritesLength = favoritesOffers.length;
   const userInfo = useAppSelector(selectUserInfo);
   const {pathname} = useLocation();
-
   const isPrivatePage = pathname === String(RoutePath.Favorites);
   const route = isPrivatePage ? RoutePath.Login : pathname;
 
@@ -26,7 +25,6 @@ function HeaderNavigation({ loginStatus}: HeaderNavigationProps): JSX.Element {
     email = userInfo.email;
   }
   const dispatch = useAppDispatch();
-
   const isLogin = loginStatus === LoginStatus.Auth;
 
   const handleUserLogout = () => {

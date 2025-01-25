@@ -7,7 +7,7 @@ import LoadingPage from '../../pages/loading-page/loading-page';
 import ErrorConnection from '../error-connection/error-connection';
 import PrivateRoute from '../private-route/private-route';
 import ScrollToTop from '../scroll-to-top/scroll-to-top';
-import { RoutePath } from '../../const';
+import { RoutePath, LoginStatus } from '../../const';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -56,7 +56,7 @@ function App(): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <ScrollToTop />
-        {isOffersListLoading ? <LoadingPage loginStatus={status} /> :
+        {isOffersListLoading || status === LoginStatus.Unknown ? <LoadingPage loginStatus={status} /> :
           <Routes>
             <Route path={RoutePath.Index}>
               <Route index element={<MainPage loginStatus={status} />}></Route>
