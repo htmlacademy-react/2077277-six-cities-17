@@ -56,4 +56,4 @@ export const offersSlice = createSlice({
   }
 });
 
-export const {setErrorConnectionStatusOffers} = offersSlice.actions;
+export const { setErrorConnectionStatusOffers } = offersSlice.actions;

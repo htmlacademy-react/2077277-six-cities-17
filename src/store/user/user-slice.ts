@@ -8,12 +8,14 @@ type InitialStateType = {
   authorizationStatus: LoginStatusList;
   userInfo: UserData | null;
   isLoadingLogin: boolean;
+  isLoadingLogout: boolean;
 };
 
 const initialState: InitialStateType = {
   authorizationStatus: LoginStatus.Unknown,
   userInfo: null,
   isLoadingLogin: false,
+  isLoadingLogout: false,
 };
 
 const userSlice = createSlice({
@@ -44,7 +46,14 @@ const userSlice = createSlice({
         state.authorizationStatus = LoginStatus.NoAuth;
         state.userInfo = null;
       })
+      .addCase(logoutAction.pending, (state) => {
+        state.isLoadingLogout = true;
+      })
+      .addCase(logoutAction.rejected, (state) => {
+        state.isLoadingLogout = false;
+      })
       .addCase(logoutAction.fulfilled, (state) => {
+        state.isLoadingLogout = false;
         state.authorizationStatus = LoginStatus.NoAuth;
         state.userInfo = null;
         dropToken();

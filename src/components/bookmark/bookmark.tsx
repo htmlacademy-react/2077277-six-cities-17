@@ -3,7 +3,7 @@ import { BookmarkCardParams, BookmarkOfferParams, LoginStatus, APIRoute } from '
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectLoginStatus } from '../../store/user/user-selectors';
 import { selectFavoriteStatusById, selectLoadingFavoriteOffersStatus } from '../../store/favorites/favorites-selectors';
-import { changeFavoriteStatus } from '../../store/api-action';
+import { changeFavoriteStatus} from '../../store/api-action';
 import { useNavigate } from 'react-router-dom';
 
 type BookmarkProps = {

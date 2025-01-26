@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../../const';
 import { useSelector } from 'react-redux';
-import { isLoadingLogin } from '../../store/user/user-selectors';
+import { selectLoadingLogin } from '../../store/user/user-selectors';
 
 function LoginForm(): JSX.Element {
   const emailRef = useRef<HTMLInputElement | null>(null);
@@ -12,7 +12,7 @@ function LoginForm(): JSX.Element {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const LoadingLoginStatus = useSelector(isLoadingLogin);
+  const LoadingLoginStatus = useSelector(selectLoadingLogin);
 
   const handleSubmitLoginForm = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
