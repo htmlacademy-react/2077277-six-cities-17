@@ -68,12 +68,9 @@ function OfferPage(): JSX.Element {
   const roundRating = Math.round(rating);
   const currentOffer = offersList.find((item) => item.id === offerId);
   const offerImages = images.slice(0, 6).map((image) => <OfferImageMemo key={image} path={image} type={offer.type} />);
-
-  const offersNearbyWithoutCurrentOffer = offersNearby.filter((itemOffer) => itemOffer.id !== offerId);
-  const offersNearbySlicedWithoutCurrentOffer = offersNearbyWithoutCurrentOffer.slice(0, 3);
-  const cards = offersNearbySlicedWithoutCurrentOffer.map((oneOffer) => <CardMemo key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} page={OffersPage} />);
-
-  const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer(offersNearbySlicedWithoutCurrentOffer, currentOffer);
+  const offersNearbySliced = offersNearby.slice(0, 3);
+  const cards = offersNearbySliced.map((oneOffer) => <CardMemo key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} page={OffersPage} />);
+  const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer(offersNearbySliced, currentOffer);
 
   return (
     <div className="page">

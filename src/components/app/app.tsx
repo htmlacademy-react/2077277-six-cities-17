@@ -12,7 +12,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectOffersLoadingStatus } from '../../store/offers/offers-selectors';
-import { selectLoginStatus } from '../../store/user/user-selectors';
+import { selectLoginStatus, selectLoadingLogout } from '../../store/user/user-selectors';
 import { useEffect } from 'react';
 import { fetchOffers, checkAuthStatus, fetchFavoriteOffers } from '../../store/api-action';
 import { setErrorConnectionStatusOffers } from '../../store/offers/offers-slice';
@@ -23,6 +23,7 @@ function App(): JSX.Element {
   const status = useAppSelector(selectLoginStatus);
   const isOffersListLoading = useAppSelector(selectOffersLoadingStatus);
   const errorConnectionStatus = useAppSelector(selectErrorConnectionOffers);
+  const isLoadingLogout = useAppSelector(selectLoadingLogout);
 
   useEffect(() => {
     dispatch(fetchOffers())
@@ -56,7 +57,7 @@ function App(): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <ScrollToTop />
-        {isOffersListLoading || status === LoginStatus.Unknown ? <LoadingPage loginStatus={status} /> :
+        {isOffersListLoading || isLoadingLogout || status === LoginStatus.Unknown ? <LoadingPage loginStatus={status} /> :
           <Routes>
             <Route path={RoutePath.Index}>
               <Route index element={<MainPage loginStatus={status} />}></Route>
