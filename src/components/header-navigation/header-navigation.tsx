@@ -33,8 +33,6 @@ function HeaderNavigation({ loginStatus}: HeaderNavigationProps): JSX.Element {
     }
   };
 
-  const favoritesOffersLength = favoritesLength ?? '0';
-
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -45,7 +43,7 @@ function HeaderNavigation({ loginStatus}: HeaderNavigationProps): JSX.Element {
             {loginStatus === LoginStatus.Auth ?
               <Fragment>
                 <span className="header__user-name user__name">{email}</span>
-                <span className="header__favorite-count">{favoritesOffersLength}</span>
+                <span className="header__favorite-count">{favoritesLength}</span>
               </Fragment> :
               <span className="header__login">Sign in</span>}
           </Link>

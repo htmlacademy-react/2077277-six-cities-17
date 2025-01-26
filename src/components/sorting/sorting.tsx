@@ -9,7 +9,7 @@ function Sorting(): JSX.Element {
   const [isSortingOpen, setSortingOpen] = useState(false);
   const currentSortType = useAppSelector(selectSortListType);
   const SortItem = Object.values(SortType).map((item) => <SortingItem key={item} isActive={currentSortType === item} sortType={item} />);
-  const onHandleSortTypeChange = useMemo(() => () => setSortingOpen((lastOpened) => !lastOpened), []);
+  const handleSortTypeChange = useMemo(() => () => setSortingOpen((lastOpened) => !lastOpened), []);
 
   useEffect(() => {
     const hideSortList = (evt: MouseEvent) => {
@@ -27,7 +27,7 @@ function Sorting(): JSX.Element {
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by&nbsp;</span>
-      <span className="places__sorting-type" tabIndex={0} ref={sortSpanRef} onClick={onHandleSortTypeChange}>
+      <span className="places__sorting-type" tabIndex={0} ref={sortSpanRef} onClick={handleSortTypeChange}>
         {currentSortType}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
