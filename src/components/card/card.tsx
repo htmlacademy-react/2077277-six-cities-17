@@ -13,12 +13,11 @@ type CardProps = {
   previewImage: string;
   rating: number;
   isPremium: boolean;
-  isFavorite: boolean;
   id: string;
   onHandleActiveOfferChange?: (id: string | null) => void;
 }
 
-function Card({ page, title, type, price, previewImage, rating, isPremium, isFavorite, id, onHandleActiveOfferChange}: CardProps): JSX.Element {
+function Card({ page, title, type, price, previewImage, rating, isPremium, id, onHandleActiveOfferChange}: CardProps): JSX.Element {
   const roundRating = Math.round(rating);
 
   return (
@@ -42,7 +41,7 @@ function Card({ page, title, type, price, previewImage, rating, isPremium, isFav
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <BookmarkMemo isFavorite={isFavorite}/>
+          <BookmarkMemo offerId={id}/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

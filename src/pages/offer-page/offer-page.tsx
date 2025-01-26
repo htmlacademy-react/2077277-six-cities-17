@@ -17,7 +17,7 @@ import { selectLoginStatus } from '../../store/user/user-selectors';
 import { selectNearbyOffers, selectNearbyOffersStatus, selectOffersList } from '../../store/offers/offers-selectors';
 import { selectOfferLoadingStatus, selectOffer, selectErrorConnection } from '../../store/offer/offer-selectors';
 import { getOfferInfoById, fetchNearbyOffers, fetchOfferComments } from '../../store/api-action';
-import { setErrorConnectionStatus } from '../../store/offer/offer-slice';
+import { setErrorConnectionStatusOffer } from '../../store/offer/offer-slice';
 import { useEffect } from 'react';
 
 function OfferPage(): JSX.Element {
@@ -40,17 +40,19 @@ function OfferPage(): JSX.Element {
     dispatch(getOfferInfoById(offerId))
       .unwrap()
       .then(() => {
-        dispatch(setErrorConnectionStatus(false));
         dispatch(fetchNearbyOffers(offerId));
         dispatch(fetchOfferComments(offerId));
       })
       .catch(() => {
-        dispatch(setErrorConnectionStatus(true));
+        dispatch(setErrorConnectionStatusOffer(true));
       });
+    return () => {
+      dispatch(setErrorConnectionStatusOffer(false));
+    };
   }, [dispatch, offerId]);
 
-  if (errorConnectionStatus) {
-    return <ErrorConnection/>;
+  if (errorConnectionStatus && offer) {
+    return <ErrorConnection />;
   }
 
   if (isOfferLoading || isNearbyOffersLoading || isOffersCommentsLoading) {
@@ -61,15 +63,15 @@ function OfferPage(): JSX.Element {
     return <NotFoundPage loginStatus={loginStatus} />;
   }
 
-  const { title, description, type, price, images, isPremium, isFavorite, rating, bedrooms, maxAdults, goods, host, city } = offer;
+  const { title, description, type, price, images, isPremium, rating, bedrooms, maxAdults, goods, host, city, id } = offer;
 
   const roundRating = Math.round(rating);
   const currentOffer = offersList.find((item) => item.id === offerId);
-  const offerImages = images.map((image) => <OfferImageMemo key={image} path={image} type={offer.type} />);
+  const offerImages = images.slice(0, 6).map((image) => <OfferImageMemo key={image} path={image} type={offer.type} />);
 
   const offersNearbyWithoutCurrentOffer = offersNearby.filter((itemOffer) => itemOffer.id !== offerId);
   const offersNearbySlicedWithoutCurrentOffer = offersNearbyWithoutCurrentOffer.slice(0, 3);
-  const cards = offersNearbySlicedWithoutCurrentOffer.map((oneOffer) => <CardMemo key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} isFavorite={oneOffer.isFavorite} page={OffersPage} />);
+  const cards = offersNearbySlicedWithoutCurrentOffer.map((oneOffer) => <CardMemo key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} page={OffersPage} />);
 
   const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer(offersNearbySlicedWithoutCurrentOffer, currentOffer);
 
@@ -93,7 +95,7 @@ function OfferPage(): JSX.Element {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <BookmarkMemo isFavorite={isFavorite} isOfferPage />
+                <BookmarkMemo isOfferPage offerId={id} />
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
@@ -107,10 +109,10 @@ function OfferPage(): JSX.Element {
                   {capitalizeFirstLetter(type)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {bedrooms} Bedrooms
+                  {bedrooms} {`${bedrooms === 1 ? 'Bedroom' : 'Bedrooms'}`}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max {maxAdults} adults
+                  Max {maxAdults} {`${maxAdults === 1 ? 'adult' : 'adults'}`}
                 </li>
               </ul>
               <div className="offer__price">
@@ -121,7 +123,7 @@ function OfferPage(): JSX.Element {
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={`offer__avatar-wrapper ${ host.isPro ? 'offer__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
                     <img className="offer__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="offer__user-name">

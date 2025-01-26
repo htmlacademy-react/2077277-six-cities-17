@@ -6,21 +6,21 @@ import { getOfferInfoById } from '../api-action';
 type InitialStateType = {
   offer: OneOfferType | null;
   isLoadingOffer: boolean;
-  isErrorConnection: boolean;
+  isErrorConnectionOffer: boolean;
 };
 
 const initialState: InitialStateType = {
   offer: null,
   isLoadingOffer: false,
-  isErrorConnection: false,
+  isErrorConnectionOffer: false,
 };
 
 export const offerSlice = createSlice({
   name: NameSpace.Offer,
   initialState,
   reducers: {
-    setErrorConnectionStatus(state, action: PayloadAction<boolean>) {
-      state.isErrorConnection = action.payload;
+    setErrorConnectionStatusOffer(state, action: PayloadAction<boolean>) {
+      state.isErrorConnectionOffer = action.payload;
     }
   },
   extraReducers(builder) {
@@ -30,7 +30,7 @@ export const offerSlice = createSlice({
       })
       .addCase(getOfferInfoById.rejected, (state) => {
         state.isLoadingOffer = false;
-        state.isErrorConnection = false;
+        state.isErrorConnectionOffer = false;
       })
       .addCase(getOfferInfoById.fulfilled, (state, action) => {
         if (action.payload) {
@@ -41,4 +41,4 @@ export const offerSlice = createSlice({
   }
 });
 
-export const {setErrorConnectionStatus} = offerSlice.actions;
+export const {setErrorConnectionStatusOffer} = offerSlice.actions;

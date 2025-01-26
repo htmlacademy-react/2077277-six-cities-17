@@ -1,16 +1,29 @@
-import { LoginStatusList} from '../../type';
+import { useAppSelector } from '../../hooks';
 import { Navigate } from 'react-router-dom';
+import { selectLoginStatus } from '../../store/user/user-selectors';
+import { RoutePath, LoginStatus } from '../../const';
 
 type PrivateRouteProps = {
   children: JSX.Element;
-  loginStatus: LoginStatusList;
-  loginStatusExpected: LoginStatusList;
-  routePath: string;
+  isLogin?: boolean;
 }
 
-function PrivateRoute({children, loginStatus, loginStatusExpected, routePath}: PrivateRouteProps): JSX.Element {
+function PrivateRoute({children, isLogin = false}: PrivateRouteProps): JSX.Element {
+
+  const authorizationStatus = useAppSelector(selectLoginStatus);
+
+  if (isLogin) {
+    return (
+      authorizationStatus === LoginStatus.Auth
+        ? <Navigate to={RoutePath.Index}/>
+        : children
+    );
+  }
+
   return (
-    loginStatus === loginStatusExpected ? children : <Navigate to={routePath}/>
+    authorizationStatus === LoginStatus.Auth
+      ? children
+      : <Navigate to={RoutePath.Login}/>
   );
 }
 

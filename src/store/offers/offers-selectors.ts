@@ -5,5 +5,6 @@ const selectOffersList = (state: State):OfferType[] => state[NameSpace.Offers].o
 const selectNearbyOffers = (state: State):OfferType[] => state[NameSpace.Offers].nearbyOffers;
 const selectOffersLoadingStatus = (state: State):boolean => state[NameSpace.Offers].isLoadingOffers;
 const selectNearbyOffersStatus = (state: State):boolean => state[NameSpace.Offers].isLoadingNearbyOffers;
+const selectErrorConnectionOffers = (state: State): boolean => state[NameSpace.Offers].isErrorConnectionOffers;
 
-export {selectOffersList, selectNearbyOffers, selectOffersLoadingStatus, selectNearbyOffersStatus};
+export {selectOffersList, selectNearbyOffers, selectOffersLoadingStatus, selectNearbyOffersStatus, selectErrorConnectionOffers};

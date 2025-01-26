@@ -14,14 +14,14 @@ type MainProps = {
 
 function Main({ offers, activeCity, filteredOffers }: MainProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-
+  const filteredOffersLength = filteredOffers.length;
   const handleActiveOfferChange = useCallback((id: string | null) => setActiveOfferId(id), []);
 
   return (
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <MainTitleMemo citiesCount={filteredOffers.length} activeCity={activeCity}/>
+        <MainTitleMemo citiesCount={filteredOffersLength} activeCity={activeCity}/>
         <SortingMemo />
         <CardsListMemo page={MainPage} filteredOffers={filteredOffers} onHandleActiveOfferChange ={handleActiveOfferChange}/>
       </section>

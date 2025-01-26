@@ -1,6 +1,6 @@
 import { OfferType } from '../../type';
 import { NameSpace } from '../../const';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchOffers, fetchNearbyOffers } from '../api-action';
 
 type InitialStateType = {
@@ -8,6 +8,7 @@ type InitialStateType = {
   nearbyOffers: OfferType[];
   isLoadingOffers: boolean;
   isLoadingNearbyOffers: boolean;
+  isErrorConnectionOffers: boolean;
 };
 
 const initialState: InitialStateType = {
@@ -15,12 +16,17 @@ const initialState: InitialStateType = {
   nearbyOffers: [],
   isLoadingOffers: false,
   isLoadingNearbyOffers: false,
+  isErrorConnectionOffers: false,
 };
 
-const offersSlice = createSlice({
+export const offersSlice = createSlice({
   name: NameSpace.Offers,
   initialState,
-  reducers: {},
+  reducers: {
+    setErrorConnectionStatusOffers(state, action: PayloadAction<boolean>) {
+      state.isErrorConnectionOffers = action.payload;
+    }
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchOffers.pending, (state) => {
@@ -28,10 +34,12 @@ const offersSlice = createSlice({
       })
       .addCase(fetchOffers.rejected, (state) => {
         state.isLoadingOffers = false;
+        state.isErrorConnectionOffers = true;
       })
       .addCase(fetchOffers.fulfilled, (state, action) => {
         state.offersList = action.payload;
         state.isLoadingOffers = false;
+        state.isErrorConnectionOffers = false;
       })
       .addCase(fetchNearbyOffers.pending, (state) => {
         state.isLoadingNearbyOffers = true;
@@ -48,4 +56,4 @@ const offersSlice = createSlice({
   }
 });
 
-export default offersSlice;
+export const {setErrorConnectionStatusOffers} = offersSlice.actions;
