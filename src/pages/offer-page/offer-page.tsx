@@ -14,7 +14,7 @@ import { Helmet } from 'react-helmet-async';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { selectCommentsOffersStatus, selectOffersComments } from '../../store/comments/comments-selectors';
 import { selectLoginStatus } from '../../store/user/user-selectors';
-import { selectNearbyOffers, selectNearbyOffersStatus, selectOffersList } from '../../store/offers/offers-selectors';
+import { selectNearbyOffers, selectNearbyOffersStatus } from '../../store/offers/offers-selectors';
 import { selectOfferLoadingStatus, selectOffer, selectErrorConnection } from '../../store/offer/offer-selectors';
 import { getOfferInfoById, fetchNearbyOffers, fetchOfferComments } from '../../store/api-action';
 import { setErrorConnectionStatusOffer } from '../../store/offer/offer-slice';
@@ -25,7 +25,6 @@ function OfferPage(): JSX.Element {
   const offerId = useUrlId();
   const isOfferLoading = useAppSelector(selectOfferLoadingStatus);
   const offer = useAppSelector(selectOffer);
-  const offersList = useAppSelector(selectOffersList);
   const isNearbyOffersLoading = useAppSelector(selectNearbyOffersStatus);
   const offersNearby = useAppSelector(selectNearbyOffers);
   const isOffersCommentsLoading = useAppSelector(selectCommentsOffersStatus);
@@ -66,11 +65,10 @@ function OfferPage(): JSX.Element {
   const { title, description, type, price, images, isPremium, rating, bedrooms, maxAdults, goods, host, city, id } = offer;
 
   const roundRating = Math.round(rating);
-  const currentOffer = offersList.find((item) => item.id === offerId);
   const offerImages = images.slice(0, 6).map((image) => <OfferImageMemo key={image} path={image} type={offer.type} />);
   const offersNearbySliced = offersNearby.slice(0, 3);
   const cards = offersNearbySliced.map((oneOffer) => <CardMemo key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} page={OffersPage} />);
-  const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer(offersNearbySliced, currentOffer);
+  const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer(offersNearbySliced, offer);
 
   return (
     <div className="page">
@@ -137,7 +135,7 @@ function OfferPage(): JSX.Element {
               <ReviewsList loginStatus={loginStatus} reviews={reviews} />
             </div>
           </div>
-          <Map isOffer activeCity={currentOffer?.city.name ?? city.name} offers={slicedNearOffersWithCurrentOffer} selectedOfferId={offerId} />
+          <Map isOffer activeCity={city.name} offers={slicedNearOffersWithCurrentOffer} selectedOfferId={offerId} />
         </section>
         <div className="container">
           <section className="near-places places">

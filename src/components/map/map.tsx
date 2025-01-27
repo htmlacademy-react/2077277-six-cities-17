@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { Icon, LayerGroup, Marker, layerGroup } from 'leaflet';
+import leaflet, { Icon, LayerGroup, layerGroup } from 'leaflet';
 import useMap from '../../hooks/use-map/use-map';
 import { OfferType, CitiesListType } from '../../type';
 import { UrlMarker, CityLocation } from '../../const';
@@ -27,7 +27,10 @@ const currentCustomIcon = new Icon({
 function Map({ isOffer = false, activeCity, offers, selectedOfferId }: MapProps): JSX.Element {
 
   const cityLocation = CityLocation[activeCity];
-  const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
+  let filteredOffers = offers;
+  if (!isOffer) {
+    filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
+  }
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityLocation);
   const markerLayer = useRef<LayerGroup>(layerGroup());
@@ -42,21 +45,16 @@ function Map({ isOffer = false, activeCity, offers, selectedOfferId }: MapProps)
 
   useEffect(() => {
     if (map) {
-      const selectedOffer = offers.find((offer) => offer.id === selectedOfferId);
       const markerLayerCurrent = markerLayer.current;
 
       filteredOffers.forEach((offer) => {
-        const marker = new Marker({
+
+        leaflet.marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
-        });
-
-        marker
-          .setIcon(
-            selectedOffer !== undefined && offer.id === selectedOffer.id
-              ? currentCustomIcon
-              : defaultCustomIcon
-          )
+        }, {
+          icon: selectedOfferId !== undefined && offer.id === selectedOfferId ? currentCustomIcon : defaultCustomIcon,
+        })
           .addTo(markerLayer.current);
       });
 
@@ -64,7 +62,7 @@ function Map({ isOffer = false, activeCity, offers, selectedOfferId }: MapProps)
         map.removeLayer(markerLayerCurrent);
       };
     }
-  }, [map, offers, filteredOffers, selectedOfferId, activeCity]);
+  }, [map, offers, filteredOffers, selectedOfferId]);
 
   return <section className={`${isOffer ? 'offer' : 'cities'}__map map`} ref={mapRef}></section>;
 }

@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { OfferType, SortListType, ReviewsType } from './type';
+import { OfferType, SortListType, ReviewsType, OneOfferType } from './type';
 import { SortType } from './const';
 import { useParams } from 'react-router-dom';
 
@@ -15,9 +15,23 @@ function getReviewsByDate(firstReviewDate: ReviewsType, secondReviewDate: Review
   return dayjs(secondReviewDate.date).diff(dayjs(firstReviewDate.date));
 }
 
-function getSlicedNearOffersWithCurrentOffer(offersNearby: OfferType[], currentOffer: OfferType | undefined) {
+function getSlicedNearOffersWithCurrentOffer(offersNearby: OfferType[], currentOffer: OneOfferType | undefined) {
   if (currentOffer) {
-    return offersNearby.concat([currentOffer]);
+
+    const convertedOffer: OfferType = {
+      id: currentOffer.id,
+      title: currentOffer.title,
+      type: currentOffer.type,
+      price: currentOffer.price,
+      previewImage: currentOffer.images[0] || '',
+      city: currentOffer.city,
+      location: currentOffer.location,
+      isFavorite: currentOffer.isFavorite,
+      isPremium: currentOffer.isPremium,
+      rating: currentOffer.rating
+    };
+
+    return offersNearby.concat([convertedOffer]);
   } return offersNearby;
 }
 
