@@ -5,11 +5,13 @@ import { fetchFavoriteOffers, changeFavoriteStatus } from '../api-action';
 
 type InitialStateType = {
   favoriteOffers: OfferType[];
+  isFavoriteOffersLoading: boolean;
   isLoadingFavoriteStatus: boolean;
 };
 
 const initialState: InitialStateType = {
   favoriteOffers: [],
+  isFavoriteOffersLoading: false,
   isLoadingFavoriteStatus: false,
 };
 
@@ -21,7 +23,14 @@ export const favoritesSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchFavoriteOffers.fulfilled, (state, action) => {
+        state.isFavoriteOffersLoading = false;
         state.favoriteOffers = action.payload;
+      })
+      .addCase(fetchFavoriteOffers.pending, (state) => {
+        state.isFavoriteOffersLoading = true;
+      })
+      .addCase(fetchFavoriteOffers.rejected, (state) => {
+        state.isFavoriteOffersLoading = false;
       })
       .addCase(changeFavoriteStatus.pending, (state) => {
         state.isLoadingFavoriteStatus = true;

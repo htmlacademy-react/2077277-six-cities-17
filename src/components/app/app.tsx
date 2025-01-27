@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 import { fetchOffers, checkAuthStatus, fetchFavoriteOffers } from '../../store/api-action';
 import { setErrorConnectionStatusOffers } from '../../store/offers/offers-slice';
 import { selectErrorConnectionOffers } from '../../store/offers/offers-selectors';
+import { selectFavoriteOffersLoading } from '../../store/favorites/favorites-selectors';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -24,6 +25,7 @@ function App(): JSX.Element {
   const isOffersListLoading = useAppSelector(selectOffersLoadingStatus);
   const errorConnectionStatus = useAppSelector(selectErrorConnectionOffers);
   const isLoadingLogout = useAppSelector(selectLoadingLogout);
+  const isFavoriteOffersLoading = useAppSelector(selectFavoriteOffersLoading);
 
   useEffect(() => {
     dispatch(fetchOffers())
@@ -57,7 +59,7 @@ function App(): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <ScrollToTop />
-        {isOffersListLoading || isLoadingLogout || status === LoginStatus.Unknown ? <LoadingPage loginStatus={status} /> :
+        {isOffersListLoading || isFavoriteOffersLoading || isLoadingLogout || status === LoginStatus.Unknown ? <LoadingPage loginStatus={status} /> :
           <Routes>
             <Route path={RoutePath.Index}>
               <Route index element={<MainPage loginStatus={status} />}></Route>
