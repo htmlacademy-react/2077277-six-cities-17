@@ -1,8 +1,8 @@
 import { memo, useMemo } from 'react';
-import { BookmarkCardParams, BookmarkOfferParams, LoginStatus, APIRoute } from '../../const';
+import { BookmarkCardParams, BookmarkOfferParams, LoginStatus, APIRoute, Status } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { selectLoginStatus } from '../../store/user/user-selectors';
-import { selectFavoriteStatusById, selectLoadingFavoriteOffersStatus } from '../../store/favorites/favorites-selectors';
+import { selectFavoriteStatusById, selectUploadingFavoriteStatus } from '../../store/favorites/favorites-selectors';
 import { changeFavoriteStatus} from '../../store/api-action';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,11 +19,11 @@ function Bookmark({ isOfferPage = false, offerId }: BookmarkProps): JSX.Element 
   const authStatus = useAppSelector(selectLoginStatus);
   const isAuthorized = useMemo(() => authStatus === LoginStatus.Auth, [authStatus]);
   const isFavorite = useAppSelector((state) => selectFavoriteStatusById(state, offerId));
-  const loadingFavoriteOffersStatus = useAppSelector(selectLoadingFavoriteOffersStatus);
+  const loadingFavoriteOffersStatus = useAppSelector(selectUploadingFavoriteStatus) === Status.Loading;
 
   const onHandleBookmarkClick = () => {
     if (isAuthorized) {
-      dispatch(changeFavoriteStatus({offerId, wasFavorite: isFavorite}));
+      dispatch(changeFavoriteStatus({offerId, isFavorite}));
     } else {
       navigate(APIRoute.Login);
     }

@@ -1,8 +1,9 @@
-import { City, LoginStatus, RATING_MEANING, RATING_STARS, SortType } from './const';
+import { City, LoginStatus, RATING_MEANING, RATING_STARS, SortType, Status } from './const';
 import { store } from './store';
 
 type CitiesListType = typeof City[keyof typeof City];
 type LoginStatusList = typeof LoginStatus[keyof typeof LoginStatus];
+type StatusType = typeof Status[keyof typeof Status];
 
 type PageParamsType = {
   ImageWrapperClass: string;
@@ -114,4 +115,28 @@ type CommentInfoType = {
   id: string;
 };
 
-export type { CitiesListType, LoginStatusList, PageParamsType, LogoParamsType, OfferType, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType, RootState, AppDispatch, SortListType, State, ErrorMessageType, Token, AuthData, UserData, CommentInfoType };
+type FullFavoriteOffer = {
+  id: string;
+  title: string;
+  type: string;
+  price: number;
+  city: CityType;
+  location: LocationType;
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  description: string;
+  bedrooms: number;
+  goods: [string];
+  host: HostType;
+  images: [string];
+  maxAdults: number;
+  previewImage: string;
+}
+
+type FavoriteData = {
+  offerId: string;
+  isFavorite: boolean;
+}
+
+export type { CitiesListType, LoginStatusList, StatusType, PageParamsType, FavoriteData, LogoParamsType, OfferType, FullFavoriteOffer, FormDataType, RatingMeaningType, RatingStarsType, CityType, LocationType, ReviewsType, OneOfferType, UserType, RootState, AppDispatch, SortListType, State, ErrorMessageType, Token, AuthData, UserData, CommentInfoType };
