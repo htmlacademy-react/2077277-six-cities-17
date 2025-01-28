@@ -1,18 +1,18 @@
-import { OfferType } from '../../type';
-import { NameSpace } from '../../const';
+import { OfferType, StatusType } from '../../type';
+import { NameSpace, Status } from '../../const';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchFavoriteOffers, changeFavoriteStatus } from '../api-action';
 
 type InitialStateType = {
   favoriteOffers: OfferType[];
   isFavoriteOffersLoading: boolean;
-  isLoadingFavoriteStatus: boolean;
+  uploadingFavoriteStatus: StatusType;
 };
 
 const initialState: InitialStateType = {
   favoriteOffers: [],
   isFavoriteOffersLoading: false,
-  isLoadingFavoriteStatus: false,
+  uploadingFavoriteStatus: Status.Idle,
 };
 
 export const favoritesSlice = createSlice({
@@ -33,19 +33,20 @@ export const favoritesSlice = createSlice({
         state.isFavoriteOffersLoading = false;
       })
       .addCase(changeFavoriteStatus.pending, (state) => {
-        state.isLoadingFavoriteStatus = true;
+        state.uploadingFavoriteStatus = Status.Loading;
       })
       .addCase(changeFavoriteStatus.rejected, (state) => {
-        state.isLoadingFavoriteStatus = false;
+        state.uploadingFavoriteStatus = Status.Error;
+        state.uploadingFavoriteStatus = Status.Idle;
       })
       .addCase(changeFavoriteStatus.fulfilled, (state, action) => {
+        state.uploadingFavoriteStatus = Status.Success;
         if (action.payload.isFavorite) {
           state.favoriteOffers.push(action.payload);
         } else {
-          const favoriteOfferIndex = state.favoriteOffers.findIndex((card) => card.id === action.payload.id);
-          state.favoriteOffers.splice(favoriteOfferIndex, 1);
+          state.favoriteOffers = state.favoriteOffers.filter((item) => item.id !== action.payload.id);
         }
-        state.isLoadingFavoriteStatus = false;
+        state.uploadingFavoriteStatus = Status.Idle;
       });
   }
 });

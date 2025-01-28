@@ -1,4 +1,4 @@
-import { OfferType, AuthData, UserData, ReviewsType, CommentInfoType, OneOfferType } from '../type';
+import { OfferType, AuthData, UserData, ReviewsType, CommentInfoType, OneOfferType, FullFavoriteOffer, FavoriteData } from '../type';
 import { APIRoute, NameSpace } from '../const';
 import { createAppAsyncThunk } from '../hooks';
 
@@ -18,20 +18,13 @@ const fetchFavoriteOffers = createAppAsyncThunk<OfferType[], undefined>(
   }
 );
 
-const changeFavoriteStatus = createAppAsyncThunk<OfferType, { offerId: string; wasFavorite: boolean }>(
+const changeFavoriteStatus = createAppAsyncThunk<FullFavoriteOffer, FavoriteData>(
   `${NameSpace.Favorite}/changeFavoriteStatus`,
-  async ({ offerId, wasFavorite }, { getState, extra: api }) => {
-    const nextFavoriteStatus = Number(!wasFavorite);
-    const { data } = await api.post<OneOfferType>(`${APIRoute.Favorite}/${offerId}/${nextFavoriteStatus}`);
-    const { offersList } = getState().OFFERS;
-    const currentOfferCard = offersList.find((card) => card.id === data.id);
-
-    if (!currentOfferCard) {
-      throw new Error(`No such offer with given id: ${data.id}`);
-    }
-    return { ...currentOfferCard, isFavorite: data.isFavorite };
-  }
-);
+  async ({offerId, isFavorite}, { extra: api}) => {
+    const offerStatus = Number(!isFavorite);
+    const {data} = await api.post<FullFavoriteOffer>(`${APIRoute.Favorite}/${offerId}/${offerStatus}`);
+    return data;
+  });
 
 const checkAuthStatus = createAppAsyncThunk<UserData, undefined>(
   `${NameSpace.User}/checkAuthStatus`,

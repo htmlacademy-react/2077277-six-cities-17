@@ -176,11 +176,18 @@ const NameSpace = {
   Error: 'ERROR'
 } as const;
 
+const Status = {
+  Idle: 'IDLE',
+  Loading: 'LOADING',
+  Success: 'SUCCESS',
+  Error: 'ERROR'
+} as const;
+
 export {
   City, ACTIVE_CITY, FavoritesPage, OffersPage, MainPage,
   LoginStatus, RoutePath, PageType, LogoHeaderParams, LogoFooterParams,
   RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor,
   UrlMarker, MapInfo, CityLocation, BookmarkOfferParams, BookmarkCardParams,
   SortType, DEFAULT_SORT_TYPE, Server, TOKEN_NAME, ERROR_TIMEOUT, APIRoute,
-  ErrorStatus, NameSpace
+  ErrorStatus, NameSpace, Status
 };
