@@ -12,14 +12,14 @@ type CitiesItemProps = {
 
 function CitiesItem({ city, isActive }: CitiesItemProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const handleChangeCity = (evt: MouseEvent<HTMLAnchorElement>) => {
+  const handleCityChange = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
     dispatch(changeCity(city));
   };
 
   return (
     <li className="locations__item">
-      <Link className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`} to={RoutePath.Index} onClick={handleChangeCity} >
+      <Link className={`locations__item-link tabs__item ${isActive ? 'tabs__item--active' : ''}`} to={RoutePath.Index} onClick={handleCityChange} >
         <span>{city}</span>
       </Link>
     </li>
