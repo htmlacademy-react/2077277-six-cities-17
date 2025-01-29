@@ -1,7 +1,7 @@
 import { OfferType } from '../../type';
 import { NameSpace } from '../../const';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchOffers, fetchNearbyOffers } from '../api-action';
+import { fetchOffers, fetchNearbyOffers, changeFavoriteStatus } from '../api-action';
 
 type InitialStateType = {
   offersList: OfferType[];
@@ -52,6 +52,17 @@ export const offersSlice = createSlice({
           state.nearbyOffers = action.payload;
         }
         state.isLoadingNearbyOffers = false;
+      })
+      .addCase(changeFavoriteStatus.fulfilled, (state, action) => {
+        const offersListIndex = state.offersList.findIndex((item) => item.id === action.payload.id);
+        if (offersListIndex !== -1) {
+          state.offersList[offersListIndex].isFavorite = action.payload.isFavorite;
+        }
+
+        const nearbyOffersIndex = state.nearbyOffers.findIndex((item) => item.id === action.payload.id);
+        if (nearbyOffersIndex !== -1) {
+          state.nearbyOffers[nearbyOffersIndex].isFavorite = action.payload.isFavorite;
+        }
       });
   }
 });

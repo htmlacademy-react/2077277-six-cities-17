@@ -62,12 +62,12 @@ function OfferPage(): JSX.Element {
     return <NotFoundPage loginStatus={loginStatus} />;
   }
 
-  const { title, description, type, price, images, isPremium, rating, bedrooms, maxAdults, goods, host, city, id } = offer;
+  const { title, description, type, price, images, isPremium, rating, bedrooms, maxAdults, goods, host, city, id, isFavorite } = offer;
 
   const roundRating = Math.round(rating);
   const offerImages = images.slice(0, 6).map((image) => <OfferImageMemo key={image} path={image} type={offer.type} />);
   const offersNearbySliced = offersNearby.slice(0, 3);
-  const cards = offersNearbySliced.map((oneOffer) => <CardMemo key={oneOffer.id} id={oneOffer.id} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} page={OffersPage} />);
+  const cards = offersNearbySliced.map((oneOffer) => <CardMemo key={oneOffer.id} id={oneOffer.id} isFavorite={oneOffer.isFavorite} title={oneOffer.title} type={oneOffer.type} price={oneOffer.price} previewImage={oneOffer.previewImage} rating={oneOffer.rating} isPremium={oneOffer.isPremium} page={OffersPage} />);
   const slicedNearOffersWithCurrentOffer = getSlicedNearOffersWithCurrentOffer(offersNearbySliced, offer);
 
   return (
@@ -90,7 +90,7 @@ function OfferPage(): JSX.Element {
                 <h1 className="offer__name">
                   {title}
                 </h1>
-                <BookmarkMemo isOfferPage offerId={id} />
+                <BookmarkMemo isOfferPage offerId={id} isFavorite={isFavorite}/>
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">

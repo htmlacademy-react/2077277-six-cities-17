@@ -15,7 +15,7 @@ function CardsList({ filteredOffers, page, onHandleActiveOfferChange }: CardsLis
   const currentSortType = useAppSelector(selectSortListType);
   const sortedOffers = useMemo(() => sortOffers(filteredOffers, currentSortType), [currentSortType, filteredOffers]);
 
-  const cardsList = sortedOffers.map((offer) => <CardMemo key={offer.id} id={offer.id} title={offer.title} type={offer.type} price={offer.price} previewImage={offer.previewImage} rating={offer.rating} isPremium={offer.isPremium} page={page} onHandleActiveOfferChange={onHandleActiveOfferChange}/>);
+  const cardsList = sortedOffers.map((offer) => <CardMemo key={offer.id} id={offer.id} isFavorite={offer.isFavorite} title={offer.title} type={offer.type} price={offer.price} previewImage={offer.previewImage} rating={offer.rating} isPremium={offer.isPremium} page={page} onHandleActiveOfferChange={onHandleActiveOfferChange}/>);
 
   return (
     <div className="cities__places-list places__list tabs__content">

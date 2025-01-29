@@ -10,7 +10,7 @@ type FavoritesListItemProps = {
 
 function FavoritesListItem({ offers, city }: FavoritesListItemProps): JSX.Element {
 
-  const cardsList = offers.map((offer) => <CardMemo key={offer.id} id={offer.id} title={offer.title} type={offer.type} price={offer.price} previewImage={offer.previewImage} rating={offer.rating} isPremium={offer.isPremium} page={FavoritesPage} />);
+  const cardsList = offers.map((offer) => <CardMemo key={offer.id} id={offer.id} title={offer.title} isFavorite={offer.isFavorite} type={offer.type} price={offer.price} previewImage={offer.previewImage} rating={offer.rating} isPremium={offer.isPremium} page={FavoritesPage} />);
 
   return (
     <li className="favorites__locations-items">
