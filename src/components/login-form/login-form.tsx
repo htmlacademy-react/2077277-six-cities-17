@@ -14,7 +14,7 @@ function LoginForm(): JSX.Element {
   const navigate = useNavigate();
   const LoadingLoginStatus = useSelector(selectLoadingLogin);
 
-  const handleSubmitLoginForm = (evt: FormEvent<HTMLFormElement>) => {
+  const handleLoginFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (emailRef.current && passwordRef.current) {
       dispatch(loginAction({
@@ -30,7 +30,7 @@ function LoginForm(): JSX.Element {
   };
 
   return (
-    <form className="login__form form" action="#" method="post" onSubmit={handleSubmitLoginForm}>
+    <form className="login__form form" action="#" method="post" onSubmit={handleLoginFormSubmit}>
       <div className="login__input-wrapper form__input-wrapper">
         <label className="visually-hidden">E-mail</label>
         <input className="login__input form__input" type="email" name="email" placeholder="Email" ref={emailRef} required disabled={LoadingLoginStatus}/>

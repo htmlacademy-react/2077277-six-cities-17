@@ -20,7 +20,7 @@ function ReviewsForm(): JSX.Element {
   const [formData, setFormData] = useState<FormDataType>(initialState);
   const isButtonDisabled = formData.rating !== 0 && formData.review.length >= ReviewLength.Min && formData.review.length <= ReviewLength.Max;
 
-  const handleChangeRating = useCallback(
+  const handleRatingChange = useCallback(
     (evt: ChangeEvent<HTMLInputElement>) => {
       setFormData((prev) => ({
         ...prev,
@@ -30,14 +30,14 @@ function ReviewsForm(): JSX.Element {
     []
   );
 
-  const handleChangeReview = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleReviewChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setFormData((prev) => ({
       ...prev,
       review: evt.target.value,
     }));
   };
 
-  const handleSubmitForm = (evt: ChangeEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: ChangeEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (offerId) {
       dispatch(postOfferComment({
@@ -56,10 +56,10 @@ function ReviewsForm(): JSX.Element {
   };
 
   return (
-    <form className="reviews__form form" onSubmit={handleSubmitForm} action="#" method="post">
+    <form className="reviews__form form" onSubmit={handleFormSubmit} action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
-      <RatingListMemo onChangeRating={handleChangeRating} dataRating={formData.rating} />
-      <textarea className="reviews__textarea form__textarea" onChange={handleChangeReview} value={formData.review} id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" disabled={isCommentStatusPending}></textarea>
+      <RatingListMemo onChangeRating={handleRatingChange} dataRating={formData.rating} />
+      <textarea className="reviews__textarea form__textarea" onChange={handleReviewChange} value={formData.review} id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" disabled={isCommentStatusPending}></textarea>
       <SubmitButtonMemo isButtonDisabled={isButtonDisabled} />
     </form>
   );
