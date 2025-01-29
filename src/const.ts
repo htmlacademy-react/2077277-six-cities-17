@@ -161,10 +161,6 @@ const APIRoute = {
   Favorite: '/favorite',
 } as const;
 
-const ErrorStatus = {
-  NoAuth: 401,
-} as const;
-
 const NameSpace = {
   User: 'USER',
   Offer: 'OFFER',
@@ -189,5 +185,5 @@ export {
   RATING_SHARE, RATING_STARS, RATING_MEANING, ReviewLength, StarsColor,
   UrlMarker, MapInfo, CityLocation, BookmarkOfferParams, BookmarkCardParams,
   SortType, DEFAULT_SORT_TYPE, Server, TOKEN_NAME, ERROR_TIMEOUT, APIRoute,
-  ErrorStatus, NameSpace, Status
+  NameSpace, Status
 };

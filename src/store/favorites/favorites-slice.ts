@@ -1,10 +1,10 @@
-import { OfferType, StatusType } from '../../type';
+import { OfferType, StatusType, FullFavoriteOffer } from '../../type';
 import { NameSpace, Status } from '../../const';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchFavoriteOffers, changeFavoriteStatus } from '../api-action';
 
 type InitialStateType = {
-  favoriteOffers: OfferType[];
+  favoriteOffers: (OfferType | FullFavoriteOffer)[];
   isFavoriteOffersLoading: boolean;
   uploadingFavoriteStatus: StatusType;
 };

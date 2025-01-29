@@ -1,7 +1,7 @@
 import { OneOfferType } from '../../type';
 import { NameSpace } from '../../const';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getOfferInfoById } from '../api-action';
+import { getOfferInfoById, changeFavoriteStatus } from '../api-action';
 
 type InitialStateType = {
   offer: OneOfferType | null;
@@ -37,6 +37,11 @@ export const offerSlice = createSlice({
           state.offer = action.payload;
         }
         state.isLoadingOffer = false;
+      })
+      .addCase(changeFavoriteStatus.fulfilled, (state, action) => {
+        if (state.offer && state.offer.id === action.payload.id) {
+          state.offer.isFavorite = action.payload.isFavorite;
+        }
       });
   }
 });
